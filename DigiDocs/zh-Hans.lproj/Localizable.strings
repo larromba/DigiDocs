@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  DigiDocs
+
+  Created by Lee Arromba on 22/12/2016.
+  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
+*/
+
+"NSCameraUsageDescription" = "我们需要访问您的相机扫描文档";
+"NSPhotoLibraryUsageDescription" = "我们需要访问您的相机扫描文档";

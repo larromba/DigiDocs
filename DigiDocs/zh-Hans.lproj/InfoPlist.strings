@@ -1,0 +1,28 @@
+/* 
+  InfoPlist.strings
+  DigiDocs
+
+  Created by Lee Arromba on 22/12/2016.
+  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
+*/
+
+"Your camera is currently not available" = "您的相机目前无法使用";
+"You have no documents saved" = "您没有保存文档";
+"Document Name" = "文档名称";
+"What name would you like to give the document?" = "你想给文件什么名字？";
+"e.g. December Invoice" = "例如十二月发票";
+"Cancel" = "取消";
+"OK" = "好";
+"You must enter a longer name" = "您必须输入较长的名称";
+"A document with that name already exists, please try again" = "具有该名称的文档已存在，请重试";
+"Delete" = "删除";
+"Couldn't delete %@. %@" = "无法删除 %@. %@";
+"Warning" = "警告";
+"Are you sure?" = "你确定？";
+"No" = "没有";
+"Yes" = "是";
+"Message" = "信息";
+"Error" = "错误";
+"Something went wrong - please try again. If the problem persists, please contact the developer" = "出现问题 - 请重试。如果问题仍然存在，请与开发人员联系";
+"Take" = "采取";
+"Done" = "完成";

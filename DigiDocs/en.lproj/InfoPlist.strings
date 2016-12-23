@@ -1,0 +1,28 @@
+/* 
+  InfoPlist.strings
+  DigiDocs
+
+  Created by Lee Arromba on 22/12/2016.
+  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
+*/
+
+"Your camera is currently not available" = "Your camera is currently not available";
+"You have no documents saved" = "You have no documents saved";
+"Document Name" = "Document Name";
+"What name would you like to give the document?" = "What name would you like to give the document?";
+"e.g. December Invoice" = "e.g. December Invoice";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"You must enter a longer name" = "You must enter a longer name";
+"A document with that name already exists, please try again" = "A document with that name already exists, please try again";
+"Delete" = "Delete";
+"Couldn't delete %@. %@" = "Couldn't delete %@. %@";
+"Warning" = "Warning";
+"Are you sure?" = "Are you sure?";
+"No" = "No";
+"Yes" = "Yes";
+"Message" = "Message";
+"Error" = "Error";
+"Something went wrong - please try again. If the problem persists, please contact the developer" = "Something went wrong - please try again. If the problem persists, please contact the developer";
+"Take" = "Take";
+"Done" = "Done";
