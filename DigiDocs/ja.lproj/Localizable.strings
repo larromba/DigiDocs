@@ -7,3 +7,4 @@
 */
 
 "NSCameraUsageDescription" = "ドキュメントをスキャンするにはカメラにアクセスする必要があります";
+"NSPhotoLibraryUsageDescription" = "ドキュメントをスキャンするにはカメラにアクセスする必要があります";

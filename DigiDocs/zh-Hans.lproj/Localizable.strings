@@ -7,3 +7,4 @@
 */
 
 "NSCameraUsageDescription" = "我们需要访问您的相机扫描文档";
+"NSPhotoLibraryUsageDescription" = "我们需要访问您的相机扫描文档";

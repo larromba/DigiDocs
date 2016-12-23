@@ -7,3 +7,4 @@
 */
 
 "NSCameraUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";
+"NSPhotoLibraryUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";

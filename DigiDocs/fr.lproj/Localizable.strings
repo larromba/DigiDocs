@@ -7,3 +7,4 @@
 */
 
 "NSCameraUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";
+"NSPhotoLibraryUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";
