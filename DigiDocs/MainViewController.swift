@@ -73,7 +73,7 @@ class MainViewController: UIViewController, Messaging {
         Analytics.shared.sendButtonPressEvent("camera", classId: classForCoder)
         guard camera.isAvailable else {
             showMessage("Your camera is currently not available".localized)
-            Analytics.shared.sendLogEvent("camera_unavailable", classId: classForCoder)
+            Analytics.shared.sendEvent("camera_unavailable", classId: classForCoder)
             return
         }
         camera.open(in: self, delegate: self, completion: { [weak camera] in
@@ -91,7 +91,7 @@ class MainViewController: UIViewController, Messaging {
         guard let preview = PDFViewController(paths: list.paths) else {
             isLoading = false
             showFatalError()
-            Analytics.shared.sendLogEvent("list_pdf_failed", classId: classForCoder)
+            Analytics.shared.sendEvent("list_pdf_failed", classId: classForCoder)
             return
         }
         present(preview, animated: true, completion: {
@@ -120,7 +120,7 @@ class MainViewController: UIViewController, Messaging {
     fileprivate func makePDF(fromPhotos photos: [UIImage], withName name: String) {
         guard let pdf = PDF(images: photos, name: name) else {
             showFatalError()
-            Analytics.shared.sendLogEvent("pdf_init_failed", classId: classForCoder)
+            Analytics.shared.sendEvent("pdf_init_failed", classId: classForCoder)
             return
         }
         isLoading = true
@@ -128,7 +128,7 @@ class MainViewController: UIViewController, Messaging {
             guard let preview = PDFViewController(paths: [pdf.path]) else {
                 self.isLoading = false
                 self.showFatalError()
-                Analytics.shared.sendLogEvent("view_pdf_failed", classId: self.classForCoder)
+                Analytics.shared.sendEvent("view_pdf_failed", classId: self.classForCoder)
                 return
             }
             self.present(preview, animated: true, completion: {
@@ -146,17 +146,17 @@ extension MainViewController: CameraDelegate {
     }
     
     func cameraDidFinish(_ camera: Camera) {
-        Analytics.shared.sendLogEvent("camera_finished", classId: classForCoder)
+        Analytics.shared.sendEvent("camera_finished", classId: classForCoder)
         getName({ (name: String?) in
             guard let name = name, name.characters.count > 0 else {
-                Analytics.shared.sendLogEvent("name_too_short", classId: self.classForCoder)
+                Analytics.shared.sendEvent("name_too_short", classId: self.classForCoder)
                 self.showMessage("You must enter a longer name".localized, handler: { (action: UIAlertAction) -> Void in
                     self.cameraDidFinish(camera) // try again
                 })
                 return
             }
             guard !PDFList.contains(name) else {
-                Analytics.shared.sendLogEvent("file_exists", classId: self.classForCoder)
+                Analytics.shared.sendEvent("file_exists", classId: self.classForCoder)
                 self.showMessage("A document with that name already exists, please try again".localized, handler: { (action: UIAlertAction) -> Void in
                     self.cameraDidFinish(camera) // try again
                 })

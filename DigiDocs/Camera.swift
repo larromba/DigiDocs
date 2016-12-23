@@ -63,7 +63,7 @@ class Camera: NSObject {
             debugPrint("dangerous call - camera not available")
             return
         }
-        Analytics.shared.sendLogEvent("camera_opened", classId: classForCoder)
+        Analytics.shared.sendEvent("camera_opened", classId: classForCoder)
         
         self.delegate = delegate
         

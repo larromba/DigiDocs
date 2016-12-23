@@ -66,7 +66,7 @@ class Analytics {
         logEvent(withName: "\(classId)", parameters: nil)
     }
     
-    func sendLogEvent(_ event: String, classId: Any) {
+    func sendEvent(_ event: String, classId: Any) {
         logEvent(withName: "\(classId)", parameters: [
             "event" : event as NSString
             ])
