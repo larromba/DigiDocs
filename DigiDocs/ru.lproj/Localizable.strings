@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  DigiDocs
+
+  Created by Lee Arromba on 22/12/2016.
+  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
+*/
+
+"NSCameraUsageDescription" = "Нам необходимо получить доступ к камере для сканирования документов";

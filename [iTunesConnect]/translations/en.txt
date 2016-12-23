@@ -1,0 +1,45 @@
+==== App ====
+
+"Your camera is currently not available"
+"You have no documents saved"
+"Document Name"
+"What name would you like to give the document?"
+"e.g. December Invoice"
+"Cancel"
+"OK"
+"You must enter a longer name"
+"A document with that name already exists, please try again"
+"Delete"
+"Couldn't delete %@. %@"
+"Warning"
+"Are you sure?"
+"No"
+"Yes"
+"Message"
+"Error"
+"Something went wrong - please try again. If the problem persists, please contact the developer"
+
+
+==== Name ====
+
+DigiDocs
+
+==== Description ====
+
+"DigiDocs" is the simplest possible way to scan your documents and send them to your computer via email or airdrop. If you want to 'digitalise' and get rid of your paper documents, this app is for you.
+
+Features:
+- Very quickly capture multiple pages and save them to a PDF document. 
+- Send documents to your computer 
+- Documents are saved to your phone for later use
+- File management is included to free up memory
+- Useful for receipts
+
+Compatible with iPad and iPhone. Optimised for iPhone 6.
+
+==== Keywords ====
+
+https://adwords.google.com/ko/KeywordPlanner/Home?__u=6602591676&__c=5826143196&authuser=0#search
+[document scanner]
+
+scanner,scanning,scanners,photo,receipt,pdf,camscanner,document,doc,phone,airdrop,free,best

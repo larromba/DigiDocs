@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q5I-O9-2jS">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Camera Overlay View Controller-->
+        <scene sceneID="Ime-Qk-e01">
+            <objects>
+                <viewController id="q5I-O9-2jS" customClass="CameraOverlayViewController" customModule="DigiDocs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wax-Ty-UIC"/>
+                        <viewControllerLayoutGuide type="bottom" id="vxF-KM-ayz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="97G-Ln-Gd2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqA-ut-Z8R">
+                                <rect key="frame" x="170" y="617" width="33" height="30"/>
+                                <state key="normal" title="Take">
+                                    <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <connections>
+                                    <action selector="takeButtonPressedWithSender:" destination="q5I-O9-2jS" eventType="touchUpInside" id="oNQ-nz-IAC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gya-k1-psu">
+                                <rect key="frame" x="321" y="617" width="37" height="30"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonPressedWithSender:" destination="q5I-O9-2jS" eventType="touchUpInside" id="02H-Df-71r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhJ-r3-cWS">
+                                <rect key="frame" x="16" y="617" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressedWithSender:" destination="q5I-O9-2jS" eventType="touchUpInside" id="Wb5-TW-A50"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gya-k1-psu" firstAttribute="trailing" secondItem="97G-Ln-Gd2" secondAttribute="trailingMargin" constant="-1" id="MiH-mq-9yC"/>
+                            <constraint firstItem="nqA-ut-Z8R" firstAttribute="centerX" secondItem="97G-Ln-Gd2" secondAttribute="centerX" constant="-1" id="NR6-Ga-lIG"/>
+                            <constraint firstItem="vxF-KM-ayz" firstAttribute="top" secondItem="nqA-ut-Z8R" secondAttribute="bottom" constant="20" id="ZbW-zl-zzk"/>
+                            <constraint firstItem="gya-k1-psu" firstAttribute="bottom" secondItem="nqA-ut-Z8R" secondAttribute="bottom" id="lIf-gk-umi"/>
+                            <constraint firstItem="hhJ-r3-cWS" firstAttribute="leading" secondItem="97G-Ln-Gd2" secondAttribute="leadingMargin" id="meq-vs-Mld"/>
+                            <constraint firstItem="hhJ-r3-cWS" firstAttribute="bottom" secondItem="nqA-ut-Z8R" secondAttribute="bottom" id="n4D-LS-O7b"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="hhJ-r3-cWS" id="s9e-dS-h5y"/>
+                        <outlet property="doneButton" destination="gya-k1-psu" id="fPB-PK-HcL"/>
+                        <outlet property="takeButton" destination="nqA-ut-Z8R" id="nFM-zf-YnC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O7H-Is-qnv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="88"/>
+        </scene>
+    </scenes>
+</document>
