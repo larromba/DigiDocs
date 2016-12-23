@@ -41,6 +41,7 @@ struct PDF {
             guard UIGraphicsBeginPDFContextToFile(self.path.relativePath, bounds, nil) else {
                 DispatchQueue.main.async(execute: {
                     completion(ErrorType.context)
+                    Analytics.shared.sendErrorEvent(ErrorType.context, classId: PDF.self)
                 })
                 return
             }

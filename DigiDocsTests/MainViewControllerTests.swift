@@ -83,7 +83,8 @@ class MainViewControllerTests: XCTestCase {
             }
         }
         let cameraButton = UIButton()
-        let camera = MockCamera(type: SimulatorImagePickerController.self, picker: UIImagePickerController(), overlay: CameraOverlayViewController())
+        let overlay = UIStoryboard.camera.instantiateInitialViewController() as! CameraOverlayViewController
+        let camera = MockCamera(type: SimulatorImagePickerController.self, picker: UIImagePickerController(), overlay: overlay)
         viewController = MainViewController(photos: [], camera: camera, cameraButton: cameraButton, listButton: UIButton(), activityIndicator: UIActivityIndicatorView())
         UIApplication.shared.keyWindow!.rootViewController = viewController
         

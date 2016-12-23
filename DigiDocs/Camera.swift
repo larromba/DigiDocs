@@ -17,7 +17,6 @@ protocol CameraDelegate: class {
 class Camera: NSObject {
     fileprivate let PickerController: UIImagePickerController.Type
     fileprivate let overlay: CameraOverlayViewController
-    fileprivate weak var presenter: UIViewController?
     fileprivate weak var picker: UIImagePickerController?
     
     weak var delegate: CameraDelegate?
@@ -29,12 +28,12 @@ class Camera: NSObject {
             return overlay.doneButton.isEnabled
         }
         set {
-//            overlay.doneButton.isEnabled = newValue
-//            if newValue {
-//                overlay.doneButton.alpha = 1.0
-//            } else {
-//                overlay.doneButton.alpha = 0.3
-//            }
+            overlay.doneButton.isEnabled = newValue
+            if newValue {
+                overlay.doneButton.alpha = 1.0
+            } else {
+                overlay.doneButton.alpha = 0.3
+            }
         }
     }
     
@@ -59,32 +58,35 @@ class Camera: NSObject {
     
     // MARK: - Internal
     
-    func open(in viewController: UIViewController, delegate: CameraDelegate, animated: Bool = true, completion: ((Void) -> Void)? = nil) {
+    func open(in viewController: UIViewController, delegate: CameraDelegate, completion: ((Void) -> Void)? = nil) {
         guard isAvailable else {
             debugPrint("dangerous call - camera not available")
             return
         }
+        Analytics.shared.sendLogEvent("camera_opened", classId: classForCoder)
         
         self.delegate = delegate
         
         let picker = PickerController.init()
         picker.delegate = self
-        picker.allowsEditing =  true
+        picker.allowsEditing = false
         picker.sourceType = .camera
-        picker.showsCameraControls = true
+        picker.showsCameraControls = false
         picker.cameraOverlayView = overlay.view
 
-//        let screenSize = UIScreen.main.bounds.size
-//        let ratio: CGFloat = 4.0 / 3.0
-//        let cameraHeight = screenSize.width * ratio
+        let screenSize = UIScreen.main.bounds.size
+        let ratio: CGFloat = 4.0 / 3.0
+        let cameraHeight = screenSize.width * ratio
+        picker.cameraViewTransform = CGAffineTransform(translationX: 0, y: (screenSize.height - cameraHeight) / 4.0)
+        
+// full screen
 //        let scale = screenSize.height / cameraHeight
-//        picker.cameraViewTransform = CGAffineTransform(translationX: 0, y: (screenSize.height - cameraHeight) / 2.0)
 //        picker.cameraViewTransform = picker.cameraViewTransform.scaledBy(x: scale, y: scale)
 
-        viewController.present(picker, animated: animated, completion: {
+        viewController.present(picker, animated: true, completion: {
             completion?()
+            Analytics.shared.sendScreenNameEvent(picker.classForCoder)
         })
-        presenter = viewController
         self.picker = picker
     }
 }
@@ -97,10 +99,6 @@ extension Camera: UIImagePickerControllerDelegate, UINavigationControllerDelegat
             fatalError("missing \(UIImagePickerControllerOriginalImage)")
         }
         delegate?.camera(self, didTakePhoto: photo)
-        
-        picker.dismiss(animated: false) {
-            self.open(in: self.presenter!, delegate: self.delegate!, animated: false)
-        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

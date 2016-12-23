@@ -12,7 +12,7 @@ class MainViewController: UIViewController, Messaging {
     @IBOutlet fileprivate var cameraButton: UIButton!
     @IBOutlet fileprivate var listButton: UIButton!
     @IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView!
-
+    
     fileprivate let camera: Camera
     fileprivate(set) var photos: [UIImage]
     fileprivate var isLoading: Bool {
@@ -47,6 +47,12 @@ class MainViewController: UIViewController, Messaging {
         super.init(coder: aDecoder)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Analytics.shared.sendScreenNameEvent(classForCoder)
+    }
+    
     // TESTING
     init(photos: [UIImage], camera: Camera, cameraButton: UIButton, listButton: UIButton, activityIndicator: UIActivityIndicatorView, isLoading: Bool? = nil, isUiEnabled: Bool? = nil) {
         self.photos = photos
@@ -64,8 +70,10 @@ class MainViewController: UIViewController, Messaging {
     // MARK: - Action
     
     @IBAction fileprivate func cameraPressed(sender: UIButton) {
+        Analytics.shared.sendButtonPressEvent("camera", classId: classForCoder)
         guard camera.isAvailable else {
             showMessage("Your camera is currently not available".localized)
+            Analytics.shared.sendLogEvent("camera_unavailable", classId: classForCoder)
             return
         }
         camera.open(in: self, delegate: self, completion: { [weak camera] in
@@ -74,6 +82,7 @@ class MainViewController: UIViewController, Messaging {
     }
     
     @IBAction fileprivate func listPressed(sender: UIButton) {
+        Analytics.shared.sendButtonPressEvent("list", classId: classForCoder)
         guard let list = PDFList() else {
             showMessage("You have no documents saved".localized)
             return
@@ -82,6 +91,7 @@ class MainViewController: UIViewController, Messaging {
         guard let preview = PDFViewController(paths: list.paths) else {
             isLoading = false
             showFatalError()
+            Analytics.shared.sendLogEvent("list_pdf_failed", classId: classForCoder)
             return
         }
         present(preview, animated: true, completion: {
@@ -110,6 +120,7 @@ class MainViewController: UIViewController, Messaging {
     fileprivate func makePDF(fromPhotos photos: [UIImage], withName name: String) {
         guard let pdf = PDF(images: photos, name: name) else {
             showFatalError()
+            Analytics.shared.sendLogEvent("pdf_init_failed", classId: classForCoder)
             return
         }
         isLoading = true
@@ -117,6 +128,7 @@ class MainViewController: UIViewController, Messaging {
             guard let preview = PDFViewController(paths: [pdf.path]) else {
                 self.isLoading = false
                 self.showFatalError()
+                Analytics.shared.sendLogEvent("view_pdf_failed", classId: self.classForCoder)
                 return
             }
             self.present(preview, animated: true, completion: {
@@ -134,14 +146,17 @@ extension MainViewController: CameraDelegate {
     }
     
     func cameraDidFinish(_ camera: Camera) {
+        Analytics.shared.sendLogEvent("camera_finished", classId: classForCoder)
         getName({ (name: String?) in
             guard let name = name, name.characters.count > 0 else {
+                Analytics.shared.sendLogEvent("name_too_short", classId: self.classForCoder)
                 self.showMessage("You must enter a longer name".localized, handler: { (action: UIAlertAction) -> Void in
                     self.cameraDidFinish(camera) // try again
                 })
                 return
             }
             guard !PDFList.contains(name) else {
+                Analytics.shared.sendLogEvent("file_exists", classId: self.classForCoder)
                 self.showMessage("A document with that name already exists, please try again".localized, handler: { (action: UIAlertAction) -> Void in
                     self.cameraDidFinish(camera) // try again
                 })

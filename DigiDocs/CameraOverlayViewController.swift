@@ -31,14 +31,17 @@ class CameraOverlayViewController: UIViewController {
     // MARK: - Action
     
     @IBAction fileprivate func takeButtonPressed(sender: UIButton) {
+        Analytics.shared.sendButtonPressEvent("take", classId: classForCoder)
         delegate?.cameraOverlayTakePressed(self)
     }
     
     @IBAction fileprivate func cancelButtonPressed(sender: UIButton) {
+        Analytics.shared.sendButtonPressEvent("cancel", classId: classForCoder)
         delegate?.cameraOverlayCancelPressed(self)
     }
     
     @IBAction fileprivate func doneButtonPressed(sender: UIButton) {
+        Analytics.shared.sendButtonPressEvent("done", classId: classForCoder)
         delegate?.cameraOverlayDonePressed(self)
     }
 }

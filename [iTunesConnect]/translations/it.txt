@@ -1,42 +1,23 @@
-==== App ====
-
-Artista sconosciuto
-sconosciuta Titolo
-[ x ] di [ x ]
-Errore
-Non hai la musica
-ok
-Il volume è troppo basso
-Non poteva giocare [ x ]
-conti
-Si prega di controllare i vostri conti sociali sono configurato correttamente e riprovare
-Fine
-La playlist finito
-via
-quota
-Dove vuoi condividere questa canzone?
-Facebook
-Twitter
-Cancellare
-
 ==== Name ====
 
-Easy Music Player
+DigiDocs
 
 ==== Description ====
 
-"Easy Music Player" è un modo semplice e alternativa per riprodurre la musica salvata sul telefono. Questa applicazione è stata amore artigianale con un solo scopo in mente - per giocare bene la vostra musica.
+"DigiDocs" è il modo più semplice possibile eseguire la scansione dei documenti e inviarli al computer tramite e-mail o Airdrop. Se si vuole 'digitalizzazione' e di sbarazzarsi dei documenti cartacei, questa applicazione è per voi.
 
-contiene :
-- Play, Pausa, Avanti, Indietro, Shuffle
-- Barra di scorrimento Tempo
-- Ripetere nessuno / uno / tutto
-- Condividere musica su Twitter e Facebook
-- Riproduzione di musica in sottofondo
-- Controlli la musica dal vostro homescreen e lockscreen
+Caratteristiche:
+- Catturare Molto rapidamente più pagine e salvarli in un documento PDF.
+- Invio di documenti al computer
+- I documenti vengono salvati sul telefono per un uso successivo
+- La gestione dei file è incluso per liberare la memoria
+- Utile per le ricevute
 
 Compatibile con iPad e iPhone. Ottimizzato per iPhone 6.
 
 ==== Keywords ====
 
-musica,giocatore,facile,audio,suono,streaming,multimediale,radio,semplice,migliore,piccolo,mp3,mp4,cd,gratis,online,ascoltare,bluetooth
+https://adwords.google.com/ko/KeywordPlanner/Home?__u=6602591676&__c=5826143196&authuser=0#search
+[document scanner]
+
+scanner,scansione,scanner,foto,ricevimento,pdf,camscanner,documento,doc,telefono,Airdrop,libero

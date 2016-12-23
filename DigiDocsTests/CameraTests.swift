@@ -33,7 +33,7 @@ class CameraTests: XCTestCase {
             func camera(_ camera: Camera, didTakePhoto photo: UIImage) {}
         }
         let picker = UIImagePickerController()
-        let overlay = CameraOverlayViewController()
+        let overlay = UIStoryboard.camera.instantiateInitialViewController() as! CameraOverlayViewController
         let presenter = UIViewController()
         UIApplication.shared.keyWindow!.rootViewController = presenter
         camera = Camera(type: SimulatorImagePickerController.self, picker: picker, overlay: overlay)

@@ -32,6 +32,11 @@ class PDFViewController: QLPreviewController, Messaging {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.shared.sendScreenNameEvent(classForCoder)
+    }
+    
     // MARK - Action
     
     @objc fileprivate func deleteItem(_ sender: UIBarButtonItem) {
@@ -57,6 +62,7 @@ class PDFViewController: QLPreviewController, Messaging {
                 debugPrint(error.localizedDescription)
                 let message = String(format: "Couldn't delete %@. %@".localized, url.lastPathComponent, error.localizedDescription)
                 self.showMessage(message)
+                Analytics.shared.sendErrorEvent(error, classId: self.classForCoder)
             }
         })
     }
@@ -64,9 +70,13 @@ class PDFViewController: QLPreviewController, Messaging {
     // MARK: - Private
     
     fileprivate func getConfirmation(_ handler: @escaping ((Void) -> Void)) {
+        Analytics.shared.sendLogEvent("delete_confirmation_show", classId: classForCoder)
         let alert = UIAlertController(title: "Warning".localized, message: "Are you sure?".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "No".localized, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No".localized, style: .default, handler: { (_) in
+            Analytics.shared.sendButtonPressEvent("no", classId: self.classForCoder)
+        }))
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (_) in
+            Analytics.shared.sendButtonPressEvent("yes", classId: self.classForCoder)
             handler()
         }))
         present(alert, animated: true, completion: nil)
