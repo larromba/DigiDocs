@@ -1,0 +1,8 @@
+1.1.0
+Long-press the list button for the option to share all / delete all
+
+1.0.0
+- Very quickly capture multiple pages and save them to a PDF document. 
+- Send documents to your computer 
+- Documents are saved to your phone for later use
+- File management is included to free up memory
