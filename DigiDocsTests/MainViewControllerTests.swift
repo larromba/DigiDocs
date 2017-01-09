@@ -14,6 +14,19 @@ class MainViewControllerTests: XCTestCase {
     fileprivate var expectation: XCTestExpectation!
     fileprivate var viewController: MainViewController!
     
+    class MockLongPressGestureRecognizer: UILongPressGestureRecognizer {
+        let action: Selector?
+        var state_: UIGestureRecognizerState
+        override var state: UIGestureRecognizerState {
+            return state_
+        }
+        override init(target: Any?, action: Selector?) {
+            self.action = action
+            state_ = .began
+            super.init(target: target, action: action)
+        }
+    }
+    
     override func setUp() {
         super.setUp()
     }
@@ -315,5 +328,61 @@ class MainViewControllerTests: XCTestCase {
         
         alertController.tapButton(atIndex: 1)
         XCTAssertEqual(viewController.photos.count, 0)
+    }
+    
+    func testLongListPressDisplaysOptions() {
+        let listButton = UIButton()
+        viewController = MainViewController(photos: [], camera: Camera(), cameraButton: UIButton(), listButton: listButton, activityIndicator: UIActivityIndicatorView(), isLoading: false, LongPressGestureRecognizer: MockLongPressGestureRecognizer.self)
+        UIApplication.shared.keyWindow!.rootViewController = viewController
+        _ = FileManager.save(Data(), name: "\(#function).pdf", in: .documentDirectory)
+        
+        let gestureRecognizer = listButton.gestureRecognizers!.first as! MockLongPressGestureRecognizer
+        gestureRecognizer.state_ = .ended
+        viewController.perform(gestureRecognizer.action!, with: gestureRecognizer)
+        
+        XCTAssertTrue(viewController.presentedViewController is UIAlertController)
+    }
+    
+    func testLongListPressOptionShareAll() {
+        expectation = expectation(description: "wait")
+        
+        let listButton = UIButton()
+        viewController = MainViewController(photos: [], camera: Camera(), cameraButton: UIButton(), listButton: listButton, activityIndicator: UIActivityIndicatorView(), isLoading: false, LongPressGestureRecognizer: MockLongPressGestureRecognizer.self)
+        UIApplication.shared.keyWindow!.rootViewController = viewController
+        _ = FileManager.save(Data(), name: "\(#function).pdf", in: .documentDirectory)
+        
+        let gestureRecognizer = listButton.gestureRecognizers!.first as! MockLongPressGestureRecognizer
+        gestureRecognizer.state_ = .ended
+        viewController.perform(gestureRecognizer.action!, with: gestureRecognizer)
+
+        let alertController = viewController.presentedViewController as! UIAlertController
+        alertController.dismiss(animated: false, completion: {
+            alertController.tapButton(atIndex: 0)
+            XCTAssertTrue(self.viewController.presentedViewController! is UIActivityViewController)
+            self.expectation.fulfill()
+        })
+        waitForExpectations(timeout: 2.0, handler: { (error: Error?) in XCTAssertNil(error) })
+    }
+    
+    func testLongListPressOptionDeleteAll() {
+        expectation = expectation(description: "wait")
+        
+        let listButton = UIButton()
+        viewController = MainViewController(photos: [], camera: Camera(), cameraButton: UIButton(), listButton: listButton, activityIndicator: UIActivityIndicatorView(), isLoading: false, LongPressGestureRecognizer: MockLongPressGestureRecognizer.self)
+        UIApplication.shared.keyWindow!.rootViewController = viewController
+        _ = FileManager.save(Data(), name: "\(#function).pdf", in: .documentDirectory)
+        
+        let gestureRecognizer = listButton.gestureRecognizers!.first as! MockLongPressGestureRecognizer
+        gestureRecognizer.state_ = .ended
+        viewController.perform(gestureRecognizer.action!, with: gestureRecognizer)
+        
+        let alertController = viewController.presentedViewController as! UIAlertController
+        alertController.dismiss(animated: false, completion: {
+            alertController.tapButton(atIndex: 1)
+            XCTAssertTrue(self.viewController.presentedViewController! is UIAlertController)
+            XCTAssertEqual((self.viewController.presentedViewController as! UIAlertController).message, "Are you sure?".localized)
+            self.expectation.fulfill()
+        })
+        waitForExpectations(timeout: 2.0, handler: { (error: Error?) in XCTAssertNil(error) })
     }
 }
