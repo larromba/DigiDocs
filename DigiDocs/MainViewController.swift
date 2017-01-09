@@ -9,6 +9,8 @@
 import UIKit
 
 class MainViewController: UIViewController, Messaging {
+    fileprivate let LongPressGestureRecognizer: UILongPressGestureRecognizer.Type // TESTING
+    
     @IBOutlet fileprivate var cameraButton: UIButton!
     @IBOutlet fileprivate var listButton: UIButton!
     @IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView!
@@ -42,9 +44,17 @@ class MainViewController: UIViewController, Messaging {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        LongPressGestureRecognizer = UILongPressGestureRecognizer.self
         photos = [UIImage]()
         camera = Camera()
         super.init(coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let gestureRecognizer = LongPressGestureRecognizer.init(target: self, action: #selector(displayOptions(_:)))
+        listButton.addGestureRecognizer(gestureRecognizer)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,7 +64,8 @@ class MainViewController: UIViewController, Messaging {
     }
     
     // TESTING
-    init(photos: [UIImage], camera: Camera, cameraButton: UIButton, listButton: UIButton, activityIndicator: UIActivityIndicatorView, isLoading: Bool? = nil, isUiEnabled: Bool? = nil) {
+    init(photos: [UIImage], camera: Camera, cameraButton: UIButton, listButton: UIButton, activityIndicator: UIActivityIndicatorView, isLoading: Bool? = nil, isUiEnabled: Bool? = nil, LongPressGestureRecognizer: UILongPressGestureRecognizer.Type = UILongPressGestureRecognizer.self) {
+        self.LongPressGestureRecognizer = LongPressGestureRecognizer
         self.photos = photos
         self.camera = camera
         self.cameraButton = cameraButton
@@ -63,13 +74,13 @@ class MainViewController: UIViewController, Messaging {
         super.init(nibName: nil, bundle: nil)
         if let isLoading = isLoading { self.isLoading = isLoading }
         if let isUiEnabled = isUiEnabled { self.isUiEnabled = isUiEnabled }
-        cameraButton.addTarget(self, action: #selector(cameraPressed(sender:)), for: .touchUpInside)
-        listButton.addTarget(self, action: #selector(listPressed(sender:)), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(cameraPressed(_:)), for: .touchUpInside)
+        listButton.addTarget(self, action: #selector(listPressed(_:)), for: .touchUpInside)
     }
     
     // MARK: - Action
     
-    @IBAction fileprivate func cameraPressed(sender: UIButton) {
+    @IBAction fileprivate func cameraPressed(_ sender: UIButton) {
         Analytics.shared.sendButtonPressEvent("camera", classId: classForCoder)
         guard camera.isAvailable else {
             showMessage("Your camera is currently not available".localized)
@@ -81,7 +92,7 @@ class MainViewController: UIViewController, Messaging {
         })
     }
     
-    @IBAction fileprivate func listPressed(sender: UIButton) {
+    @IBAction fileprivate func listPressed(_ sender: UIButton) {
         Analytics.shared.sendButtonPressEvent("list", classId: classForCoder)
         guard let list = PDFList() else {
             showMessage("You have no documents saved".localized)
@@ -97,6 +108,26 @@ class MainViewController: UIViewController, Messaging {
         present(preview, animated: true, completion: {
             self.isLoading = false
         })
+    }
+    
+    @objc fileprivate func displayOptions(_ sender: UILongPressGestureRecognizer) {
+        guard sender.state == .ended, let list = PDFList(), list.paths.count > 0 else {
+            return
+        }
+        let options = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        options.addAction(UIAlertAction(title: "Share all".localized, style: .default, handler: { (action: UIAlertAction) in
+            let activityViewController = UIActivityViewController(activityItems: list.paths, applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+        }))
+        options.addAction(UIAlertAction(title: "Delete all".localized, style: .default, handler: { (action: UIAlertAction) in
+            self.getConfirmation({ [weak self] in
+                if let error = list.delete() {
+                    self?.showError(error)
+                }
+            })
+        }))
+        options.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        present(options, animated: true, completion: nil)
     }
     
     // MARK: - Private

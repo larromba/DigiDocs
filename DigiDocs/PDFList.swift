@@ -32,6 +32,17 @@ struct PDFList {
         }
     }
     
+    func delete() -> Error? {
+        for url in paths {
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch {
+                return error
+            }
+        }
+        return nil
+    }
+    
     // MARK: - Internal
     
     static func contains(_ name: String) -> Bool {

@@ -66,21 +66,6 @@ class PDFViewController: QLPreviewController, Messaging {
             }
         })
     }
-    
-    // MARK: - Private
-    
-    fileprivate func getConfirmation(_ handler: @escaping ((Void) -> Void)) {
-        Analytics.shared.sendEvent("delete_confirmation_show", classId: classForCoder)
-        let alert = UIAlertController(title: "Warning".localized, message: "Are you sure?".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "No".localized, style: .default, handler: { (_) in
-            Analytics.shared.sendButtonPressEvent("no", classId: self.classForCoder)
-        }))
-        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (_) in
-            Analytics.shared.sendButtonPressEvent("yes", classId: self.classForCoder)
-            handler()
-        }))
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 // MARK: - QLPreviewControllerDataSource

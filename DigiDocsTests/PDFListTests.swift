@@ -30,4 +30,13 @@ class PDFListTests: XCTestCase {
         let list = PDFList()
         XCTAssertEqual(list?.paths.count ?? 0, 1)
     }
+    
+    func testListDelete() {
+        _ = FileManager.save(Data(), name: "\(#function).pdf", in: .documentDirectory)
+        _ = FileManager.save(Data(), name: "\(#function)2.pdf", in: .documentDirectory)
+        _ = FileManager.save(Data(), name: "\(#function)3.pdf", in: .documentDirectory)
+        let list = PDFList()
+        XCTAssertNil(list!.delete())
+        XCTAssertNil(PDFList())
+    }
 }
