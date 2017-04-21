@@ -1,10 +1,30 @@
 /* 
-  Localizable.strings
+  InfoPlist.strings
   DigiDocs
 
   Created by Lee Arromba on 22/12/2016.
   Copyright © 2016 Pink Chicken Ltd. All rights reserved.
 */
 
-"NSCameraUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";
-"NSPhotoLibraryUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";
+"Your camera is currently not available" = "Votre appareil photo n'est pas disponible actuellement";
+"You have no documents saved" = "Vous n'avez aucun document enregistré";
+"Document Name" = "Nom du document";
+"What name would you like to give the document?" = "Quel nom aimeriez-vous donner au document?";
+"e.g. December Invoice" = "par exemple. Facture de décembre";
+"Cancel" = "Annuler";
+"OK" = "D'accord";
+"You must enter a longer name" = "Vous devez saisir un nom plus long";
+"A document with that name already exists, please try again" = "Un document portant ce nom existe déjà. Veuillez réessayer.";
+"Delete" = "Effacer";
+"Couldn't delete %@. %@" = "Impossible de supprimer %@. %@";
+"Warning" = "Attention";
+"Are you sure?" = "Êtes-vous sûr?";
+"No" = "Non";
+"Yes" = "Oui";
+"Message" = "Message";
+"Error" = "Erreur";
+"Something went wrong - please try again. If the problem persists, please contact the developer" = "Une erreur s'est produite. Veuillez réessayer. Si le problème persiste, veuillez contacter le développeur";
+"Take" = "Prendre";
+"Done" = "Terminé";
+"Share all" = "Partagez tous";
+"Delete all" = "Supprimer tout";

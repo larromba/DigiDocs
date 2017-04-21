@@ -1,10 +1,30 @@
 /* 
-  Localizable.strings
+  InfoPlist.strings
   DigiDocs
 
   Created by Lee Arromba on 22/12/2016.
   Copyright © 2016 Pink Chicken Ltd. All rights reserved.
 */
 
-"NSCameraUsageDescription" = "Нам необходимо получить доступ к камере для сканирования документов";
-"NSPhotoLibraryUsageDescription" = "Нам необходимо получить доступ к камере для сканирования документов";
+"Your camera is currently not available" = "Ваша камера в настоящее время не доступно";
+"You have no documents saved" = "У вас нет документов, сохраненных";
+"Document Name" = "название документа";
+"What name would you like to give the document?" = "Какое имя вы хотели бы предоставить документ?";
+"e.g. December Invoice" = "например Счет-фактура декабрь";
+"Cancel" = "Отмена";
+"OK" = "ОК";
+"You must enter a longer name" = "Вы должны ввести более длинное название";
+"A document with that name already exists, please try again" = "Документ с таким именем уже существует, пожалуйста, попробуйте еще раз";
+"Delete" = "Удалить";
+"Couldn't delete %@. %@" = "Не удалось удалить %@. %@";
+"Warning" = "Предупреждение";
+"Are you sure?" = "Ты уверен?";
+"No" = "Нет";
+"Yes" = "да";
+"Message" = "Сообщение";
+"Error" = "ошибка";
+"Something went wrong - please try again. If the problem persists, please contact the developer" = "Что-то пошло не так. Пожалуйста, попробуйте еще раз. Если проблема не устраняется, обратитесь к разработчику";
+"Take" = "взять";
+"Done" = "Готово";
+"Share all" = "Доля всех";
+"Delete all" = "Удалить все";
