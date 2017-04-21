@@ -1,30 +1,10 @@
 /* 
-  InfoPlist.strings
+  Localizable.strings
   DigiDocs
 
   Created by Lee Arromba on 22/12/2016.
   Copyright © 2016 Pink Chicken Ltd. All rights reserved.
 */
 
-"Your camera is currently not available" = "La fotocamera non è al momento disponibile";
-"You have no documents saved" = "Non ci sono documenti salvati";
-"Document Name" = "Nome documento";
-"What name would you like to give the document?" = "Quale nome vorresti dare il documento?";
-"e.g. December Invoice" = "per esempio. dicembre fattura";
-"Cancel" = "Annulla";
-"OK" = "ok";
-"You must enter a longer name" = "È necessario immettere un nome più lungo";
-"A document with that name already exists, please try again" = "Un documento con questo nome esiste già, si prega di riprovare";
-"Delete" = "cancellare";
-"Couldn't delete %@. %@" = "Impossibile eliminare %@. %@";
-"Warning" = "avvertimento";
-"Are you sure?" = "Sei sicuro?";
-"No" = "No";
-"Yes" = "sì";
-"Message" = "Messaggio";
-"Error" = "Errore";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "Qualcosa è andato storto, prova ancora. Se il problema persiste, si prega di contattare lo sviluppatore";
-"Take" = "Prendere";
-"Done" = "Fatto";
-"Share all" = "Condividi tutto";
-"Delete all" = "Cancella tutto";
+"NSCameraUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";
+"NSPhotoLibraryUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";
