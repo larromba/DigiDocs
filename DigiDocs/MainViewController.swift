@@ -199,6 +199,16 @@ extension MainViewController: CameraDelegate {
     }
     
     func camera(_ camera: Camera, didTakePhoto photo: UIImage) {
+        // right    0
+        // down     90 deg CW
+        // left     180
+        // up       90 CCW
+        guard photo.imageOrientation == .right else {
+            let alert = UIAlertController(title: "Error".localized, message: "The photo was not taken. Please keep the camera facing upright, or downwards".localized, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+            camera.picker?.present(alert, animated: true, completion: nil)
+            return
+        }
         photos.append(photo)
         camera.isDoneEnabled = true
     }

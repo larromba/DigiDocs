@@ -29,9 +29,11 @@ class MainViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        UIView.setAnimationsEnabled(false)
     }
     
     override func tearDown() {
+        UIView.setAnimationsEnabled(true)
         FileManager.clearAll(in: .documentDirectory)
         viewController = nil
         expectation = nil
@@ -384,5 +386,20 @@ class MainViewControllerTests: XCTestCase {
             self.expectation.fulfill()
         })
         waitForExpectations(timeout: 2.0, handler: { (error: Error?) in XCTAssertNil(error) })
+    }
+    
+    func testErrorWhenBadPhotoTaken() {
+        let picker = UIImagePickerController()
+        let camera = Camera(picker: picker, overlay: CameraOverlayViewController())
+        viewController = MainViewController(photos: [], camera: camera, cameraButton: UIButton(), listButton: UIButton(), activityIndicator: UIActivityIndicatorView(), isLoading: false, LongPressGestureRecognizer: MockLongPressGestureRecognizer.self)
+        camera.delegate = viewController
+        UIApplication.shared.keyWindow!.rootViewController = picker
+        let bundle = Bundle.init(for: AppDelegate.self)
+        let cgImage = UIImage(named: "camera", in: bundle, compatibleWith: nil)!.cgImage!
+        let image = UIImage(cgImage: cgImage, scale: 0.0, orientation: .left)
+
+        camera.delegate?.camera(camera, didTakePhoto: image)
+        XCTAssertTrue(picker.presentedViewController! is UIAlertController)
+        XCTAssertEqual((picker.presentedViewController as! UIAlertController).message, "The photo was not taken. Please keep the camera facing upright, or downwards".localized)
     }
 }
