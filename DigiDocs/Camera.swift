@@ -17,8 +17,8 @@ protocol CameraDelegate: class {
 class Camera: NSObject {
     fileprivate let PickerController: UIImagePickerController.Type
     fileprivate let overlay: CameraOverlayViewController
-    fileprivate weak var picker: UIImagePickerController?
-    
+   
+    weak var picker: UIImagePickerController?
     weak var delegate: CameraDelegate?
     var isAvailable: Bool {
         return PickerController.isSourceTypeAvailable(.camera)

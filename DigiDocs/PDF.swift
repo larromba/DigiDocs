@@ -34,10 +34,10 @@ struct PDF {
     
     func generate(_ completion: @escaping ((_ error: Error?) -> Void)) {
         DispatchQueue.global().async(execute: {
-            guard self.images.count > 0 else {
+            guard let firstImage = self.images.first else {
                 fatalError("images count <= 0")
             }
-            let bounds = CGRect(x: 0, y: 0, width: self.images[0].size.width, height: self.images[0].size.height)
+            let bounds = CGRect(x: 0, y: 0, width: firstImage.size.width, height: firstImage.size.height)
             guard UIGraphicsBeginPDFContextToFile(self.path.relativePath, bounds, nil) else {
                 DispatchQueue.main.async(execute: {
                     completion(ErrorType.context)
