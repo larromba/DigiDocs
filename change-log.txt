@@ -1,3 +1,9 @@
+1.1.2
+pdf images not always appearing in portrait
+
+1.1.1
+Localizations files fixed (had wrong name)
+
 1.1.0
 Long-press the list button for the option to share all / delete all
 
