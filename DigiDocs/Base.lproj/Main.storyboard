@@ -21,10 +21,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="44K-lD-eQC">
-                                <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="189" y="350" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-cS-mNA">
-                                <rect key="frame" x="152.66666666666669" y="433.66666666666663" width="109.00000000000006" height="84.999999999999886"/>
+                                <rect key="frame" x="153" y="434" width="109" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="wba-hx-vvw"/>
                                 </constraints>
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYu-0b-p9J">
-                                <rect key="frame" x="152.66666666666669" y="200.66666666666669" width="109.00000000000006" height="109.00000000000006"/>
+                                <rect key="frame" x="153" y="201" width="109" height="109"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="109" id="I8M-wy-UGA"/>
                                     <constraint firstAttribute="height" constant="109" id="Kge-DC-J5i"/>
@@ -66,7 +66,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="44K-lD-eQC" id="o3h-59-kzS"/>
-                        <outlet property="appVersionLabel" destination="Log-N9-2ZW" id="zRK-NL-jQX"/>
+                        <outlet property="appVersionLabel" destination="Log-N9-2ZW" id="OqZ-c8-Rfa"/>
                         <outlet property="cameraButton" destination="aYu-0b-p9J" id="rdp-Hj-cVB"/>
                         <outlet property="listButton" destination="PgW-cS-mNA" id="MA8-b9-2e2"/>
                     </connections>

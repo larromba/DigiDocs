@@ -74,6 +74,7 @@ class MainViewController: UIViewController, Messaging {
         self.cameraButton = cameraButton
         self.listButton = listButton
         self.activityIndicator = activityIndicator
+        self.appVersionLabel = UILabel()
         super.init(nibName: nil, bundle: nil)
         if let isLoading = isLoading { self.isLoading = isLoading }
         if let isUiEnabled = isUiEnabled { self.isUiEnabled = isUiEnabled }
