@@ -28,4 +28,4 @@
 "Done" = "完成";
 "Share all" = "分享全部";
 "Delete all" = "删除所有";
-"The photo was not taken. Please keep the camera facing upright, or downwards" = "照片没被拍摄。请保持相机正面或向下";
+"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "照片没有被拍摄 - 照片的方向有问题。握住相机直立并从横向移动到纵向，以重置方向。然后再试一次";

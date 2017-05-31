@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad9_7" orientation="portrait">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,14 +17,14 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="44K-lD-eQC">
-                                <rect key="frame" x="365.5" y="493.5" width="37" height="37"/>
+                                <rect key="frame" x="189" y="350" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-cS-mNA">
-                                <rect key="frame" x="329.5" y="577.5" width="109" height="85"/>
+                                <rect key="frame" x="153" y="434" width="109" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="wba-hx-vvw"/>
                                 </constraints>
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYu-0b-p9J">
-                                <rect key="frame" x="329.5" y="344.5" width="109" height="109"/>
+                                <rect key="frame" x="153" y="201" width="109" height="109"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="109" id="I8M-wy-UGA"/>
                                     <constraint firstAttribute="height" constant="109" id="Kge-DC-J5i"/>
@@ -44,6 +44,12 @@
                                     <action selector="cameraPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TiT-HS-5VZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Log-N9-2ZW">
+                                <rect key="frame" x="413" y="736" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="8"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.7803921568627451" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -53,11 +59,14 @@
                             <constraint firstItem="PgW-cS-mNA" firstAttribute="trailing" secondItem="aYu-0b-p9J" secondAttribute="trailing" id="cId-f6-PKf"/>
                             <constraint firstItem="PgW-cS-mNA" firstAttribute="leading" secondItem="aYu-0b-p9J" secondAttribute="leading" id="kob-RY-Df4"/>
                             <constraint firstItem="44K-lD-eQC" firstAttribute="top" secondItem="aYu-0b-p9J" secondAttribute="bottom" constant="40" id="n7z-01-1o3"/>
+                            <constraint firstAttribute="trailing" secondItem="Log-N9-2ZW" secondAttribute="trailing" constant="1" id="ntV-nI-IW6"/>
+                            <constraint firstAttribute="bottom" secondItem="Log-N9-2ZW" secondAttribute="bottom" id="wlk-bc-OcT"/>
                             <constraint firstItem="44K-lD-eQC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zB1-4V-rGC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="44K-lD-eQC" id="o3h-59-kzS"/>
+                        <outlet property="appVersionLabel" destination="Log-N9-2ZW" id="OqZ-c8-Rfa"/>
                         <outlet property="cameraButton" destination="aYu-0b-p9J" id="rdp-Hj-cVB"/>
                         <outlet property="listButton" destination="PgW-cS-mNA" id="MA8-b9-2e2"/>
                     </connections>

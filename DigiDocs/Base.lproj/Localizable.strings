@@ -28,4 +28,4 @@
 "Done" = "Done";
 "Share all" = "Share all";
 "Delete all" = "Delete all";
-"The photo was not taken. Please keep the camera facing upright, or downwards" = "The photo was not taken. Please keep the camera facing upright, or downwards";
+"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again";
