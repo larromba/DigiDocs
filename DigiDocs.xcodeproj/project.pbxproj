@@ -85,6 +85,7 @@
 		7F1A647B1E0C77EF004C5A5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F1A647C1E0C77FA004C5A5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F1A647D1E0C77FA004C5A5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7F6308241ED4FAE000436423 /* change-log.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "change-log.txt"; sourceTree = "<group>"; };
 		7F95940A1E0AD54F00CC2CC8 /* PDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
 		7F95940C1E0ADA2100CC2CC8 /* PDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		7F95940F1E0ADA7600CC2CC8 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
