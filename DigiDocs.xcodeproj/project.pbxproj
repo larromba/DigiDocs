@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1355EB3536DC3DBFE463483A /* Pods_DigiDocsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024849A094FC54D18847F798 /* Pods_DigiDocsTests.framework */; };
+		7F163D391EDF0D5B00DC52B6 /* Bundle+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F163D381EDF0D5B00DC52B6 /* Bundle+Utility.swift */; };
 		7F1A645C1E0C3367004C5A5C /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A645B1E0C3367004C5A5C /* MainViewControllerTests.swift */; };
 		7F1A645E1E0C483B004C5A5C /* FileManager+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A645D1E0C483B004C5A5C /* FileManager+Utility.swift */; };
 		7F1A64651E0C5029004C5A5C /* UIAlertController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64641E0C5029004C5A5C /* UIAlertController+Utility.swift */; };
@@ -61,6 +62,8 @@
 		3341DE4A9E16DAF3809B8E3D /* Pods_DigiDocs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigiDocs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0F7DF31D6C0C862CA8F914 /* Pods-DigiDocsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigiDocsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DigiDocsTests/Pods-DigiDocsTests.release.xcconfig"; sourceTree = "<group>"; };
 		724AA5DD740C048C5B1C0C62 /* Pods-DigiDocsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigiDocsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DigiDocsTests/Pods-DigiDocsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F163D371EDF0BB100DC52B6 /* change-log.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "change-log.txt"; sourceTree = "<group>"; };
+		7F163D381EDF0D5B00DC52B6 /* Bundle+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utility.swift"; sourceTree = "<group>"; };
 		7F1A645B1E0C3367004C5A5C /* MainViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		7F1A645D1E0C483B004C5A5C /* FileManager+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Utility.swift"; sourceTree = "<group>"; };
 		7F1A64641E0C5029004C5A5C /* UIAlertController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utility.swift"; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 				7F95941B1E0BD4E800CC2CC8 /* UIStoryboard+Utility.swift */,
 				7F9594241E0BD79E00CC2CC8 /* String+Utility.swift */,
 				7FAB97B81E0CC96700FC2E3B /* GCD.swift */,
+				7F163D381EDF0D5B00DC52B6 /* Bundle+Utility.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -243,6 +247,7 @@
 		7FEB2C451E0ACA6D00478CD6 = {
 			isa = PBXGroup;
 			children = (
+				7F163D371EDF0BB100DC52B6 /* change-log.txt */,
 				7FEB2C501E0ACA6D00478CD6 /* DigiDocs */,
 				7FEB2C651E0ACA6D00478CD6 /* DigiDocsTests */,
 				7FEB2C4F1E0ACA6D00478CD6 /* Products */,
@@ -543,6 +548,7 @@
 			files = (
 				7FEB2C541E0ACA6D00478CD6 /* MainViewController.swift in Sources */,
 				7FAB97B91E0CC96700FC2E3B /* GCD.swift in Sources */,
+				7F163D391EDF0D5B00DC52B6 /* Bundle+Utility.swift in Sources */,
 				7F9594151E0B2FCA00CC2CC8 /* PDFPreviewItem.swift in Sources */,
 				7FB76CA51E0CBD2B00C1000B /* Analytics.swift in Sources */,
 				7F95940B1E0AD54F00CC2CC8 /* PDF.swift in Sources */,

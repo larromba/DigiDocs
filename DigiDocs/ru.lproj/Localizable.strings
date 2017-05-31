@@ -28,4 +28,4 @@
 "Done" = "Готово";
 "Share all" = "Доля всех";
 "Delete all" = "Удалить все";
-"The photo was not taken. Please keep the camera facing upright, or downwards" = "Фотография не была сделана. Пожалуйста, держите камеру вертикально или вниз";
+"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "Фотография не была сделана - возникла проблема с ориентацией фото. Держите камеру вертикально и перемещайтесь от пейзажа, к портрету, чтобы сбросить ориентацию. Затем повторите попытку";

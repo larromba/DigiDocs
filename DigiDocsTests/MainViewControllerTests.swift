@@ -400,6 +400,6 @@ class MainViewControllerTests: XCTestCase {
 
         camera.delegate?.camera(camera, didTakePhoto: image)
         XCTAssertTrue(picker.presentedViewController! is UIAlertController)
-        XCTAssertEqual((picker.presentedViewController as! UIAlertController).message, "The photo was not taken. Please keep the camera facing upright, or downwards".localized)
+        XCTAssertEqual((picker.presentedViewController as! UIAlertController).message, "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again".localized)
     }
 }

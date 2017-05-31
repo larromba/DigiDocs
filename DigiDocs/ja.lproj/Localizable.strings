@@ -28,4 +28,4 @@
 "Done" = "完了";
 "Share all" = "すべてを共有する";
 "Delete all" = "すべて削除";
-"The photo was not taken. Please keep the camera facing upright, or downwards" = "写真は撮られませんでした。カメラを直立または下向きにしてください";
+"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "写真は撮影されませんでした。写真の向きに問題がありました。カメラを直立させて横から縦に動かし、向きをリセットします。次にやり直してください";
