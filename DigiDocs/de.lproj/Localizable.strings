@@ -28,4 +28,4 @@
 "Done" = "Erledigt";
 "Share all" = "Alles teilen";
 "Delete all" = "Lösche alles";
-"The photo was not taken. Please keep the camera facing upright, or downwards" = "Das Foto wurde nicht genommen. Bitte halten Sie die Kamera aufrecht oder nach unten";
+"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "Das Foto wurde nicht genommen - es gab ein Problem mit der Orientierung des Fotos. Halten Sie die Kamera aufrecht und bewegen Sie sich von der Landschaft, zum Porträt, um die Ausrichtung zurückzusetzen. Dann versuche es noch einmal";

@@ -14,6 +14,7 @@ class MainViewController: UIViewController, Messaging {
     @IBOutlet fileprivate var cameraButton: UIButton!
     @IBOutlet fileprivate var listButton: UIButton!
     @IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate var appVersionLabel: UILabel!
     
     fileprivate let camera: Camera
     fileprivate(set) var photos: [UIImage]
@@ -53,6 +54,8 @@ class MainViewController: UIViewController, Messaging {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        appVersionLabel.text = Bundle.appVersion
+        
         let gestureRecognizer = LongPressGestureRecognizer.init(target: self, action: #selector(displayOptions(_:)))
         listButton.addGestureRecognizer(gestureRecognizer)
     }
@@ -71,6 +74,7 @@ class MainViewController: UIViewController, Messaging {
         self.cameraButton = cameraButton
         self.listButton = listButton
         self.activityIndicator = activityIndicator
+        self.appVersionLabel = UILabel()
         super.init(nibName: nil, bundle: nil)
         if let isLoading = isLoading { self.isLoading = isLoading }
         if let isUiEnabled = isUiEnabled { self.isUiEnabled = isUiEnabled }
@@ -204,7 +208,7 @@ extension MainViewController: CameraDelegate {
         // left     180
         // up       90 CCW
         guard photo.imageOrientation == .right else {
-            let alert = UIAlertController(title: "Error".localized, message: "The photo was not taken. Please keep the camera facing upright, or downwards".localized, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error".localized, message: "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
             camera.picker?.present(alert, animated: true, completion: nil)
             return
