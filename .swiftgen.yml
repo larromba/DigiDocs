@@ -1,0 +1,13 @@
+strings:
+  inputs: 
+    - DigiDocs/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+      output: Generated/strings.swift
+xcassets:
+  inputs:
+    - DigiDocs/Assets.xcassets
+    #- DigiDocs/Colors.xcassets
+  outputs:
+    - templateName: swift4
+      output: Generated/assets.swift

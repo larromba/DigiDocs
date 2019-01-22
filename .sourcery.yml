@@ -1,0 +1,6 @@
+sources:
+  - ./DigiDocs
+templates:
+  - ./Templates
+output:
+  ./Generated

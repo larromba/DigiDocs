@@ -1,31 +1,23 @@
-/* 
-  InfoPlist.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
-"Your camera is currently not available" = "あなたのカメラは現在利用できません";
-"You have no documents saved" = "保存されたドキュメントがありません";
-"Document Name" = "ドキュメント名";
-"What name would you like to give the document?" = "ドキュメントにはどのような名前を付けたいですか？";
-"e.g. December Invoice" = "例えば12月の請求書";
-"Cancel" = "キャンセル";
-"OK" = "[OK]";
-"You must enter a longer name" = "長い名前を入力する必要があります";
-"A document with that name already exists, please try again" = "その名前のドキュメントが既に存在します。もう一度お試しください";
-"Delete" = "削除";
-"Couldn't delete %@. %@" = "削除できませんでした %@. %@";
-"Warning" = "警告";
-"Are you sure?" = "本気ですか？";
-"No" = "いいえ";
-"Yes" = "はい";
-"Message" = "メッセージ";
-"Error" = "エラー";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "何かが間違っていた - もう一度お試しください。問題が解決しない場合は、開発者に連絡してください";
-"Take" = "取る";
-"Done" = "完了";
-"Share all" = "すべてを共有する";
-"Delete all" = "すべて削除";
-"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "写真は撮影されませんでした。写真の向きに問題がありました。カメラを直立させて横から縦に動かし、向きをリセットします。次にやり直してください";
+"no camera alert title" = "あなたのカメラは現在利用できません";
+"no documents alert title" = "保存されたドキュメントがありません";
+"new document alert title" = "ドキュメント名";
+"new document alert message" = "ドキュメントにはどのような名前を付けたいですか？";
+"new document alert placeholder" = "例えば12月の請求書";
+"cancel button title" = "キャンセル";
+"ok button title" = "[OK]";
+"longer name alert title" = "長い名前を入力する必要があります";
+"document exists alert title" = "その名前のドキュメントが既に存在します。もう一度お試しください";
+"delete button title" = "削除";
+"delete error alert title" = "削除できませんでした %@. %@";
+"warning alert title" = "警告";
+"are you sure alert title" = "本気ですか？";
+"no button title" = "いいえ";
+"yes button title" = "はい";
+"message alert title" = "メッセージ";
+"error alert title" = "エラー";
+"foobar alert title" = "何かが間違っていた - もう一度お試しください。問題が解決しない場合は、開発者に連絡してください";
+"take button title" = "取る";
+"done button title" = "完了";
+"share all option" = "すべてを共有する";
+"delete all option" = "すべて削除";
+"photo not taken alert title" = "写真は撮影されませんでした。写真の向きに問題がありました。カメラを直立させて横から縦に動かし、向きをリセットします。次にやり直してください";

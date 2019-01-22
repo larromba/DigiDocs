@@ -1,47 +1,58 @@
-//
-//  CameraOverlayViewController.swift
-//  DigiDocs
-//
-//  Created by Lee Arromba on 21/12/2016.
-//  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-//
-
 import UIKit
 
-protocol CameraOverlayViewControllerDelegate: class {
+protocol CameraOverlayViewControlling {
+    var viewState: CameraViewStating? { get set }
+
+    func setDelegate(_ delegate: CameraOverlayViewControllerDelegate)
+}
+
+protocol CameraOverlayViewControllerDelegate: AnyObject {
     func cameraOverlayTakePressed(_ cameraOverlay: CameraOverlayViewController)
     func cameraOverlayDonePressed(_ cameraOverlay: CameraOverlayViewController)
     func cameraOverlayCancelPressed(_ cameraOverlay: CameraOverlayViewController)
 }
 
-class CameraOverlayViewController: UIViewController {
-    @IBOutlet var takeButton: UIButton!
-    @IBOutlet var doneButton: UIButton!
-    @IBOutlet var cancelButton: UIButton!
-    
-    weak var delegate: CameraOverlayViewControllerDelegate?
-    
+final class CameraOverlayViewController: UIViewController, CameraOverlayViewControlling {
+    @IBOutlet private(set) weak var takeButton: UIButton!
+    @IBOutlet private(set) weak var doneButton: UIButton!
+    @IBOutlet private(set) weak var cancelButton: UIButton!
+    private weak var delegate: CameraOverlayViewControllerDelegate?
+
+    var viewState: CameraViewStating? {
+        didSet { _ = viewState.map(bind) }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        takeButton.setTitle("Take".localized, for: .normal)
-        doneButton.setTitle("Done".localized, for: .normal)
-        cancelButton.setTitle("Cancel".localized, for: .normal)
+        _ = viewState.map(bind)
     }
-    
-    // MARK: - Action
-    
-    @IBAction fileprivate func takeButtonPressed(sender: UIButton) {
-        Analytics.shared.sendButtonPressEvent("take", classId: classForCoder)
+
+    func setDelegate(_ delegate: CameraOverlayViewControllerDelegate) {
+        self.delegate = delegate
+    }
+
+    // MARK: - private
+
+    private func bind(_ viewState: CameraViewStating) {
+        guard isViewLoaded else { return }
+        takeButton.setTitle(viewState.takeButtonTitle, for: .normal)
+        doneButton.setTitle(viewState.doneButtonTitle, for: .normal)
+        cancelButton.setTitle(viewState.cancelButtonTitle, for: .normal)
+        doneButton.isEnabled = viewState.isDoneEnabled
+        doneButton.alpha = viewState.doneButtonAlpha
+    }
+
+    // MARK: - action
+
+    @IBAction private func takeButtonPressed(sender: UIButton) {
         delegate?.cameraOverlayTakePressed(self)
     }
-    
-    @IBAction fileprivate func cancelButtonPressed(sender: UIButton) {
-        Analytics.shared.sendButtonPressEvent("cancel", classId: classForCoder)
+
+    @IBAction private func cancelButtonPressed(sender: UIButton) {
         delegate?.cameraOverlayCancelPressed(self)
     }
-    
-    @IBAction fileprivate func doneButtonPressed(sender: UIButton) {
-        Analytics.shared.sendButtonPressEvent("done", classId: classForCoder)
+
+    @IBAction private func doneButtonPressed(sender: UIButton) {
         delegate?.cameraOverlayDonePressed(self)
     }
 }
