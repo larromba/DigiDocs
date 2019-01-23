@@ -61,7 +61,7 @@ final class Camera: NSObject, Camerable {
     }
 
     func dismiss() {
-        (picker as? UIViewController)?.dismiss(animated: true, completion: nil)
+        picker.asViewController.dismiss(animated: true, completion: nil)
     }
 }
 
