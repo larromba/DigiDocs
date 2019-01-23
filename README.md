@@ -5,7 +5,7 @@
 | [![Build Status](https://travis-ci.com/larromba/DigiDocs.svg?branch=master)](https://travis-ci.com/larromba/DigiDocs) | [![Build Status](https://travis-ci.com/larromba/DigiDocs.svg?branch=develop)](https://travis-ci.com/larromba/DigiDocs) |
 
 ## About
-DigiDocs [(app store)](https://itunes.apple.com/app/id1229095589) is a simple app designed to turn receipts and letters into pdfs.
+DigiDocs [(app store)](https://itunes.apple.com/app/id1189349369) is a simple app designed to turn receipts and letters into pdfs.
 
 ## Installation from Source
 
