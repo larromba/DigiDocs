@@ -37,7 +37,7 @@ This assumes you're farmiliar with Xcode and building iOS apps.
 
 1. `carthage update --platform iOS`
 2. open `DigiDocs.xcodeproj`
-3. select `DigiDocs-Release` target
+3. select `DigiDocs` target
 4. select your device from the device list
 5. run the app on your phone
 
