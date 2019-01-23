@@ -1,6 +1,7 @@
 import UIKit
 
-protocol CameraOverlayViewControlling {
+// sourcery: name = CameraOverlayViewController
+protocol CameraOverlayViewControlling: Presentable, Mockable {
     var viewState: CameraViewStating? { get set }
 
     func setDelegate(_ delegate: CameraOverlayViewControllerDelegate)
@@ -16,6 +17,7 @@ final class CameraOverlayViewController: UIViewController, CameraOverlayViewCont
     @IBOutlet private(set) weak var takeButton: UIButton!
     @IBOutlet private(set) weak var doneButton: UIButton!
     @IBOutlet private(set) weak var cancelButton: UIButton!
+    @IBOutlet private(set) weak var numberLabel: UILabel!
     private weak var delegate: CameraOverlayViewControllerDelegate?
 
     var viewState: CameraViewStating? {
@@ -40,6 +42,7 @@ final class CameraOverlayViewController: UIViewController, CameraOverlayViewCont
         cancelButton.setTitle(viewState.cancelButtonTitle, for: .normal)
         doneButton.isEnabled = viewState.isDoneEnabled
         doneButton.alpha = viewState.doneButtonAlpha
+        numberLabel.text = viewState.numberOfPhotosString
     }
 
     // MARK: - action

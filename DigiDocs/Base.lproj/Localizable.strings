@@ -1,14 +1,10 @@
 "no camera alert title" = "Your camera is currently not available";
-"no documents alert title" = "You have no documents saved";
 "new document alert title" = "Document Name";
 "new document alert message" = "What name would you like to give the document?";
 "new document alert placeholder" = "e.g. December Invoice";
 "cancel button title" = "Cancel";
 "ok button title" = "OK";
-"longer name alert title" = "You must enter a longer name";
-"document exists alert title" = "A document with that name already exists, please try again";
 "delete button title" = "Delete";
-"delete error alert title" = "Couldn't delete %@. %@";
 "warning alert title" = "Warning";
 "are you sure alert title" = "Are you sure?";
 "no button title" = "No";
@@ -20,4 +16,7 @@
 "done button title" = "Done";
 "share all option" = "Share all";
 "delete all option" = "Delete all";
+"view all option" = "View all";
 "photo not taken alert title" = "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again";
+"photos label" = "%d photos";
+"random button title" = "Random";

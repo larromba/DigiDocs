@@ -7,19 +7,26 @@ protocol MainViewStating {
     var isListButtonEnabled: Bool { get }
 
     func copy(isListButtonEnabled: Bool) -> MainViewStating
+    func copy(isLoading: Bool) -> MainViewStating
 }
 
 struct MainViewState: MainViewStating {
     let appVersion: String = Bundle.appVersion
     let isLoading: Bool
-    let isUserInteractionEnabled: Bool
+    var isUserInteractionEnabled: Bool {
+        return !isLoading
+    }
     let isListButtonEnabled: Bool
 }
 
 extension MainViewState {
     func copy(isListButtonEnabled: Bool) -> MainViewStating {
         return MainViewState(isLoading: isLoading,
-                             isUserInteractionEnabled: isUserInteractionEnabled,
+                             isListButtonEnabled: isListButtonEnabled)
+    }
+
+    func copy(isLoading: Bool) -> MainViewStating {
+        return MainViewState(isLoading: isLoading,
                              isListButtonEnabled: isListButtonEnabled)
     }
 }

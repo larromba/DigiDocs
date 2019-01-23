@@ -1,12 +1,9 @@
 import Logging
 import UIKit
 
-protocol ShareControlling {
+// sourcery: name = ShareController
+protocol ShareControlling: Mockable {
     func shareItems(_ items: [URL])
-}
-
-protocol ShareControllerDelegate: AnyObject {
-    // TODO: this
 }
 
 final class ShareController: ShareControlling {

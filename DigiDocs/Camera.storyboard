@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q5I-O9-2jS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q5I-O9-2jS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqA-ut-Z8R">
-                                <rect key="frame" x="170" y="617" width="33" height="30"/>
+                                <rect key="frame" x="170.5" y="617" width="32" height="30"/>
                                 <state key="normal" title="Take">
                                     <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </state>
@@ -48,20 +48,31 @@
                                     <action selector="cancelButtonPressedWithSender:" destination="q5I-O9-2jS" eventType="touchUpInside" id="Wb5-TW-A50"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pk-sH-XxX">
+                                <rect key="frame" x="171" y="28" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9pk-sH-XxX" firstAttribute="centerX" secondItem="97G-Ln-Gd2" secondAttribute="centerX" id="4he-lp-PHx"/>
+                            <constraint firstItem="9pk-sH-XxX" firstAttribute="top" secondItem="Wax-Ty-UIC" secondAttribute="bottom" constant="8" id="G9T-lQ-bZR"/>
                             <constraint firstItem="gya-k1-psu" firstAttribute="trailing" secondItem="97G-Ln-Gd2" secondAttribute="trailingMargin" constant="-1" id="MiH-mq-9yC"/>
                             <constraint firstItem="nqA-ut-Z8R" firstAttribute="centerX" secondItem="97G-Ln-Gd2" secondAttribute="centerX" constant="-1" id="NR6-Ga-lIG"/>
+                            <constraint firstItem="9pk-sH-XxX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="97G-Ln-Gd2" secondAttribute="leadingMargin" id="XAB-AC-T6L"/>
                             <constraint firstItem="vxF-KM-ayz" firstAttribute="top" secondItem="nqA-ut-Z8R" secondAttribute="bottom" constant="20" id="ZbW-zl-zzk"/>
                             <constraint firstItem="gya-k1-psu" firstAttribute="bottom" secondItem="nqA-ut-Z8R" secondAttribute="bottom" id="lIf-gk-umi"/>
                             <constraint firstItem="hhJ-r3-cWS" firstAttribute="leading" secondItem="97G-Ln-Gd2" secondAttribute="leadingMargin" id="meq-vs-Mld"/>
                             <constraint firstItem="hhJ-r3-cWS" firstAttribute="bottom" secondItem="nqA-ut-Z8R" secondAttribute="bottom" id="n4D-LS-O7b"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9pk-sH-XxX" secondAttribute="trailing" id="uoG-1R-eQr"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="hhJ-r3-cWS" id="s9e-dS-h5y"/>
                         <outlet property="doneButton" destination="gya-k1-psu" id="fPB-PK-HcL"/>
+                        <outlet property="numberLabel" destination="9pk-sH-XxX" id="uMG-bK-EcE"/>
                         <outlet property="takeButton" destination="nqA-ut-Z8R" id="nFM-zf-YnC"/>
                     </connections>
                 </viewController>

@@ -1,17 +1,18 @@
 import UIKit
 
-protocol MainViewControlling: Presentable {
+// sourcery: name = MainViewController
+protocol MainViewControlling: Presentable, Mockable {
     var viewState: MainViewStating? { get set }
 
     func setDelegate(_ delegate: MainViewControllerDelegate)
 }
 
 protocol MainViewControllerDelegate: AnyObject {
+    func viewControllerWillAppear(_ viewController: MainViewControlling)
     func viewControllerCameraPressed(_ viewController: MainViewControlling)
     func viewControllerListPressed(_ viewController: MainViewControlling)
 }
 
-// TODO: rename
 final class MainViewController: UIViewController, MainViewControlling {
     @IBOutlet private(set) weak var cameraButton: UIButton!
     @IBOutlet private(set) weak var listButton: UIButton!
@@ -27,6 +28,11 @@ final class MainViewController: UIViewController, MainViewControlling {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = viewState.map(bind)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        delegate?.viewControllerWillAppear(self)
     }
 
     func setDelegate(_ delegate: MainViewControllerDelegate) {

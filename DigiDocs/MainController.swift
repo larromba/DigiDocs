@@ -1,10 +1,12 @@
 import UIKit
 
-protocol MainControlling {
+// sourcery: name = MainController
+protocol MainControlling: Mockable {
     var presenter: Presentable { get }
 
+    func setIsLoading(_ isLoading: Bool)
     func setDelegate(_ delegate: MainControllerDelegate)
-    func updatedPDFList()
+    func refreshUI()
 }
 
 protocol MainControllerDelegate: AnyObject {
@@ -27,17 +29,20 @@ final class MainController: MainControlling {
         let list = pdfService.generateList()
         viewController.viewState = MainViewState(
             isLoading: false,
-            isUserInteractionEnabled: true,
             isListButtonEnabled: !list.paths.isEmpty
         )
         viewController.setDelegate(self)
+    }
+
+    func setIsLoading(_ isLoading: Bool) {
+        viewController.viewState = viewController.viewState?.copy(isLoading: isLoading)
     }
 
     func setDelegate(_ delegate: MainControllerDelegate) {
         self.delegate = delegate
     }
 
-    func updatedPDFList() {
+    func refreshUI() {
         let list = pdfService.generateList()
         viewController.viewState = viewController.viewState?.copy(isListButtonEnabled: !list.paths.isEmpty)
     }
@@ -46,6 +51,10 @@ final class MainController: MainControlling {
 // MARK: - MainViewControllerDelegate
 
 extension MainController: MainViewControllerDelegate {
+    func viewControllerWillAppear(_ viewController: MainViewControlling) {
+        refreshUI()
+    }
+
     func viewControllerCameraPressed(_ viewController: MainViewControlling) {
         delegate?.controller(self, performAction: .openCamera)
     }

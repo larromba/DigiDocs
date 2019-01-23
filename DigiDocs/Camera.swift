@@ -1,10 +1,12 @@
 import Logging
 import UIKit
 
-protocol Camerable: AnyObject {
+// sourcery: name = Camera
+protocol Camerable: AnyObject, Mockable {
     var isAvailable: Bool { get }
 
-    func open(in viewController: Presentable, completion: (() -> Void)?)
+    func setDelegate(_ delegate: CameraDelegate)
+    func open(in viewController: Presentable) -> Bool
     func takePicture()
     func dismiss()
 }
@@ -15,14 +17,16 @@ protocol CameraDelegate: AnyObject {
 }
 
 final class Camera: NSObject, Camerable {
-    private let picker: UIImagePickerController
+    private let pickerType: ImagePickerControlling.Type
+    private let picker: ImagePickerControlling
     private weak var delegate: CameraDelegate?
     var isAvailable: Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.camera)
+        return pickerType.isSourceTypeAvailable(.camera)
     }
 
-    init(overlay: UIViewController) {
-        let picker = UIImagePickerController()
+    init(overlay: UIViewController, pickerType: ImagePickerControlling.Type) {
+        self.pickerType = pickerType
+        let picker = pickerType.init()
         picker.allowsEditing = false
         picker.sourceType = .camera
         picker.showsCameraControls = false
@@ -43,15 +47,13 @@ final class Camera: NSObject, Camerable {
         self.delegate = delegate
     }
 
-    func open(in viewController: Presentable, completion: (() -> Void)? = nil) {
+    func open(in viewController: Presentable) -> Bool {
         guard isAvailable else {
-            // TODO: return error
             logError("camera not available")
-            return
+            return false
         }
-        viewController.present(picker, animated: true, completion: {
-            completion?()
-        })
+        viewController.present(picker.asViewController, animated: true, completion: nil)
+        return true
     }
 
     func takePicture() {
@@ -59,7 +61,7 @@ final class Camera: NSObject, Camerable {
     }
 
     func dismiss() {
-        picker.dismiss(animated: true, completion: nil)
+        (picker as? UIViewController)?.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -8,7 +8,9 @@ import UIKit
 import AppKit
 #endif
 
+import AsyncAwait
 @testable import DigiDocs
+import Result
 
 {% macro helperClassPrefix %}_{% endmacro %}
 {% macro swiftifyMethodName name %}{{ name | replace:"(","_" | replace:")","" | replace:":","_" | replace:"`","" | snakeToCamelCase | lowerFirstWord }}{% endmacro %}

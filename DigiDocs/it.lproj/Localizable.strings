@@ -1,14 +1,10 @@
 "no camera alert title" = "La fotocamera non è al momento disponibile";
-"no documents alert title" = "Non ci sono documenti salvati";
 "new document alert title" = "Nome documento";
 "new document alert message" = "Quale nome vorresti dare il documento?";
 "new document alert placeholder" = "per esempio. dicembre fattura";
 "cancel button title" = "Annulla";
 "ok button title" = "ok";
-"longer name alert title" = "È necessario immettere un nome più lungo";
-"document exists alert title" = "Un documento con questo nome esiste già, si prega di riprovare";
 "delete button title" = "cancellare";
-"delete error alert title" = "Impossibile eliminare %@. %@";
 "warning alert title" = "avvertimento";
 "are you sure alert title" = "Sei sicuro?";
 "no button title" = "No";
@@ -20,4 +16,7 @@
 "done button title" = "Fatto";
 "share all option" = "Condividi tutto";
 "delete all option" = "Cancella tutto";
+"view all option" = "Guarda tutto";
 "photo not taken alert title" = "La foto non è stata presa - ci fu un problema con l'orientamento della foto. Tenere la fotocamera in posizione verticale e spostarsi dal paesaggio, fino al ritratto, per ripristinare l'orientamento. Poi riprova";
+"photos label" = "%d foto";
+"random button title" = "Casuale";

@@ -1,7 +1,6 @@
-import UIKit
+import AsyncAwait
 import Logging
-
-// TODO: remove L10n.longerNameAlertTitle
+import UIKit
 
 // sourcery: name = AppController
 protocol AppControlling: Mockable {
@@ -16,10 +15,11 @@ final class AppController: AppControlling {
     private let pdfController: PDFControlling
     private let namingController: NamingControlling
     private let shareController: ShareControlling
+    private let alertController: AlertControlling
 
     init(mainController: MainControlling, cameraController: CameraControlling, listController: ListControlling,
          optionsController: OptionsControlling, pdfController: PDFControlling, namingController: NamingControlling,
-         shareController: ShareControlling) {
+         shareController: ShareControlling, alertController: AlertControlling) {
         self.mainController = mainController
         self.cameraController = cameraController
         self.listController = listController
@@ -27,9 +27,36 @@ final class AppController: AppControlling {
         self.namingController = namingController
         self.shareController = shareController
         self.pdfController = pdfController
+        self.alertController = alertController
 
         mainController.setDelegate(self)
+        cameraController.setDelegate(self)
         optionsController.setDelegate(self)
+    }
+
+    // MARK: - private
+
+    private func deleteAll() {
+        async({
+            try await(self.pdfController.deletePDFs(at: self.listController.list.paths))
+            onMain { self.mainController.refreshUI() }
+        }, onError: { error in
+            onMain { self.alertController.showAlert(Alert(error: error)) }
+        })
+    }
+
+    private func finishedWithPhotos(_ photos: [UIImage]) {
+        async({
+            let name = try await(self.namingController.getName())
+            onMain { self.mainController.setIsLoading(true) }
+            try await(self.pdfController.makePDF(fromPhotos: photos, withName: name))
+            onMain {
+                self.mainController.setIsLoading(false)
+                self.mainController.refreshUI()
+            }
+        }, onError: { error in
+            onMain { self.alertController.showAlert(Alert(error: error)) }
+        })
     }
 }
 
@@ -38,14 +65,8 @@ final class AppController: AppControlling {
 extension AppController: MainControllerDelegate {
     func controller(_ controller: MainControlling, performAction action: MainAction) {
         switch action {
-        case .openCamera:
-            cameraController.openCamera(in: mainController.presenter)
-        case .openList:
-            if listController.documentCount == 1 {
-                listController.openList(listController.list)
-            } else {
-                optionsController.displayOptions()
-            }
+        case .openCamera: cameraController.openCamera(in: mainController.presenter)
+        case .openList: optionsController.displayOptions()
         }
     }
 }
@@ -54,10 +75,7 @@ extension AppController: MainControllerDelegate {
 
 extension AppController: CameraControllerDelegate {
     func controller(_ controller: CameraController, finishedWithPhotos photos: [UIImage]) {
-        namingController.getName { name in
-            self.pdfController.makePDF(fromPhotos: photos, withName: name ?? "") //TODO: ??
-            self.mainController.updatedPDFList() // TODO: correct here?
-        }
+        self.finishedWithPhotos(photos)
     }
 }
 
@@ -67,7 +85,7 @@ extension AppController: OptionsControllerDelegate {
     func controller(_ controller: OptionsController, performAction action: OptionAction) {
         switch action {
         case .viewAll: listController.openList(listController.list)
-        case .deleteAll: pdfController.deletePDFs(at: listController.list.paths)
+        case .deleteAll: deleteAll()
         case .shareAll: shareController.shareItems(listController.list.paths)
         }
     }

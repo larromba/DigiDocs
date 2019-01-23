@@ -50,7 +50,13 @@ fastlane frameit silver
 ```
 
 ## How it works
-...
+* Press the camera icon
+* Take a picture for each page of your document. (In the simulator the camera doesn't work, but is mocked to use empty images)
+* Press 'done'
+* Choose a name
+* Save the pdf
+* Share it via airdrop to your Mac
+* You can view or delete the pdf at a later date using the list button
 
 ## Licence
 [![licensebuttons by-nc-sa](https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0) 

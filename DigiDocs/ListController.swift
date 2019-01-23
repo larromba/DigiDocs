@@ -1,8 +1,7 @@
 import Foundation
 
-// TODO: remove L10n.noDocumentsAlertTitle
-
-protocol ListControlling {
+// sourcery: name = ListController
+protocol ListControlling: Mockable {
     var documentCount: Int { get }
     var list: PDFList { get }
 

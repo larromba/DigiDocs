@@ -1,14 +1,10 @@
 "no camera alert title" = "您的相机目前无法使用";
-"no documents alert title" = "您没有保存文档";
 "new document alert title" = "文档名称";
 "new document alert message" = "你想给文件什么名字？";
 "new document alert placeholder" = "例如十二月发票";
 "cancel button title" = "取消";
 "ok button title" = "好";
-"longer name alert title" = "您必须输入较长的名称";
-"document exists alert title" = "具有该名称的文档已存在，请重试";
 "delete button title" = "删除";
-"delete error alert title" = "无法删除 %@. %@";
 "warning alert title" = "警告";
 "are you sure alert title" = "你确定？";
 "no button title" = "没有";
@@ -20,4 +16,7 @@
 "done button title" = "完成";
 "share all option" = "分享全部";
 "delete all option" = "删除所有";
+"view all option" = "查看全部";
 "photo not taken alert title" = "照片没有被拍摄 - 照片的方向有问题。握住相机直立并从横向移动到纵向，以重置方向。然后再试一次";
+"photos label" = "%d张照片";
+"random button title" = "随机";

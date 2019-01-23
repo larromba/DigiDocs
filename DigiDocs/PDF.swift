@@ -1,3 +1,4 @@
+import Logging
 import UIKit
 
 struct PDF {
@@ -6,9 +7,9 @@ struct PDF {
 
     init(images: [UIImage], name: String, fileManager: FileManager = .default) {
         self.images = images
-        guard let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            // TODO: how to handle?
+        guard let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             path = URL(fileURLWithPath: "file://")
+            logError("couldn't find documentDirectory")
             return
         }
         path = documentsPath.appendingPathComponent("\(name)").appendingPathExtension(FileExtension.pdf.rawValue)

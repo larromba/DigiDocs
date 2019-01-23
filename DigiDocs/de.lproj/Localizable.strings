@@ -1,14 +1,10 @@
 "no camera alert title" = "Ihre Kamera ist derzeit nicht verfügbar";
-"no documents alert title" = "Sie haben keine Dokumente gespeichert";
 "new document alert title" = "Dokumentname";
 "new document alert message" = "Welchen Namen möchten Sie dem Dokument geben?";
 "new document alert placeholder" = "z.B. Dezember Rechnung";
 "cancel button title" = "Stornieren";
 "ok button title" = "OK";
-"longer name alert title" = "Sie müssen einen längeren Namen eingeben";
-"document exists alert title" = "Ein Dokument mit diesem Namen ist bereits vorhanden. Bitte versuchen Sie es erneut";
 "delete button title" = "Löschen";
-"delete error alert title" = "Konnte nicht gelöscht werden %@. %@";
 "warning alert title" = "Warnung";
 "are you sure alert title" = "Bist du sicher?";
 "no button title" = "Nein";
@@ -20,4 +16,7 @@
 "done button title" = "Erledigt";
 "share all option" = "Alles teilen";
 "delete all option" = "Lösche alles";
+"view all option" = "Alle ansehen";
 "photo not taken alert title" = "Das Foto wurde nicht genommen - es gab ein Problem mit der Orientierung des Fotos. Halten Sie die Kamera aufrecht und bewegen Sie sich von der Landschaft, zum Porträt, um die Ausrichtung zurückzusetzen. Dann versuche es noch einmal";
+"photos label" = "%d Fotos";
+"random button title" = "Zufällig";

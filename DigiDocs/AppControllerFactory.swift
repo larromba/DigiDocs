@@ -10,31 +10,34 @@ enum AppControllerFactory {
             .instantiateInitialViewController() as? CameraOverlayViewController else {
                 fatalError("couldn't instantiate CameraOverlayViewController")
         }
-        let camera = Camera(overlay: overlay)
+        #if targetEnvironment(simulator)
+        let pickerType = SimulatorImagePickerController.self
+        #else
+        let pickerType = UIImagePickerController.self
+        #endif
+        let camera = Camera(overlay: overlay, pickerType: pickerType)
+        let alertController = AlertController(presenter: viewController)
         let cameraController = CameraController(camera: camera, cameraOverlay: overlay,
-                                                alertController: AlertController(presenter: overlay))
+                                                alertController: alertController,
+                                                overlayAlertController: AlertController(presenter: overlay))
 
-        let listController = ListController(alertController: AlertController(presenter: viewController),
-                                            presenter: viewController,
+        let listController = ListController(alertController: alertController, presenter: viewController,
                                             pdfService: pdfService)
 
-        let optionsController = OptionsController(presenter: viewController,
-                                                  alertController: AlertController(presenter: viewController))
+        let optionsController = OptionsController(presenter: viewController)
 
-        // TODO: empty view state?
         let pdfViewController = PDFViewController(viewState: PDFViewState(paths: []))
-        let pdfController = PDFController(viewController: pdfViewController,
-                                          alertController: AlertController(presenter: pdfViewController),
+        let pdfController = PDFController(viewController: pdfViewController, alertController: alertController,
+                                          pdfAlertController: AlertController(presenter: pdfViewController),
                                           presenter: viewController, pdfService: pdfService)
 
-        let namingController = NamingController(alertController: AlertController(presenter: viewController),
-                                                pdfService: pdfService)
+        let namingController = NamingController(alertController: alertController, pdfService: pdfService)
 
         let shareController = ShareController(presenter: viewController)
 
         return AppController(mainController: mainController, cameraController: cameraController,
                              listController: listController, optionsController: optionsController,
                              pdfController: pdfController, namingController: namingController,
-                             shareController: shareController)
+                             shareController: shareController, alertController: alertController)
     }
 }

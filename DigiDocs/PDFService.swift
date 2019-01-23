@@ -1,17 +1,17 @@
-import UIKit
+import AsyncAwait
 import Logging
+import Result
+import UIKit
 
-protocol PDFServicing {
+// sourcery: name = PDFService
+protocol PDFServicing: Mockable {
+    // sourcery: returnValue = "PDFList(paths: [])"
     func generateList() -> PDFList
-    func deleteList(_ list: PDFList) -> Error?
-    func generatePDF(_ pdf: PDF, _ completion: @escaping ((_ error: Error?) -> Void))
+    func deleteList(_ list: PDFList) -> Result<Void>
+    func generatePDF(_ pdf: PDF) -> Async<Void>
 }
 
 final class PDFService: PDFServicing {
-    enum ErrorType: Error {
-        case context
-    }
-
     let fileManager: FileManager
 
     init(fileManager: FileManager = .default) {
@@ -26,9 +26,8 @@ final class PDFService: PDFServicing {
         do {
             let documents = try fileManager.contentsOfDirectory(atPath: documentsPath.relativePath)
             let pdfDocuments = documents.filter { $0.contains(".\(FileExtension.pdf.rawValue)") }
-            guard !pdfDocuments.isEmpty else {
-                logWarning("no pdf documents found")
-                return PDFList(paths: [])
+            if pdfDocuments.isEmpty {
+                logWarning("no pdf docs")
             }
             return PDFList(paths: pdfDocuments.map { name -> URL in
                 let path = documentsPath.appendingPathComponent(name)
@@ -40,39 +39,38 @@ final class PDFService: PDFServicing {
         }
     }
 
-    func deleteList(_ list: PDFList) -> Error? {
+    func deleteList(_ list: PDFList) -> Result<Void> {
         for url in list.paths {
             do {
                 try fileManager.removeItem(at: url)
             } catch {
-                return error
+                return .failure(PDFError.framework(error))
             }
         }
-        return nil
+        return .success(())
     }
 
-    func generatePDF(_ pdf: PDF, _ completion: @escaping ((_ error: Error?) -> Void)) {
-        guard !pdf.images.isEmpty else {
-            // TODO: return error?
-            return
-        }
-        DispatchQueue.global().async(execute: {
-            let firstImage = pdf.images[0]
-            let bounds = CGRect(x: 0, y: 0, width: firstImage.size.width, height: firstImage.size.height)
-            guard UIGraphicsBeginPDFContextToFile(pdf.path.relativePath, bounds, nil) else {
-                DispatchQueue.main.async(execute: {
-                    completion(ErrorType.context)
-                })
+    func generatePDF(_ pdf: PDF) -> Async<Void> {
+        return Async { completion in
+            guard !pdf.images.isEmpty else {
+                logError("pdf images empty")
+                completion(.failure(PDFError.noContent))
                 return
             }
-            for image in pdf.images {
-                UIGraphicsBeginPDFPageWithInfo(bounds, nil)
-                image.draw(at: .zero)
-            }
-            UIGraphicsEndPDFContext()
-            DispatchQueue.main.async(execute: {
-                completion(nil)
+            DispatchQueue.global().async(execute: {
+                let firstImage = pdf.images[0]
+                let bounds = CGRect(x: 0, y: 0, width: firstImage.size.width, height: firstImage.size.height)
+                guard UIGraphicsBeginPDFContextToFile(pdf.path.relativePath, bounds, nil) else {
+                    completion(.failure(PDFError.context))
+                    return
+                }
+                for image in pdf.images {
+                    UIGraphicsBeginPDFPageWithInfo(bounds, nil)
+                    image.draw(at: .zero)
+                }
+                UIGraphicsEndPDFContext()
+                completion(.success(()))
             })
-        })
+        }
     }
 }

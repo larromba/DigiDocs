@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F163D391EDF0D5B00DC52B6 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F163D381EDF0D5B00DC52B6 /* BundleExtensions.swift */; };
-		7F1A64651E0C5029004C5A5C /* UIAlertController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64641E0C5029004C5A5C /* UIAlertController+Utility.swift */; };
-		7F1A64671E0C6F83004C5A5C /* SimulatorImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64661E0C6F83004C5A5C /* SimulatorImagePickerController.swift */; };
-		7F1A64691E0C736A004C5A5C /* UIViewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64681E0C736A004C5A5C /* UIViewController+Utility.swift */; };
+		7F1A64651E0C5029004C5A5C /* UIAlertActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64641E0C5029004C5A5C /* UIAlertActionExtensions.swift */; };
+		7F1A64691E0C736A004C5A5C /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A64681E0C736A004C5A5C /* UIViewControllerExtensions.swift */; };
 		7F1A646A1E0C779B004C5A5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F1A646C1E0C779B004C5A5C /* InfoPlist.strings */; };
 		7F48FE9121F721DC00EACC03 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FE9021F721DC00EACC03 /* AppController.swift */; };
 		7F48FE9321F7221800EACC03 /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FE9221F7221800EACC03 /* Mockable.swift */; };
@@ -30,6 +29,28 @@
 		7F48FEB221F7584400EACC03 /* NamingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB121F7584400EACC03 /* NamingController.swift */; };
 		7F48FEB421F765CC00EACC03 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB321F765CC00EACC03 /* ShareController.swift */; };
 		7F48FEB621F7662900EACC03 /* OptionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB521F7662900EACC03 /* OptionAction.swift */; };
+		7F48FEB821F77ADF00EACC03 /* ImagePickerControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB721F77ADF00EACC03 /* ImagePickerControlling.swift */; };
+		7F48FEBB21F7808500EACC03 /* SimulatorImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEBA21F7808500EACC03 /* SimulatorImagePickerController.swift */; };
+		7F48FEBE21F7941D00EACC03 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEBC21F7941D00EACC03 /* Result.framework */; };
+		7F48FEBF21F7941D00EACC03 /* AsyncAwait.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEBD21F7941D00EACC03 /* AsyncAwait.framework */; };
+		7F48FEC321F7A40D00EACC03 /* TestExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */; };
+		7F48FEC421F7A41500EACC03 /* TestExtensions.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F48FEC921F7A44700EACC03 /* mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEC821F7A44700EACC03 /* mocks.generated.swift */; };
+		7F48FECB21F7A45F00EACC03 /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FECA21F7A45F00EACC03 /* TestEnvironment.swift */; };
+		7F48FECE21F7A47A00EACC03 /* AppTestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FECD21F7A47A00EACC03 /* AppTestEnvironment.swift */; };
+		7F48FED321F7A94000EACC03 /* CameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FED221F7A94000EACC03 /* CameraTests.swift */; };
+		7F48FED521F7A94A00EACC03 /* NameDialogueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FED421F7A94A00EACC03 /* NameDialogueTests.swift */; };
+		7F48FED721F7A95600EACC03 /* OptionsDialogueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FED621F7A95600EACC03 /* OptionsDialogueTests.swift */; };
+		7F48FED921F7A95F00EACC03 /* MainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FED821F7A95F00EACC03 /* MainTests.swift */; };
+		7F48FEDB21F7AD2500EACC03 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEDA21F7AD2500EACC03 /* ArrayExtensions.swift */; };
+		7F48FEDD21F7AF0400EACC03 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEDC21F7AF0400EACC03 /* UIButtonExtensions.swift */; };
+		7F48FEE321F7D64500EACC03 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEE221F7D64500EACC03 /* UITextFieldExtensions.swift */; };
+		7F48FEE521F7D79A00EACC03 /* PDFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEE421F7D79A00EACC03 /* PDFTests.swift */; };
+		7F48FEE721F7DDBD00EACC03 /* test.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7F48FEE621F7DDBD00EACC03 /* test.pdf */; };
+		7F48FEE921F7E02300EACC03 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEE821F7E02300EACC03 /* UIAlertControllerExtensions.swift */; };
+		7F48FEEB21F7E7E200EACC03 /* ViewControllerCastable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEEA21F7E7E200EACC03 /* ViewControllerCastable.swift */; };
+		7F48FEF321F7EEE300EACC03 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEF221F7EEE300EACC03 /* Snapshots.swift */; };
+		7F48FEFB21F7EF1C00EACC03 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEFA21F7EF1C00EACC03 /* SnapshotHelper.swift */; };
 		7F8CBA1721F6FB8100218D8B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F8CBA1621F6FB8100218D8B /* README.md */; };
 		7F8CBA1921F6FB9400218D8B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 7F8CBA1821F6FB9400218D8B /* CHANGELOG.md */; };
 		7F8CBA1D21F7003D00218D8B /* Logging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8CBA1C21F7003D00218D8B /* Logging.framework */; };
@@ -56,6 +77,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7F48FEF521F7EEE300EACC03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7FEB2C461E0ACA6D00478CD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FEB2C4D1E0ACA6D00478CD6;
+			remoteInfo = DigiDocs;
+		};
 		7FEB2C631E0ACA6D00478CD6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7FEB2C461E0ACA6D00478CD6 /* Project object */;
@@ -65,11 +93,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7F48FEC121F7A3FA00EACC03 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7F48FEC421F7A41500EACC03 /* TestExtensions.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7F163D381EDF0D5B00DC52B6 /* BundleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
-		7F1A64641E0C5029004C5A5C /* UIAlertController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utility.swift"; sourceTree = "<group>"; };
-		7F1A64661E0C6F83004C5A5C /* SimulatorImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulatorImagePickerController.swift; sourceTree = "<group>"; };
-		7F1A64681E0C736A004C5A5C /* UIViewController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utility.swift"; sourceTree = "<group>"; };
+		7F1A64641E0C5029004C5A5C /* UIAlertActionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertActionExtensions.swift; sourceTree = "<group>"; };
+		7F1A64681E0C736A004C5A5C /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		7F1A646B1E0C779B004C5A5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F1A646D1E0C77A1004C5A5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F1A64721E0C77C3004C5A5C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -96,6 +136,29 @@
 		7F48FEB121F7584400EACC03 /* NamingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingController.swift; sourceTree = "<group>"; };
 		7F48FEB321F765CC00EACC03 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		7F48FEB521F7662900EACC03 /* OptionAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionAction.swift; sourceTree = "<group>"; };
+		7F48FEB721F77ADF00EACC03 /* ImagePickerControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerControlling.swift; sourceTree = "<group>"; };
+		7F48FEBA21F7808500EACC03 /* SimulatorImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorImagePickerController.swift; sourceTree = "<group>"; };
+		7F48FEBC21F7941D00EACC03 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		7F48FEBD21F7941D00EACC03 /* AsyncAwait.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncAwait.framework; path = Carthage/Build/iOS/AsyncAwait.framework; sourceTree = "<group>"; };
+		7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TestExtensions.framework; path = Carthage/Build/iOS/TestExtensions.framework; sourceTree = "<group>"; };
+		7F48FEC821F7A44700EACC03 /* mocks.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = mocks.generated.swift; path = Generated/mocks.generated.swift; sourceTree = SOURCE_ROOT; };
+		7F48FECA21F7A45F00EACC03 /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
+		7F48FECD21F7A47A00EACC03 /* AppTestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTestEnvironment.swift; sourceTree = "<group>"; };
+		7F48FED221F7A94000EACC03 /* CameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTests.swift; sourceTree = "<group>"; };
+		7F48FED421F7A94A00EACC03 /* NameDialogueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameDialogueTests.swift; sourceTree = "<group>"; };
+		7F48FED621F7A95600EACC03 /* OptionsDialogueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsDialogueTests.swift; sourceTree = "<group>"; };
+		7F48FED821F7A95F00EACC03 /* MainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTests.swift; sourceTree = "<group>"; };
+		7F48FEDA21F7AD2500EACC03 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		7F48FEDC21F7AF0400EACC03 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		7F48FEE221F7D64500EACC03 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		7F48FEE421F7D79A00EACC03 /* PDFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTests.swift; sourceTree = "<group>"; };
+		7F48FEE621F7DDBD00EACC03 /* test.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = test.pdf; sourceTree = "<group>"; };
+		7F48FEE821F7E02300EACC03 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
+		7F48FEEA21F7E7E200EACC03 /* ViewControllerCastable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCastable.swift; sourceTree = "<group>"; };
+		7F48FEF021F7EEE300EACC03 /* DigiDocsSnapshot.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigiDocsSnapshot.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F48FEF221F7EEE300EACC03 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
+		7F48FEF421F7EEE300EACC03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F48FEFA21F7EF1C00EACC03 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		7F8CBA1621F6FB8100218D8B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7F8CBA1821F6FB9400218D8B /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		7F8CBA1C21F7003D00218D8B /* Logging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Logging.framework; path = Carthage/Build/iOS/Logging.framework; sourceTree = "<group>"; };
@@ -133,12 +196,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7F48FEED21F7EEE300EACC03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FEB2C4B1E0ACA6D00478CD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7F9594101E0ADA7600CC2CC8 /* QuickLook.framework in Frameworks */,
 				7F8CBA1D21F7003D00218D8B /* Logging.framework in Frameworks */,
+				7F48FEBE21F7941D00EACC03 /* Result.framework in Frameworks */,
+				7F48FEBF21F7941D00EACC03 /* AsyncAwait.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F48FEC321F7A40D00EACC03 /* TestExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +228,7 @@
 		7F1A64601E0C4994004C5A5C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F48FEE621F7DDBD00EACC03 /* test.pdf */,
 				7FEB2C681E0ACA6D00478CD6 /* Info.plist */,
 			);
 			name = Resources;
@@ -193,6 +267,53 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7F48FEB921F7805E00EACC03 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7F48FEE221F7D64500EACC03 /* UITextFieldExtensions.swift */,
+				7F1A64641E0C5029004C5A5C /* UIAlertActionExtensions.swift */,
+				7F48FEE821F7E02300EACC03 /* UIAlertControllerExtensions.swift */,
+				7F1A64681E0C736A004C5A5C /* UIViewControllerExtensions.swift */,
+				7F48FEDA21F7AD2500EACC03 /* ArrayExtensions.swift */,
+				7F48FEDC21F7AF0400EACC03 /* UIButtonExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		7F48FEC721F7A42F00EACC03 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				7F48FEC821F7A44700EACC03 /* mocks.generated.swift */,
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		7F48FECC21F7A46300EACC03 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				7F48FECA21F7A45F00EACC03 /* TestEnvironment.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		7F48FECF21F7A7D300EACC03 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7F48FECD21F7A47A00EACC03 /* AppTestEnvironment.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		7F48FEF121F7EEE300EACC03 /* DigiDocsSnapshot */ = {
+			isa = PBXGroup;
+			children = (
+				7F48FEF221F7EEE300EACC03 /* Snapshots.swift */,
+				7F48FEFA21F7EF1C00EACC03 /* SnapshotHelper.swift */,
+				7F48FEF421F7EEE300EACC03 /* Info.plist */,
+			);
+			path = DigiDocsSnapshot;
+			sourceTree = "<group>";
+		};
 		7F8CBA1F21F7007900218D8B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +342,9 @@
 		7F95940E1E0ADA7600CC2CC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */,
+				7F48FEBD21F7941D00EACC03 /* AsyncAwait.framework */,
+				7F48FEBC21F7941D00EACC03 /* Result.framework */,
 				7F8CBA1C21F7003D00218D8B /* Logging.framework */,
 				7F95940F1E0ADA7600CC2CC8 /* QuickLook.framework */,
 			);
@@ -242,6 +366,7 @@
 			children = (
 				7F48FEA721F731F500EACC03 /* PDFService.swift */,
 				7FEB2C711E0ACAA100478CD6 /* Camera.swift */,
+				7F48FEBA21F7808500EACC03 /* SimulatorImagePickerController.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -265,6 +390,8 @@
 			children = (
 				7F48FE9221F7221800EACC03 /* Mockable.swift */,
 				7F48FE9C21F7272C00EACC03 /* Presentable.swift */,
+				7F48FEB721F77ADF00EACC03 /* ImagePickerControlling.swift */,
+				7F48FEEA21F7E7E200EACC03 /* ViewControllerCastable.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -285,6 +412,7 @@
 				7F8CBA1821F6FB9400218D8B /* CHANGELOG.md */,
 				7FEB2C501E0ACA6D00478CD6 /* DigiDocs */,
 				7FEB2C651E0ACA6D00478CD6 /* DigiDocsTests */,
+				7F48FEF121F7EEE300EACC03 /* DigiDocsSnapshot */,
 				7FEB2C4F1E0ACA6D00478CD6 /* Products */,
 				7F95940E1E0ADA7600CC2CC8 /* Frameworks */,
 			);
@@ -295,6 +423,7 @@
 			children = (
 				7FEB2C4E1E0ACA6D00478CD6 /* DigiDocs.app */,
 				7FEB2C621E0ACA6D00478CD6 /* DigiDocsTests.xctest */,
+				7F48FEF021F7EEE300EACC03 /* DigiDocsSnapshot.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,9 +449,15 @@
 		7FEB2C651E0ACA6D00478CD6 /* DigiDocsTests */ = {
 			isa = PBXGroup;
 			children = (
-				7F1A64641E0C5029004C5A5C /* UIAlertController+Utility.swift */,
-				7F1A64661E0C6F83004C5A5C /* SimulatorImagePickerController.swift */,
-				7F1A64681E0C736A004C5A5C /* UIViewController+Utility.swift */,
+				7F48FED221F7A94000EACC03 /* CameraTests.swift */,
+				7F48FED421F7A94A00EACC03 /* NameDialogueTests.swift */,
+				7F48FEE421F7D79A00EACC03 /* PDFTests.swift */,
+				7F48FED621F7A95600EACC03 /* OptionsDialogueTests.swift */,
+				7F48FED821F7A95F00EACC03 /* MainTests.swift */,
+				7F48FECF21F7A7D300EACC03 /* Utility */,
+				7F48FEC721F7A42F00EACC03 /* Generated */,
+				7F48FECC21F7A46300EACC03 /* Protocol */,
+				7F48FEB921F7805E00EACC03 /* Extensions */,
 				7F1A64601E0C4994004C5A5C /* Resources */,
 			);
 			path = DigiDocsTests;
@@ -331,6 +466,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7F48FEEF21F7EEE300EACC03 /* DigiDocsSnapshot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F48FEF721F7EEE300EACC03 /* Build configuration list for PBXNativeTarget "DigiDocsSnapshot" */;
+			buildPhases = (
+				7F48FEEC21F7EEE300EACC03 /* Sources */,
+				7F48FEED21F7EEE300EACC03 /* Frameworks */,
+				7F48FEEE21F7EEE300EACC03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F48FEF621F7EEE300EACC03 /* PBXTargetDependency */,
+			);
+			name = DigiDocsSnapshot;
+			productName = DigiDocsSnapshot;
+			productReference = 7F48FEF021F7EEE300EACC03 /* DigiDocsSnapshot.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		7FEB2C4D1E0ACA6D00478CD6 /* DigiDocs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FEB2C6B1E0ACA6D00478CD6 /* Build configuration list for PBXNativeTarget "DigiDocs" */;
@@ -356,9 +509,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FEB2C6E1E0ACA6D00478CD6 /* Build configuration list for PBXNativeTarget "DigiDocsTests" */;
 			buildPhases = (
+				7F48FEC021F7A3EB00EACC03 /* ShellScript */,
 				7FEB2C5E1E0ACA6D00478CD6 /* Sources */,
 				7FEB2C5F1E0ACA6D00478CD6 /* Frameworks */,
 				7FEB2C601E0ACA6D00478CD6 /* Resources */,
+				7F48FEC121F7A3FA00EACC03 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -376,10 +531,16 @@
 		7FEB2C461E0ACA6D00478CD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Pink Chicken Ltd";
 				TargetAttributes = {
+					7F48FEEF21F7EEE300EACC03 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = PFC77GK3D7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7FEB2C4D1E0ACA6D00478CD6;
+					};
 					7FEB2C4D1E0ACA6D00478CD6 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = PFC77GK3D7;
@@ -416,11 +577,19 @@
 			targets = (
 				7FEB2C4D1E0ACA6D00478CD6 /* DigiDocs */,
 				7FEB2C611E0ACA6D00478CD6 /* DigiDocsTests */,
+				7F48FEEF21F7EEE300EACC03 /* DigiDocsSnapshot */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7F48FEEE21F7EEE300EACC03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FEB2C4C1E0ACA6D00478CD6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,6 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F48FEE721F7DDBD00EACC03 /* test.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +628,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${TRAVIS}\" = \"1\" ]; then\n    exit 0\nfi\nsh base_lang.sh\n";
+		};
+		7F48FEC021F7A3EB00EACC03 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${TRAVIS}\" = \"1\" ]; then\n    exit 0\nfi\nsourcery\n";
 		};
 		7F8CBA1A21F6FF9A00218D8B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -500,9 +687,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Logging.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AsyncAwait.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Logging.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AsyncAwait.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -511,11 +702,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7F48FEEC21F7EEE300EACC03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F48FEF321F7EEE300EACC03 /* Snapshots.swift in Sources */,
+				7F48FEFB21F7EF1C00EACC03 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FEB2C4A1E0ACA6D00478CD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7FEB2C541E0ACA6D00478CD6 /* MainViewController.swift in Sources */,
+				7F48FEB821F77ADF00EACC03 /* ImagePickerControlling.swift in Sources */,
 				7F163D391EDF0D5B00DC52B6 /* BundleExtensions.swift in Sources */,
 				7F9594151E0B2FCA00CC2CC8 /* PDFPreviewItem.swift in Sources */,
 				7F48FE9F21F7276600EACC03 /* Alert.swift in Sources */,
@@ -527,6 +728,7 @@
 				7F48FEAE21F749C700EACC03 /* CameraViewState.swift in Sources */,
 				7F48FEB621F7662900EACC03 /* OptionAction.swift in Sources */,
 				7F48FEA621F72F2E00EACC03 /* OptionsController.swift in Sources */,
+				7F48FEEB21F7E7E200EACC03 /* ViewControllerCastable.swift in Sources */,
 				7F48FE9521F7243C00EACC03 /* AppControllerFactory.swift in Sources */,
 				7F48FEB021F7545200EACC03 /* Error.swift in Sources */,
 				7F8CBA3821F717F700218D8B /* strings.swift in Sources */,
@@ -547,6 +749,7 @@
 				7F8CBA2521F700A100218D8B /* CameraController.swift in Sources */,
 				7F48FE9821F725EE00EACC03 /* MainViewState.swift in Sources */,
 				7F48FEA421F72E9A00EACC03 /* MainAction.swift in Sources */,
+				7F48FEBB21F7808500EACC03 /* SimulatorImagePickerController.swift in Sources */,
 				7F48FEA221F72C5E00EACC03 /* ListController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,15 +758,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F1A64671E0C6F83004C5A5C /* SimulatorImagePickerController.swift in Sources */,
-				7F1A64651E0C5029004C5A5C /* UIAlertController+Utility.swift in Sources */,
-				7F1A64691E0C736A004C5A5C /* UIViewController+Utility.swift in Sources */,
+				7F48FED321F7A94000EACC03 /* CameraTests.swift in Sources */,
+				7F48FEDB21F7AD2500EACC03 /* ArrayExtensions.swift in Sources */,
+				7F48FEE921F7E02300EACC03 /* UIAlertControllerExtensions.swift in Sources */,
+				7F1A64651E0C5029004C5A5C /* UIAlertActionExtensions.swift in Sources */,
+				7F48FED521F7A94A00EACC03 /* NameDialogueTests.swift in Sources */,
+				7F48FECB21F7A45F00EACC03 /* TestEnvironment.swift in Sources */,
+				7F48FED921F7A95F00EACC03 /* MainTests.swift in Sources */,
+				7F48FECE21F7A47A00EACC03 /* AppTestEnvironment.swift in Sources */,
+				7F48FEC921F7A44700EACC03 /* mocks.generated.swift in Sources */,
+				7F48FED721F7A95600EACC03 /* OptionsDialogueTests.swift in Sources */,
+				7F48FEE321F7D64500EACC03 /* UITextFieldExtensions.swift in Sources */,
+				7F1A64691E0C736A004C5A5C /* UIViewControllerExtensions.swift in Sources */,
+				7F48FEDD21F7AF0400EACC03 /* UIButtonExtensions.swift in Sources */,
+				7F48FEE521F7D79A00EACC03 /* PDFTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7F48FEF621F7EEE300EACC03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FEB2C4D1E0ACA6D00478CD6 /* DigiDocs */;
+			targetProxy = 7F48FEF521F7EEE300EACC03 /* PBXContainerItemProxy */;
+		};
 		7FEB2C641E0ACA6D00478CD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7FEB2C4D1E0ACA6D00478CD6 /* DigiDocs */;
@@ -621,6 +840,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7F48FEF821F7EEE300EACC03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PFC77GK3D7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = DigiDocsSnapshot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsSnapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DigiDocs;
+			};
+			name = Debug;
+		};
+		7F48FEF921F7EEE300EACC03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PFC77GK3D7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = DigiDocsSnapshot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsSnapshot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DigiDocs;
+			};
+			name = Release;
+		};
 		7FEB2C691E0ACA6D00478CD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -782,6 +1048,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = PFC77GK3D7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DigiDocsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -799,6 +1069,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = PFC77GK3D7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DigiDocsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -813,6 +1087,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7F48FEF721F7EEE300EACC03 /* Build configuration list for PBXNativeTarget "DigiDocsSnapshot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F48FEF821F7EEE300EACC03 /* Debug */,
+				7F48FEF921F7EEE300EACC03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7FEB2C491E0ACA6D00478CD6 /* Build configuration list for PBXProject "DigiDocs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

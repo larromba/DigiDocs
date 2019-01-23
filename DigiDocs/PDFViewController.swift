@@ -1,7 +1,8 @@
 import Logging
 import QuickLook
 
-protocol PDFViewControlling: Presentable {
+// sourcery: name = PDFViewController
+protocol PDFViewControlling: Presentable, Mockable, ViewControllerCastable {
     var viewState: PDFViewStating { get set }
 
     func setDelegate(_ delegate: PDFViewControllerDelegate)

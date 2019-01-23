@@ -1,21 +1,25 @@
+import AsyncAwait
 import UIKit
 
-protocol PDFControlling {
-    func deletePDFs(at paths: [URL])
-    func makePDF(fromPhotos photos: [UIImage], withName name: String)
+// sourcery: name = PDFController
+protocol PDFControlling: Mockable {
+    func deletePDFs(at paths: [URL]) -> Async<Void>
+    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void>
 }
 
 final class PDFController: PDFControlling {
     private let viewController: PDFViewControlling
     private let alertController: AlertControlling
+    private let pdfAlertController: AlertControlling
     private let presenter: Presentable
     private let pdfService: PDFServicing
     private let fileManager: FileManager
 
-    init(viewController: PDFViewControlling, alertController: AlertControlling, presenter: Presentable,
-         pdfService: PDFServicing, fileManager: FileManager = .default) {
+    init(viewController: PDFViewControlling, alertController: AlertControlling, pdfAlertController: AlertControlling,
+         presenter: Presentable, pdfService: PDFServicing, fileManager: FileManager = .default) {
         self.viewController = viewController
         self.alertController = alertController
+        self.pdfAlertController = pdfAlertController
         self.presenter = presenter
         self.pdfService = pdfService
         self.fileManager = fileManager
@@ -25,47 +29,64 @@ final class PDFController: PDFControlling {
         viewController.setDelegate(self)
     }
 
-    func deletePDFs(at paths: [URL]) {
-        let alert = Alert(
-            title: L10n.warningAlertTitle,
-            message: L10n.areYouSureAlertTitle,
-            cancel: Alert.Action(title: L10n.noButtonTitle, handler: nil),
-            actions: [Alert.Action(title: L10n.yesButtonTitle, handler: {
-                self.delete(paths)
-            })],
-            textField: nil
-        )
-        alertController.showAlert(alert)
+    func deletePDFs(at paths: [URL]) -> Async<Void> {
+        return deletePDFs(at: paths, alertController: alertController)
     }
 
-    func makePDF(fromPhotos photos: [UIImage], withName name: String) {
-        let pdf = PDF(images: photos, name: name)
-        pdfService.generatePDF(pdf, { _ in
-            self.viewController.viewState = PDFViewState(paths: [pdf.path])
-            // TODO: !
-            self.presenter.present(self.viewController as! UIViewController, animated: true, completion: nil)
-        })
+    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void> {
+        return Async { completion in
+            async({
+                let pdf = PDF(images: photos, name: name)
+                try await(self.pdfService.generatePDF(pdf))
+                onMain {
+                    self.viewController.viewState = PDFViewState(paths: [pdf.path])
+                    self.presenter.present(self.viewController.asViewController, animated: true, completion: nil)
+                }
+                completion(.success(()))
+            }, onError: { error in
+                completion(.failure(error))
+            })
+        }
     }
 
     // MARK: - private
 
-    private func delete(_ paths: [URL]) {
-        var errors = [URL: Error]()
-        paths.forEach {
-            do {
-                try fileManager.removeItem(at: $0)
-            } catch {
-                errors[$0] = error
-            }
+    private func deletePDFs(at paths: [URL], alertController: AlertControlling) -> Async<Void> {
+        return Async { completion in
+            let alert = Alert(
+                title: L10n.warningAlertTitle,
+                message: L10n.areYouSureAlertTitle,
+                cancel: Alert.Action(title: L10n.noButtonTitle, handler: nil),
+                actions: [Alert.Action(title: L10n.yesButtonTitle, handler: {
+                    async({
+                        try await(self._deletePDFs(at: paths))
+                        completion(.success(()))
+                    }, onError: { error in
+                        completion(.failure(error))
+                    })
+                })],
+                textField: nil
+            )
+            onMain { alertController.showAlert(alert) }
         }
-        if errors.isEmpty {
-            let list = pdfService.generateList()
-            viewController.viewState = PDFViewState(paths: list.paths)
-        } else {
-            let error = errors.first!
-            // TODO: this will work?
-            let title = L10n.deleteErrorAlertTitle(error.key.absoluteString, error.value.localizedDescription)
-            alertController.showAlert(Alert(title: title))
+    }
+
+    private func _deletePDFs(at paths: [URL]) -> Async<Void> {
+        return Async { completion in
+            var errors = [URL: Error]()
+            paths.forEach {
+                do {
+                    try self.fileManager.removeItem(at: $0)
+                } catch {
+                    errors[$0] = error
+                }
+            }
+            guard errors.isEmpty else {
+                let error = errors.first!
+                completion(.failure(PDFError.framework(error.value)))
+                return
+            }
+            completion(.success(()))
         }
     }
 }
@@ -74,7 +95,12 @@ final class PDFController: PDFControlling {
 
 extension PDFController: PDFViewControllerDelegate {
     func viewController(_ viewController: PDFViewController, deleteItem item: PDFPreviewItem) {
-        guard let url = item.previewItemURL else { return }
-        deletePDFs(at: [url])
+        async({
+            guard let url = item.previewItemURL else { return }
+            try await(self.deletePDFs(at: [url], alertController: self.pdfAlertController))
+            onMain { self.viewController.viewState = PDFViewState(paths: self.pdfService.generateList().paths) }
+        }, onError: { error in
+            onMain { self.alertController.showAlert(Alert(error: error)) }
+        })
     }
 }
