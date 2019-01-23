@@ -1,10 +1,2 @@
-/* 
-  Localizable.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
 "NSCameraUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";
 "NSPhotoLibraryUsageDescription" = "Nous devons accéder à votre appareil photo pour numériser vos documents";

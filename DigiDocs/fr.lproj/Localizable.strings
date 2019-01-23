@@ -1,31 +1,22 @@
-/* 
-  InfoPlist.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
-"Your camera is currently not available" = "Votre appareil photo n'est pas disponible actuellement";
-"You have no documents saved" = "Vous n'avez aucun document enregistré";
-"Document Name" = "Nom du document";
-"What name would you like to give the document?" = "Quel nom aimeriez-vous donner au document?";
-"e.g. December Invoice" = "par exemple. Facture de décembre";
-"Cancel" = "Annuler";
-"OK" = "D'accord";
-"You must enter a longer name" = "Vous devez saisir un nom plus long";
-"A document with that name already exists, please try again" = "Un document portant ce nom existe déjà. Veuillez réessayer.";
-"Delete" = "Effacer";
-"Couldn't delete %@. %@" = "Impossible de supprimer %@. %@";
-"Warning" = "Attention";
-"Are you sure?" = "Êtes-vous sûr?";
-"No" = "Non";
-"Yes" = "Oui";
-"Message" = "Message";
-"Error" = "Erreur";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "Une erreur s'est produite. Veuillez réessayer. Si le problème persiste, veuillez contacter le développeur";
-"Take" = "Prendre";
-"Done" = "Terminé";
-"Share all" = "Partagez tous";
-"Delete all" = "Supprimer tout";
-"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "La photo n'a pas été prise - il y avait un problème avec l'orientation de la photo. Tenez la caméra en position verticale et passez du paysage, au portrait, pour réinitialiser l'orientation. Ensuite, réessayez";
+"no camera alert title" = "Votre appareil photo n'est pas disponible actuellement";
+"new document alert title" = "Nom du document";
+"new document alert message" = "Quel nom aimeriez-vous donner au document?";
+"new document alert placeholder" = "par exemple. Facture de décembre";
+"cancel button title" = "Annuler";
+"ok button title" = "D'accord";
+"delete button title" = "Effacer";
+"warning alert title" = "Attention";
+"are you sure alert title" = "Êtes-vous sûr?";
+"no button title" = "Non";
+"yes button title" = "Oui";
+"message alert title" = "Message";
+"error alert title" = "Erreur";
+"foobar alert title" = "Une erreur s'est produite. Veuillez réessayer. Si le problème persiste, veuillez contacter le développeur";
+"take button title" = "Prendre";
+"done button title" = "Terminé";
+"share all option" = "Partagez tous";
+"delete all option" = "Supprimer tout";
+"view all option" = "Voir tout";
+"photo not taken alert title" = "La photo n'a pas été prise - il y avait un problème avec l'orientation de la photo. Tenez la caméra en position verticale et passez du paysage, au portrait, pour réinitialiser l'orientation. Ensuite, réessayez";
+"photos label" = "%d photos";
+"random button title" = "au hasard";

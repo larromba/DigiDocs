@@ -1,0 +1,41 @@
+{
+  "default": {
+    "title": {},
+    "background": "./background.jpg",
+    "padding": 50
+  },
+  "data": [
+    {
+      "filter": "Main",
+      "title":
+      {
+        "color": "#000000",
+        "text": "DigiDocs"
+      }
+    },
+    {
+      "filter": "Camera",
+      "title":
+      {
+        "color": "#000000",
+        "text": "DigiDocse"
+      }
+    },
+    {
+      "filter": "Naming",
+      "title":
+      {
+        "color": "#000000",
+        "text": "DigiDocs"
+      }
+    },
+    {
+      "filter": "PDF",
+      "title":
+      {
+        "color": "#000000",
+        "text": "DigiDocs"
+      }
+    }
+  ]
+}

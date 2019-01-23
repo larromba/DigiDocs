@@ -1,70 +1,51 @@
-//
-//  PDFViewController.swift
-//  DigiDocs
-//
-//  Created by Lee Arromba on 21/12/2016.
-//  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-//
-
+import Logging
 import QuickLook
 
-class PDFViewController: QLPreviewController, Messaging {
-    fileprivate var items: [PDFPreviewItem]
-    
-    init?(paths: [URL]) {
-        items = [PDFPreviewItem]()
+// sourcery: name = PDFViewController
+protocol PDFViewControlling: Presentable, Mockable, ViewControllerCastable {
+    var viewState: PDFViewStating { get set }
 
-        for path in paths {
-            let item = PDFPreviewItem(path: path)
-            guard QLPreviewController.canPreview(item) else {
-                return nil
-            }
-            items.append(item)
-        }
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        dataSource = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete".localized, style: .done, target: self, action: #selector(deleteItem(_:)))
+    func setDelegate(_ delegate: PDFViewControllerDelegate)
+}
+
+protocol PDFViewControllerDelegate: AnyObject {
+    func viewController(_ viewController: PDFViewController, deleteItem item: PDFPreviewItem)
+}
+
+final class PDFViewController: QLPreviewController, PDFViewControlling {
+    private weak var viewControllerDelegate: PDFViewControllerDelegate?
+
+    var viewState: PDFViewStating {
+        didSet { bind(viewState) }
     }
-    
+
+    init(viewState: PDFViewStating) {
+        self.viewState = viewState
+        super.init(nibName: nil, bundle: nil)
+        dataSource = self
+    }
+
+    func setDelegate(_ delegate: PDFViewControllerDelegate) {
+        viewControllerDelegate = delegate
+    }
+
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        Analytics.shared.sendScreenNameEvent(classForCoder)
+
+    // MARK: - private
+
+    private func bind(_ viewState: PDFViewStating) {
+        guard isViewLoaded else { return }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewState.deleteButtonTitle, style: .done,
+                                                            target: self, action: #selector(deleteItem(_:)))
+        reloadData()
     }
-    
-    // MARK - Action
-    
-    @objc fileprivate func deleteItem(_ sender: UIBarButtonItem) {
-        guard currentPreviewItemIndex < items.count else {
-            debugPrint("bad index")
-            return // shouldnt happen
-        }
-        getConfirmation({
-            let item = self.items[self.currentPreviewItemIndex]
-            guard let url = item.previewItemURL else {
-                self.showFatalError()
-                return
-            }
-            do {
-                try FileManager.default.removeItem(at: url)
-                self.items.remove(at: self.currentPreviewItemIndex)
-                guard self.items.count > 0 else {
-                    self.dismiss(animated: true, completion: nil)
-                    return
-                }
-                self.reloadData()
-            } catch {
-                debugPrint(error.localizedDescription)
-                let message = String(format: "Couldn't delete %@. %@".localized, url.lastPathComponent, error.localizedDescription)
-                self.showMessage(message)
-                Analytics.shared.sendErrorEvent(error, classId: self.classForCoder)
-            }
-        })
+
+    @objc
+    private func deleteItem(_ sender: UIBarButtonItem) {
+        viewControllerDelegate?.viewController(self, deleteItem: viewState.items[currentPreviewItemIndex])
     }
 }
 
@@ -72,10 +53,10 @@ class PDFViewController: QLPreviewController, Messaging {
 
 extension PDFViewController: QLPreviewControllerDataSource {
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return items.count
+        return viewState.items.count
     }
-    
+
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        return items[index]
+        return viewState.items[index]
     }
 }

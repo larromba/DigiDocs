@@ -1,31 +1,22 @@
-/* 
-  InfoPlist.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
-"Your camera is currently not available" = "Your camera is currently not available";
-"You have no documents saved" = "You have no documents saved";
-"Document Name" = "Document Name";
-"What name would you like to give the document?" = "What name would you like to give the document?";
-"e.g. December Invoice" = "e.g. December Invoice";
-"Cancel" = "Cancel";
-"OK" = "OK";
-"You must enter a longer name" = "You must enter a longer name";
-"A document with that name already exists, please try again" = "A document with that name already exists, please try again";
-"Delete" = "Delete";
-"Couldn't delete %@. %@" = "Couldn't delete %@. %@";
-"Warning" = "Warning";
-"Are you sure?" = "Are you sure?";
-"No" = "No";
-"Yes" = "Yes";
-"Message" = "Message";
-"Error" = "Error";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "Something went wrong - please try again. If the problem persists, please contact the developer";
-"Take" = "Take";
-"Done" = "Done";
-"Share all" = "Share all";
-"Delete all" = "Delete all";
-"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again";
+"no camera alert title" = "Your camera is currently not available";
+"new document alert title" = "Document Name";
+"new document alert message" = "What name would you like to give the document?";
+"new document alert placeholder" = "e.g. December Invoice";
+"cancel button title" = "Cancel";
+"ok button title" = "OK";
+"delete button title" = "Delete";
+"warning alert title" = "Warning";
+"are you sure alert title" = "Are you sure?";
+"no button title" = "No";
+"yes button title" = "Yes";
+"message alert title" = "Message";
+"error alert title" = "Error";
+"foobar alert title" = "Something went wrong - please try again. If the problem persists, please contact the developer";
+"take button title" = "Take";
+"done button title" = "Done";
+"share all option" = "Share all";
+"delete all option" = "Delete all";
+"view all option" = "View all";
+"photo not taken alert title" = "The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again";
+"photos label" = "%d photos";
+"random button title" = "Random";

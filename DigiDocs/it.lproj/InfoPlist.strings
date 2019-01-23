@@ -1,10 +1,2 @@
-/* 
-  Localizable.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
 "NSCameraUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";
 "NSPhotoLibraryUsageDescription" = "Abbiamo bisogno di accedere alla fotocamera per la scansione di documenti";

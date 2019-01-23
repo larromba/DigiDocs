@@ -1,31 +1,22 @@
-/* 
-  InfoPlist.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
-"Your camera is currently not available" = "您的相机目前无法使用";
-"You have no documents saved" = "您没有保存文档";
-"Document Name" = "文档名称";
-"What name would you like to give the document?" = "你想给文件什么名字？";
-"e.g. December Invoice" = "例如十二月发票";
-"Cancel" = "取消";
-"OK" = "好";
-"You must enter a longer name" = "您必须输入较长的名称";
-"A document with that name already exists, please try again" = "具有该名称的文档已存在，请重试";
-"Delete" = "删除";
-"Couldn't delete %@. %@" = "无法删除 %@. %@";
-"Warning" = "警告";
-"Are you sure?" = "你确定？";
-"No" = "没有";
-"Yes" = "是";
-"Message" = "信息";
-"Error" = "错误";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "出现问题 - 请重试。如果问题仍然存在，请与开发人员联系";
-"Take" = "采取";
-"Done" = "完成";
-"Share all" = "分享全部";
-"Delete all" = "删除所有";
-"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "照片没有被拍摄 - 照片的方向有问题。握住相机直立并从横向移动到纵向，以重置方向。然后再试一次";
+"no camera alert title" = "您的相机目前无法使用";
+"new document alert title" = "文档名称";
+"new document alert message" = "你想给文件什么名字？";
+"new document alert placeholder" = "例如十二月发票";
+"cancel button title" = "取消";
+"ok button title" = "好";
+"delete button title" = "删除";
+"warning alert title" = "警告";
+"are you sure alert title" = "你确定？";
+"no button title" = "没有";
+"yes button title" = "是";
+"message alert title" = "信息";
+"error alert title" = "错误";
+"foobar alert title" = "出现问题 - 请重试。如果问题仍然存在，请与开发人员联系";
+"take button title" = "采取";
+"done button title" = "完成";
+"share all option" = "分享全部";
+"delete all option" = "删除所有";
+"view all option" = "查看全部";
+"photo not taken alert title" = "照片没有被拍摄 - 照片的方向有问题。握住相机直立并从横向移动到纵向，以重置方向。然后再试一次";
+"photos label" = "%d张照片";
+"random button title" = "随机";

@@ -1,31 +1,22 @@
-/* 
-  InfoPlist.strings
-  DigiDocs
-
-  Created by Lee Arromba on 22/12/2016.
-  Copyright © 2016 Pink Chicken Ltd. All rights reserved.
-*/
-
-"Your camera is currently not available" = "Ihre Kamera ist derzeit nicht verfügbar";
-"You have no documents saved" = "Sie haben keine Dokumente gespeichert";
-"Document Name" = "Dokumentname";
-"What name would you like to give the document?" = "Welchen Namen möchten Sie dem Dokument geben?";
-"e.g. December Invoice" = "z.B. Dezember Rechnung";
-"Cancel" = "Stornieren";
-"OK" = "OK";
-"You must enter a longer name" = "Sie müssen einen längeren Namen eingeben";
-"A document with that name already exists, please try again" = "Ein Dokument mit diesem Namen ist bereits vorhanden. Bitte versuchen Sie es erneut";
-"Delete" = "Löschen";
-"Couldn't delete %@. %@" = "Konnte nicht gelöscht werden %@. %@";
-"Warning" = "Warnung";
-"Are you sure?" = "Bist du sicher?";
-"No" = "Nein";
-"Yes" = "ja";
-"Message" = "Nachricht";
-"Error" = "Fehler";
-"Something went wrong - please try again. If the problem persists, please contact the developer" = "Etwas ist schief gelaufen. Bitte versuche es erneut. Wenn das Problem weiterhin besteht, wenden Sie sich an den Entwickler";
-"Take" = "Nehmen";
-"Done" = "Erledigt";
-"Share all" = "Alles teilen";
-"Delete all" = "Lösche alles";
-"The photo was not taken - there was a problem with the photo's orientation. Hold the camera upright and move from landscape, to portrait, to reset the orientation. Then try again" = "Das Foto wurde nicht genommen - es gab ein Problem mit der Orientierung des Fotos. Halten Sie die Kamera aufrecht und bewegen Sie sich von der Landschaft, zum Porträt, um die Ausrichtung zurückzusetzen. Dann versuche es noch einmal";
+"no camera alert title" = "Ihre Kamera ist derzeit nicht verfügbar";
+"new document alert title" = "Dokumentname";
+"new document alert message" = "Welchen Namen möchten Sie dem Dokument geben?";
+"new document alert placeholder" = "z.B. Dezember Rechnung";
+"cancel button title" = "Stornieren";
+"ok button title" = "OK";
+"delete button title" = "Löschen";
+"warning alert title" = "Warnung";
+"are you sure alert title" = "Bist du sicher?";
+"no button title" = "Nein";
+"yes button title" = "ja";
+"message alert title" = "Nachricht";
+"error alert title" = "Fehler";
+"foobar alert title" = "Etwas ist schief gelaufen. Bitte versuche es erneut. Wenn das Problem weiterhin besteht, wenden Sie sich an den Entwickler";
+"take button title" = "Nehmen";
+"done button title" = "Erledigt";
+"share all option" = "Alles teilen";
+"delete all option" = "Lösche alles";
+"view all option" = "Alle ansehen";
+"photo not taken alert title" = "Das Foto wurde nicht genommen - es gab ein Problem mit der Orientierung des Fotos. Halten Sie die Kamera aufrecht und bewegen Sie sich von der Landschaft, zum Porträt, um die Ausrichtung zurückzusetzen. Dann versuche es noch einmal";
+"photos label" = "%d Fotos";
+"random button title" = "Zufällig";

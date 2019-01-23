@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,9 +30,14 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open-source" translatesAutoresizingMaskIntoConstraints="NO" id="9xq-2o-KlT">
+                                <rect key="frame" x="100" y="440" width="120" height="20"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9xq-2o-KlT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GXz-J3-cQP"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="9xq-2o-KlT" secondAttribute="bottom" constant="20" id="MVx-Q0-c4u"/>
                             <constraint firstAttribute="trailing" secondItem="Mm7-xO-CHf" secondAttribute="trailing" constant="20" id="WRQ-NC-Fwc"/>
                             <constraint firstItem="Mm7-xO-CHf" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aAd-dq-H7k"/>
                             <constraint firstItem="Mm7-xO-CHf" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="bas-fM-jXu"/>
@@ -43,4 +49,7 @@
             <point key="canvasLocation" x="50.625" y="373.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="open-source" width="120" height="20"/>
+    </resources>
 </document>
