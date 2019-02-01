@@ -8,7 +8,7 @@ protocol AppControlling: Mockable {
 }
 
 final class AppController: AppControlling {
-    private let mainController: MainControlling
+    private let homeController: HomeControlling
     private let cameraController: CameraControlling
     private let listController: ListControlling
     private let optionsController: OptionsControlling
@@ -17,10 +17,10 @@ final class AppController: AppControlling {
     private let shareController: ShareControlling
     private let alertController: AlertControlling
 
-    init(mainController: MainControlling, cameraController: CameraControlling, listController: ListControlling,
+    init(homeController: HomeControlling, cameraController: CameraControlling, listController: ListControlling,
          optionsController: OptionsControlling, pdfController: PDFControlling, namingController: NamingControlling,
          shareController: ShareControlling, alertController: AlertControlling) {
-        self.mainController = mainController
+        self.homeController = homeController
         self.cameraController = cameraController
         self.listController = listController
         self.optionsController = optionsController
@@ -29,7 +29,7 @@ final class AppController: AppControlling {
         self.pdfController = pdfController
         self.alertController = alertController
 
-        mainController.setDelegate(self)
+        homeController.setDelegate(self)
         cameraController.setDelegate(self)
         optionsController.setDelegate(self)
     }
@@ -39,20 +39,20 @@ final class AppController: AppControlling {
     private func deleteAll() {
         async({
             try await(self.pdfController.deletePDFs(at: self.listController.list.paths))
-            onMain { self.mainController.refreshUI() }
+            onMain { self.homeController.refreshUI() }
         }, onError: { error in
             onMain { self.alertController.showAlert(Alert(error: error)) }
         })
     }
 
-    private func finishedWithPhotos(_ photos: [UIImage]) {
+    private func cameraFinishedWithPhotos(_ photos: [UIImage]) {
         async({
             let name = try await(self.namingController.getName())
-            onMain { self.mainController.setIsLoading(true) }
+            onMain { self.homeController.setIsLoading(true) }
             try await(self.pdfController.makePDF(fromPhotos: photos, withName: name))
             onMain {
-                self.mainController.setIsLoading(false)
-                self.mainController.refreshUI()
+                self.homeController.setIsLoading(false)
+                self.homeController.refreshUI()
             }
         }, onError: { error in
             onMain { self.alertController.showAlert(Alert(error: error)) }
@@ -62,10 +62,10 @@ final class AppController: AppControlling {
 
 // MARK: - MainControllerDelegate
 
-extension AppController: MainControllerDelegate {
-    func controller(_ controller: MainControlling, performAction action: MainAction) {
+extension AppController: HomeControllerDelegate {
+    func controller(_ controller: HomeControlling, performAction action: MainAction) {
         switch action {
-        case .openCamera: cameraController.openCamera(in: mainController.presenter)
+        case .openCamera: cameraController.openCamera(in: homeController.presenter)
         case .openList: optionsController.displayOptions()
         }
     }
@@ -75,7 +75,7 @@ extension AppController: MainControllerDelegate {
 
 extension AppController: CameraControllerDelegate {
     func controller(_ controller: CameraController, finishedWithPhotos photos: [UIImage]) {
-        self.finishedWithPhotos(photos)
+        self.cameraFinishedWithPhotos(photos)
     }
 }
 

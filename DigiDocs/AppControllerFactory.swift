@@ -1,10 +1,12 @@
 import UIKit
 
 enum AppControllerFactory {
-    static func makeAppController(viewController: MainViewControlling) -> AppControlling {
+    static func makeAppController(viewController: HomeViewController) -> AppControlling {
+        viewController.preloadView()
+
         let fileManager = FileManager.default
         let pdfService = PDFService(fileManager: fileManager)
-        let mainController = MainController(viewController: viewController, pdfService: pdfService)
+        let homeController = HomeController(viewController: viewController, pdfService: pdfService)
 
         guard let overlay = UIStoryboard.camera
             .instantiateInitialViewController() as? CameraOverlayViewController else {
@@ -24,7 +26,7 @@ enum AppControllerFactory {
         let listController = ListController(alertController: alertController, presenter: viewController,
                                             pdfService: pdfService)
 
-        let optionsController = OptionsController(presenter: viewController)
+        let optionsController = OptionsController(presenter: viewController, popoverView: viewController.listButton)
 
         let pdfViewController = PDFViewController(viewState: PDFViewState(paths: []))
         let pdfController = PDFController(viewController: pdfViewController, alertController: alertController,
@@ -35,7 +37,7 @@ enum AppControllerFactory {
 
         let shareController = ShareController(presenter: viewController)
 
-        return AppController(mainController: mainController, cameraController: cameraController,
+        return AppController(homeController: homeController, cameraController: cameraController,
                              listController: listController, optionsController: optionsController,
                              pdfController: pdfController, namingController: namingController,
                              shareController: shareController, alertController: alertController)

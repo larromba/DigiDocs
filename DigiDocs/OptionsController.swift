@@ -12,10 +12,12 @@ protocol OptionsControllerDelegate: AnyObject {
 
 final class OptionsController: OptionsControlling {
     private let presenter: Presentable
+    private let popoverView: UIView
     private weak var delegate: OptionsControllerDelegate?
 
-    init(presenter: Presentable) {
+    init(presenter: Presentable, popoverView: UIView) {
         self.presenter = presenter
+        self.popoverView = popoverView
     }
 
     func setDelegate(_ delegate: OptionsControllerDelegate) {
@@ -24,6 +26,8 @@ final class OptionsController: OptionsControlling {
 
     func displayOptions() {
         let options = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        options.popoverPresentationController?.sourceView = popoverView
+        options.popoverPresentationController?.sourceRect = popoverView.bounds
         options.addAction(UIAlertAction(title: L10n.viewAllOption, style: .default, handler: { _ in
             self.delegate?.controller(self, performAction: .viewAll)
         }))

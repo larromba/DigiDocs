@@ -5,8 +5,9 @@ protocol MainViewStating {
     var isLoading: Bool { get }
     var isUserInteractionEnabled: Bool { get }
     var isListButtonEnabled: Bool { get }
+    var badgeNumber: Int { get }
 
-    func copy(isListButtonEnabled: Bool) -> MainViewStating
+    func copy(badgeNumber: Int) -> MainViewStating
     func copy(isLoading: Bool) -> MainViewStating
 }
 
@@ -16,17 +17,18 @@ struct MainViewState: MainViewStating {
     var isUserInteractionEnabled: Bool {
         return !isLoading
     }
-    let isListButtonEnabled: Bool
+    var isListButtonEnabled: Bool {
+        return badgeNumber > 0
+    }
+    let badgeNumber: Int
 }
 
 extension MainViewState {
-    func copy(isListButtonEnabled: Bool) -> MainViewStating {
-        return MainViewState(isLoading: isLoading,
-                             isListButtonEnabled: isListButtonEnabled)
+    func copy(badgeNumber: Int) -> MainViewStating {
+        return MainViewState(isLoading: isLoading, badgeNumber: badgeNumber)
     }
 
     func copy(isLoading: Bool) -> MainViewStating {
-        return MainViewState(isLoading: isLoading,
-                             isListButtonEnabled: isListButtonEnabled)
+        return MainViewState(isLoading: isLoading, badgeNumber: badgeNumber)
     }
 }

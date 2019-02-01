@@ -4,19 +4,19 @@ import TestExtensions
 import XCTest
 
 final class NameDialogueTests: XCTestCase {
-    private var mainViewController: MainViewController!
+    private var homeViewController: HomeViewController!
     private var env: AppTestEnvironment!
 
     override func setUp() {
         super.setUp()
-        mainViewController = UIStoryboard.main.instantiateInitialViewController() as? MainViewController
-        env = AppTestEnvironment(mainViewController: mainViewController)
-        env.setInWindow(mainViewController)
+        homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
+        env = AppTestEnvironment(homeViewController: homeViewController)
+        env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
 
     override func tearDown() {
-        mainViewController = nil
+        homeViewController = nil
         env = nil
         UIView.setAnimationsEnabled(true)
         super.tearDown()
@@ -33,7 +33,7 @@ final class NameDialogueTests: XCTestCase {
 
         // test
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -51,7 +51,7 @@ final class NameDialogueTests: XCTestCase {
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -74,7 +74,7 @@ final class NameDialogueTests: XCTestCase {
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -96,7 +96,7 @@ final class NameDialogueTests: XCTestCase {
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -104,7 +104,7 @@ final class NameDialogueTests: XCTestCase {
 
         // test
         waitSync()
-        XCTAssertNil(mainViewController.presentedViewController)
+        XCTAssertNil(homeViewController.presentedViewController)
     }
 
     func testOkChoosesEnteredName() {
@@ -119,7 +119,7 @@ final class NameDialogueTests: XCTestCase {
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -129,5 +129,29 @@ final class NameDialogueTests: XCTestCase {
         // test
         waitSync()
         XCTAssertEqual(name, "test")
+    }
+
+    func testNameIsValidForFilePath() {
+        // mocks
+        env.inject()
+        var name: String = ""
+        async({
+            name = try await(self.env.namingController.getName())
+        }, onError: { error in
+            XCTFail(error.localizedDescription)
+        })
+
+        // sut
+        waitSync()
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
+            XCTFail("expected UIAlertController")
+            return
+        }
+        alertController.textFields?.first?.setText("a-\\te/st|..na:me")
+        XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
+
+        // test
+        waitSync()
+        XCTAssertEqual(name, "a-test|name")
     }
 }

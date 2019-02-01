@@ -27,7 +27,7 @@ final class NamingController: NamingControlling {
                     guard let name = name else {
                         fatalError("name should never be nil")
                     }
-                    completion(.success(name))
+                    completion(.success(self.cleanName(name)))
                 }), Alert.Action(title: L10n.randomButtonTitle, handler: {
                     completion(.success(UUID().uuidString))
                 })],
@@ -47,5 +47,16 @@ final class NamingController: NamingControlling {
                 self.alertController.setIsButtonEnabled(false, at: 1)
             }
         }
+    }
+
+    // MARK: - private
+
+    // swiftlint:disable joined_default_parameter
+    private func cleanName(_ name: String) -> String {
+        var invalidCharacters = CharacterSet(charactersIn: ":/.\\")
+        invalidCharacters.formUnion(.newlines)
+        invalidCharacters.formUnion(.illegalCharacters)
+        invalidCharacters.formUnion(.controlCharacters)
+        return name.components(separatedBy: invalidCharacters).joined(separator: "")
     }
 }

@@ -2,8 +2,8 @@
 import TestExtensions
 import XCTest
 
-final class MainTests: XCTestCase {
-    private var mainViewController: MainViewController!
+final class HomeTests: XCTestCase {
+    private var homeViewController: HomeViewController!
     private var camera: Camera!
     private var cameraOverlay: CameraOverlayViewController!
     private var env: AppTestEnvironment!
@@ -11,19 +11,19 @@ final class MainTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        mainViewController = UIStoryboard.main.instantiateInitialViewController() as? MainViewController
+        homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
         cameraOverlay = UIStoryboard.camera.instantiateInitialViewController() as? CameraOverlayViewController
         camera = Camera(overlay: cameraOverlay, pickerType: SimulatorImagePickerController.self)
         pdfService = PDFService(fileManager: .default)
         _ = pdfService.deleteList(pdfService.generateList())
-        env = AppTestEnvironment(mainViewController: mainViewController, pdfService: pdfService, camera: camera,
+        env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService, camera: camera,
                                  cameraOverlay: cameraOverlay)
-        env.setInWindow(mainViewController)
+        env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
 
     override func tearDown() {
-        mainViewController = nil
+        homeViewController = nil
         cameraOverlay = nil
         camera = nil
         env = nil
@@ -37,10 +37,10 @@ final class MainTests: XCTestCase {
         env.inject()
 
         // sut
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
 
         // test
-        XCTAssertTrue(mainViewController.presentedViewController is SimulatorImagePickerController)
+        XCTAssertTrue(homeViewController.presentedViewController is SimulatorImagePickerController)
     }
 
     func testListButtonShowsOptionsWhenHavePDFs() {
@@ -49,14 +49,23 @@ final class MainTests: XCTestCase {
         env.inject()
 
         // sut
-        XCTAssertTrue(mainViewController.listButton.fire())
+        XCTAssertTrue(homeViewController.listButton.fire())
 
         // test
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
         XCTAssertEqual(alertController.preferredStyle, .actionSheet)
+    }
+
+    func testListButtonBadgeShowsNumberOfPDFs() {
+        // mocks
+        env.setNumberOfPDFs(1)
+        env.inject()
+
+        // sut
+        XCTAssertEqual(homeViewController.listBadgeLabel?.text, "1")
     }
 
     func testNoPDFsDisabledListButton() {
@@ -64,7 +73,7 @@ final class MainTests: XCTestCase {
         env.inject()
 
         // test
-        XCTAssertFalse(mainViewController.listButton.isEnabled)
+        XCTAssertFalse(homeViewController.listButton.isEnabled)
     }
 
     func testPDFsEnableListButton() {
@@ -73,6 +82,6 @@ final class MainTests: XCTestCase {
         env.inject()
 
         // test
-        XCTAssertTrue(mainViewController.listButton.isEnabled)
+        XCTAssertTrue(homeViewController.listButton.isEnabled)
     }
 }

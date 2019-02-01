@@ -15,8 +15,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         #endif
 
-        guard let viewController = window?.rootViewController as? MainViewControlling else {
-            assertionFailure("expected MainViewController")
+        guard let viewController = window?.rootViewController as? HomeViewController else {
+            assertionFailure("expected homeViewController")
             return true
         }
         appController = AppControllerFactory.makeAppController(viewController: viewController)

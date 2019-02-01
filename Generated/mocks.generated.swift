@@ -330,6 +330,114 @@ class MockCamera: NSObject, Camerable {
     }
 }
 
+class MockHomeController: NSObject, HomeControlling {
+    var presenter: Presentable {
+        get { return _presenter }
+        set(value) { _presenter = value; _presenterHistory.append(_Variable(value)) }
+    }
+    var _presenter: Presentable!
+    var _presenterHistory: [_Variable<Presentable?>] = []
+    let invocations = _Invocations()
+    let actions = _Actions()
+    static let invocations = _Invocations()
+    static let actions = _Actions()
+
+    // MARK: - setIsLoading
+
+    func setIsLoading(_ isLoading: Bool) {
+        let functionName = setIsLoading1.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: isLoading, forKey: setIsLoading1.params.isLoading)
+        invocations.record(invocation)
+    }
+
+    enum setIsLoading1: String, _StringRawRepresentable {
+        case name = "setIsLoading1"
+        enum params: String, _StringRawRepresentable {
+            case isLoading = "setIsLoading(_isLoading:Bool).isLoading"
+        }
+    }
+
+    // MARK: - setDelegate
+
+    func setDelegate(_ delegate: HomeControllerDelegate) {
+        let functionName = setDelegate2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: delegate, forKey: setDelegate2.params.delegate)
+        invocations.record(invocation)
+    }
+
+    enum setDelegate2: String, _StringRawRepresentable {
+        case name = "setDelegate2"
+        enum params: String, _StringRawRepresentable {
+            case delegate = "setDelegate(_delegate:HomeControllerDelegate).delegate"
+        }
+    }
+
+    // MARK: - refreshUI
+
+    func refreshUI() {
+        let functionName = refreshUI3.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocations.record(invocation)
+    }
+
+    enum refreshUI3: String, _StringRawRepresentable {
+        case name = "refreshUI3"
+    }
+}
+
+class MockHomeViewController: NSObject, HomeViewControlling {
+    var viewState: MainViewStating? {
+        get { return _viewState }
+        set(value) { _viewState = value; _viewStateHistory.append(_Variable(value)) }
+    }
+    var _viewState: MainViewStating?
+    var _viewStateHistory: [_Variable<MainViewStating?>] = []
+    let invocations = _Invocations()
+    let actions = _Actions()
+    static let invocations = _Invocations()
+    static let actions = _Actions()
+
+    // MARK: - setDelegate
+
+    func setDelegate(_ delegate: HomeViewControllerDelegate) {
+        let functionName = setDelegate1.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: delegate, forKey: setDelegate1.params.delegate)
+        invocations.record(invocation)
+    }
+
+    enum setDelegate1: String, _StringRawRepresentable {
+        case name = "setDelegate1"
+        enum params: String, _StringRawRepresentable {
+            case delegate = "setDelegate(_delegate:HomeViewControllerDelegate).delegate"
+        }
+    }
+
+    // MARK: - present
+
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        let functionName = present2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: viewControllerToPresent, forKey: present2.params.viewControllerToPresent)
+        invocation.set(parameter: flag, forKey: present2.params.flag)
+        if let completion = completion {
+            invocation.set(parameter: completion, forKey: present2.params.completion)
+        }
+        invocations.record(invocation)
+    }
+
+    enum present2: String, _StringRawRepresentable {
+        case name = "present2"
+        enum params: String, _StringRawRepresentable {
+            case viewControllerToPresent = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).viewControllerToPresent"
+            case flag = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).flag"
+            case completion = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).completion"
+        }
+    }
+}
+
 class MockListController: NSObject, ListControlling {
     var documentCount: Int {
         get { return _documentCount }
@@ -361,114 +469,6 @@ class MockListController: NSObject, ListControlling {
         case name = "openList1"
         enum params: String, _StringRawRepresentable {
             case list = "openList(_list:PDFList).list"
-        }
-    }
-}
-
-class MockMainController: NSObject, MainControlling {
-    var presenter: Presentable {
-        get { return _presenter }
-        set(value) { _presenter = value; _presenterHistory.append(_Variable(value)) }
-    }
-    var _presenter: Presentable!
-    var _presenterHistory: [_Variable<Presentable?>] = []
-    let invocations = _Invocations()
-    let actions = _Actions()
-    static let invocations = _Invocations()
-    static let actions = _Actions()
-
-    // MARK: - setIsLoading
-
-    func setIsLoading(_ isLoading: Bool) {
-        let functionName = setIsLoading1.name
-        let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: isLoading, forKey: setIsLoading1.params.isLoading)
-        invocations.record(invocation)
-    }
-
-    enum setIsLoading1: String, _StringRawRepresentable {
-        case name = "setIsLoading1"
-        enum params: String, _StringRawRepresentable {
-            case isLoading = "setIsLoading(_isLoading:Bool).isLoading"
-        }
-    }
-
-    // MARK: - setDelegate
-
-    func setDelegate(_ delegate: MainControllerDelegate) {
-        let functionName = setDelegate2.name
-        let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: delegate, forKey: setDelegate2.params.delegate)
-        invocations.record(invocation)
-    }
-
-    enum setDelegate2: String, _StringRawRepresentable {
-        case name = "setDelegate2"
-        enum params: String, _StringRawRepresentable {
-            case delegate = "setDelegate(_delegate:MainControllerDelegate).delegate"
-        }
-    }
-
-    // MARK: - refreshUI
-
-    func refreshUI() {
-        let functionName = refreshUI3.name
-        let invocation = _Invocation(name: functionName.rawValue)
-        invocations.record(invocation)
-    }
-
-    enum refreshUI3: String, _StringRawRepresentable {
-        case name = "refreshUI3"
-    }
-}
-
-class MockMainViewController: NSObject, MainViewControlling {
-    var viewState: MainViewStating? {
-        get { return _viewState }
-        set(value) { _viewState = value; _viewStateHistory.append(_Variable(value)) }
-    }
-    var _viewState: MainViewStating?
-    var _viewStateHistory: [_Variable<MainViewStating?>] = []
-    let invocations = _Invocations()
-    let actions = _Actions()
-    static let invocations = _Invocations()
-    static let actions = _Actions()
-
-    // MARK: - setDelegate
-
-    func setDelegate(_ delegate: MainViewControllerDelegate) {
-        let functionName = setDelegate1.name
-        let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: delegate, forKey: setDelegate1.params.delegate)
-        invocations.record(invocation)
-    }
-
-    enum setDelegate1: String, _StringRawRepresentable {
-        case name = "setDelegate1"
-        enum params: String, _StringRawRepresentable {
-            case delegate = "setDelegate(_delegate:MainViewControllerDelegate).delegate"
-        }
-    }
-
-    // MARK: - present
-
-    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
-        let functionName = present2.name
-        let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: viewControllerToPresent, forKey: present2.params.viewControllerToPresent)
-        invocation.set(parameter: flag, forKey: present2.params.flag)
-        if let completion = completion {
-            invocation.set(parameter: completion, forKey: present2.params.completion)
-        }
-        invocations.record(invocation)
-    }
-
-    enum present2: String, _StringRawRepresentable {
-        case name = "present2"
-        enum params: String, _StringRawRepresentable {
-            case viewControllerToPresent = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).viewControllerToPresent"
-            case flag = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).flag"
-            case completion = "present(_viewControllerToPresent:UIViewController,animatedflag:Bool,completion:(()->Void)?).completion"
         }
     }
 }

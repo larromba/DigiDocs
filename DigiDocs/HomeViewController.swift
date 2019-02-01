@@ -1,25 +1,26 @@
+import PPBadgeView
 import UIKit
 
-// sourcery: name = MainViewController
-protocol MainViewControlling: Presentable, Mockable {
+// sourcery: name = HomeViewController
+protocol HomeViewControlling: Presentable, Mockable {
     var viewState: MainViewStating? { get set }
 
-    func setDelegate(_ delegate: MainViewControllerDelegate)
+    func setDelegate(_ delegate: HomeViewControllerDelegate)
 }
 
-protocol MainViewControllerDelegate: AnyObject {
-    func viewControllerWillAppear(_ viewController: MainViewControlling)
-    func viewControllerCameraPressed(_ viewController: MainViewControlling)
-    func viewControllerListPressed(_ viewController: MainViewControlling)
+protocol HomeViewControllerDelegate: AnyObject {
+    func viewControllerWillAppear(_ viewController: HomeViewControlling)
+    func viewControllerCameraPressed(_ viewController: HomeViewControlling)
+    func viewControllerListPressed(_ viewController: HomeViewControlling)
 }
 
-final class MainViewController: UIViewController, MainViewControlling {
+final class HomeViewController: UIViewController, HomeViewControlling {
     @IBOutlet private(set) weak var cameraButton: UIButton!
     @IBOutlet private(set) weak var listButton: UIButton!
     @IBOutlet private(set) weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private(set) weak var appVersionLabel: UILabel!
-
-    private weak var delegate: MainViewControllerDelegate?
+    private(set) var listBadgeLabel: PPBadgeLabel?
+    private weak var delegate: HomeViewControllerDelegate?
 
     var viewState: MainViewStating? {
         didSet { _ = viewState.map(bind) }
@@ -35,7 +36,7 @@ final class MainViewController: UIViewController, MainViewControlling {
         delegate?.viewControllerWillAppear(self)
     }
 
-    func setDelegate(_ delegate: MainViewControllerDelegate) {
+    func setDelegate(_ delegate: HomeViewControllerDelegate) {
         self.delegate = delegate
     }
 
@@ -44,6 +45,8 @@ final class MainViewController: UIViewController, MainViewControlling {
     private func bind(_ viewState: MainViewStating) {
         guard isViewLoaded else { return }
         listButton.isEnabled = viewState.isListButtonEnabled
+        listButton.pp.addBadge(number: viewState.badgeNumber)
+        listButton.pp.setBadgeLabel(attributes: { self.listBadgeLabel = $0 })
         appVersionLabel.text = viewState.appVersion
         if viewState.isLoading {
             activityIndicator.startAnimating()
