@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.1 (01/02/2019)
+    added list badge that shows number of pdfs
+
 ## v2.0.0 (21/01/2019) (Free)
     large refactor
     made open source
