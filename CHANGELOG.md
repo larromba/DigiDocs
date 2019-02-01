@@ -1,11 +1,9 @@
 # Changelog
 
-## v2.0.1 (01/02/2019)
-    added list badge that shows number of pdfs
-
-## v2.0.0 (21/01/2019) (Free)
+## v2.0.0 (01/02/2019) (Free)
     large refactor
     made open source
+    added list badge that shows number of pdfs
 
 ## 1.1.3 (31/05/2017)
     added small version number to main screen
