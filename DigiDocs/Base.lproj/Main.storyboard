@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="DigiDocs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="DigiDocs" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,10 +22,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="44K-lD-eQC">
-                                <rect key="frame" x="189" y="350" width="37" height="37"/>
+                                <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-cS-mNA">
-                                <rect key="frame" x="153" y="434" width="109" height="85"/>
+                                <rect key="frame" x="152.66666666666666" y="433.66666666666669" width="108.99999999999997" height="85.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="wba-hx-vvw"/>
                                 </constraints>
@@ -34,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYu-0b-p9J">
-                                <rect key="frame" x="153" y="201" width="109" height="109"/>
+                                <rect key="frame" x="152.66666666666666" y="200.66666666666666" width="108.99999999999997" height="108.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="109" id="I8M-wy-UGA"/>
                                     <constraint firstAttribute="height" constant="109" id="Kge-DC-J5i"/>
@@ -56,6 +57,7 @@
                             <constraint firstItem="PgW-cS-mNA" firstAttribute="top" secondItem="44K-lD-eQC" secondAttribute="bottom" constant="47" id="7cY-fA-GMk"/>
                             <constraint firstItem="44K-lD-eQC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="E2c-gk-RrR"/>
                             <constraint firstItem="aYu-0b-p9J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GLJ-3c-x2y"/>
+                            <constraint firstItem="Log-N9-2ZW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="1" id="LLW-EJ-fPf"/>
                             <constraint firstItem="PgW-cS-mNA" firstAttribute="trailing" secondItem="aYu-0b-p9J" secondAttribute="trailing" id="cId-f6-PKf"/>
                             <constraint firstItem="PgW-cS-mNA" firstAttribute="leading" secondItem="aYu-0b-p9J" secondAttribute="leading" id="kob-RY-Df4"/>
                             <constraint firstItem="44K-lD-eQC" firstAttribute="top" secondItem="aYu-0b-p9J" secondAttribute="bottom" constant="40" id="n7z-01-1o3"/>

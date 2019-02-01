@@ -3,23 +3,23 @@ import TestExtensions
 import XCTest
 
 final class OptionsDialogueTests: XCTestCase {
-    private var mainViewController: MainViewController!
+    private var homeViewController: HomeViewController!
     private var pdfService: PDFService!
     private var env: AppTestEnvironment!
 
     override func setUp() {
         super.setUp()
-        mainViewController = UIStoryboard.main.instantiateInitialViewController() as? MainViewController
+        homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
         pdfService = PDFService(fileManager: .default)
         _ = pdfService.deleteList(pdfService.generateList())
-        env = AppTestEnvironment(mainViewController: mainViewController, pdfService: pdfService)
+        env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService)
         env.setNumberOfPDFs(2)
-        env.setInWindow(mainViewController)
+        env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
 
     override func tearDown() {
-        mainViewController = nil
+        homeViewController = nil
         pdfService = nil
         env = nil
         UIView.setAnimationsEnabled(true)
@@ -29,11 +29,11 @@ final class OptionsDialogueTests: XCTestCase {
     func testViewAllOpensAllPDFs() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.listButton.fire())
+        XCTAssertTrue(homeViewController.listButton.fire())
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -41,17 +41,17 @@ final class OptionsDialogueTests: XCTestCase {
 
         // test
         waitSync()
-        XCTAssertTrue(mainViewController.presentedViewController is PDFViewController)
+        XCTAssertTrue(homeViewController.presentedViewController is PDFViewController)
     }
 
     func testShareAllOpensShareDialogue() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.listButton.fire())
+        XCTAssertTrue(homeViewController.listButton.fire())
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -59,23 +59,23 @@ final class OptionsDialogueTests: XCTestCase {
 
         // test
         waitSync()
-        XCTAssertTrue(mainViewController.presentedViewController is UIActivityViewController)
+        XCTAssertTrue(homeViewController.presentedViewController is UIActivityViewController)
     }
 
     func testDeleteAllDeletesAllPDFs() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.listButton.fire())
+        XCTAssertTrue(homeViewController.listButton.fire())
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
         alertController.tapButton(at: 2)
         waitSync()
-        guard let confirmationController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let confirmationController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -89,20 +89,20 @@ final class OptionsDialogueTests: XCTestCase {
     func testMainUIUpdatesAfterDelete() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.listButton.fire())
+        XCTAssertTrue(homeViewController.listButton.fire())
 
         // precondition
-        XCTAssertTrue(mainViewController.listButton.isEnabled)
+        XCTAssertTrue(homeViewController.listButton.isEnabled)
 
         // sut
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
         alertController.tapButton(at: 2)
         waitSync()
-        guard let confirmationController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let confirmationController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -110,6 +110,6 @@ final class OptionsDialogueTests: XCTestCase {
 
         // test
         waitSync()
-        XCTAssertFalse(mainViewController.listButton.isEnabled)
+        XCTAssertFalse(homeViewController.listButton.isEnabled)
     }
 }

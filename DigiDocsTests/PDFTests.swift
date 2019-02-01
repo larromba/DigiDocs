@@ -3,7 +3,7 @@ import TestExtensions
 import XCTest
 
 final class PDFTests: XCTestCase {
-    private var mainViewController: MainViewController!
+    private var homeViewController: HomeViewController!
     private var camera: Camera!
     private var cameraOverlay: CameraOverlayViewController!
     private var env: AppTestEnvironment!
@@ -12,38 +12,37 @@ final class PDFTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        mainViewController = UIStoryboard.main.instantiateInitialViewController() as? MainViewController
+        homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
         cameraOverlay = UIStoryboard.camera.instantiateInitialViewController() as? CameraOverlayViewController
         camera = Camera(overlay: cameraOverlay, pickerType: SimulatorImagePickerController.self)
         pdfService = PDFService(fileManager: .default)
         _ = pdfService.deleteList(pdfService.generateList())
         pdfViewController = PDFViewController(viewState: PDFViewState(paths: []))
-        env = AppTestEnvironment(mainViewController: mainViewController, pdfService: pdfService, camera: camera,
+        env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService, camera: camera,
                                  cameraOverlay: cameraOverlay, pdfViewController: pdfViewController)
-        env.setInWindow(mainViewController)
+        env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
 
     override func tearDown() {
-        mainViewController = nil
+        homeViewController = nil
         cameraOverlay = nil
         camera = nil
         pdfService = nil
         pdfViewController = nil
         env = nil
         UIView.setAnimationsEnabled(true)
-        SimulatorImagePickerController.isSourceTypeAvailable = true
         super.tearDown()
     }
 
     func testChoosingNameAndTakingPictureGeneratesPDF() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
         XCTAssertTrue(cameraOverlay.doneButton.fire())
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -57,11 +56,11 @@ final class PDFTests: XCTestCase {
     func testPDFOpensInViewAfterGeneration() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
         XCTAssertTrue(cameraOverlay.doneButton.fire())
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -69,6 +68,6 @@ final class PDFTests: XCTestCase {
 
         // test
         waitSync(for: 2.0)
-        XCTAssertTrue(mainViewController.presentedViewController is PDFViewController)
+        XCTAssertTrue(homeViewController.presentedViewController is PDFViewController)
     }
 }

@@ -3,51 +3,50 @@ import TestExtensions
 import XCTest
 
 final class CameraTests: XCTestCase {
-    private var mainViewController: MainViewController!
+    private var homeViewController: HomeViewController!
     private var camera: Camera!
     private var cameraOverlay: CameraOverlayViewController!
     private var env: AppTestEnvironment!
 
     override func setUp() {
         super.setUp()
-        mainViewController = UIStoryboard.main.instantiateInitialViewController() as? MainViewController
+        homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
         cameraOverlay = UIStoryboard.camera.instantiateInitialViewController() as? CameraOverlayViewController
         camera = Camera(overlay: cameraOverlay, pickerType: SimulatorImagePickerController.self)
-        env = AppTestEnvironment(mainViewController: mainViewController, camera: camera, cameraOverlay: cameraOverlay)
-        env.setInWindow(mainViewController)
+        env = AppTestEnvironment(homeViewController: homeViewController, camera: camera, cameraOverlay: cameraOverlay)
+        env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
 
     override func tearDown() {
-        mainViewController = nil
+        homeViewController = nil
         cameraOverlay = nil
         camera = nil
         env = nil
         UIView.setAnimationsEnabled(true)
-        SimulatorImagePickerController.isSourceTypeAvailable = true
         super.tearDown()
     }
 
     func testCancelClosesCamera() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
 
         // precondition
-        XCTAssertNotNil(mainViewController.presentedViewController)
+        XCTAssertNotNil(homeViewController.presentedViewController)
 
         // sut
         XCTAssertTrue(cameraOverlay.cancelButton.fire())
 
         // test
         waitSync()
-        XCTAssertNil(mainViewController.presentedViewController)
+        XCTAssertNil(homeViewController.presentedViewController)
     }
 
     func testDoneOpensNameFileDialogue() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
 
         // sut
@@ -55,7 +54,7 @@ final class CameraTests: XCTestCase {
 
         // test
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
@@ -87,7 +86,7 @@ final class CameraTests: XCTestCase {
     func testDoneIsNotEnabledWith0Photos() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
 
         // test
         XCTAssertFalse(cameraOverlay.doneButton.isEnabled)
@@ -96,7 +95,7 @@ final class CameraTests: XCTestCase {
     func testDoneIsEnabledWithPhotos() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
 
         // test
@@ -106,7 +105,7 @@ final class CameraTests: XCTestCase {
     func testPhotoCount() {
         // mocks
         env.inject()
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
         XCTAssertTrue(cameraOverlay.takeButton.fire())
@@ -121,11 +120,11 @@ final class CameraTests: XCTestCase {
         SimulatorImagePickerController.isSourceTypeAvailable = false
 
         // sut
-        XCTAssertTrue(mainViewController.cameraButton.fire())
+        XCTAssertTrue(homeViewController.cameraButton.fire())
 
         // test
         waitSync()
-        guard let alertController = mainViewController.presentedViewController as? UIAlertController else {
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
             XCTFail("expected UIAlertController")
             return
         }
