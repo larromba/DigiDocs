@@ -1,7 +1,9 @@
 import UIKit
 
 enum AppControllerFactory {
-    static func makeAppController(viewController: HomeViewControlling) -> AppControlling {
+    static func makeAppController(viewController: HomeViewController) -> AppControlling {
+        viewController.preloadView()
+
         let fileManager = FileManager.default
         let pdfService = PDFService(fileManager: fileManager)
         let homeController = HomeController(viewController: viewController, pdfService: pdfService)
@@ -24,7 +26,7 @@ enum AppControllerFactory {
         let listController = ListController(alertController: alertController, presenter: viewController,
                                             pdfService: pdfService)
 
-        let optionsController = OptionsController(presenter: viewController)
+        let optionsController = OptionsController(presenter: viewController, popoverView: viewController.listButton)
 
         let pdfViewController = PDFViewController(viewState: PDFViewState(paths: []))
         let pdfController = PDFController(viewController: pdfViewController, alertController: alertController,

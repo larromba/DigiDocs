@@ -71,7 +71,8 @@ extension AppTestEnvironment: TestEnvironment {
                                             overlayAlertController: overlayAlertController)
         listController = ListController(alertController: alertController, presenter: homeViewController,
                                         pdfService: pdfService)
-        optionsController = OptionsController(presenter: homeViewController)
+        // popoverView required for ipad, but safe to inject dummy view as we're only testing iphone
+        optionsController = OptionsController(presenter: homeViewController, popoverView: UIView())
         pdfAlertController = AlertController(presenter: pdfViewController)
         pdfController = PDFController(viewController: pdfViewController, alertController: alertController,
                                       pdfAlertController: pdfAlertController, presenter: homeViewController,

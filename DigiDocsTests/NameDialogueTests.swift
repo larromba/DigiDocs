@@ -130,4 +130,28 @@ final class NameDialogueTests: XCTestCase {
         waitSync()
         XCTAssertEqual(name, "test")
     }
+
+    func testNameIsValidForFilePath() {
+        // mocks
+        env.inject()
+        var name: String = ""
+        async({
+            name = try await(self.env.namingController.getName())
+        }, onError: { error in
+            XCTFail(error.localizedDescription)
+        })
+
+        // sut
+        waitSync()
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
+            XCTFail("expected UIAlertController")
+            return
+        }
+        alertController.textFields?.first?.setText("a-\\te/st|..na:me")
+        XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
+
+        // test
+        waitSync()
+        XCTAssertEqual(name, "a-test|name")
+    }
 }
