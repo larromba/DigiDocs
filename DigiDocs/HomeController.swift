@@ -1,3 +1,5 @@
+import AsyncAwait
+import Logging
 import UIKit
 
 // sourcery: name = HomeController
@@ -16,18 +18,19 @@ protocol HomeControllerDelegate: AnyObject {
 final class HomeController: HomeControlling {
     private let viewController: HomeViewControlling
     private let pdfService: PDFServicing
+    private let badge: Badge
     private weak var delegate: HomeControllerDelegate?
 
     var presenter: Presentable {
         return viewController
     }
 
-    init(viewController: HomeViewControlling, pdfService: PDFServicing) {
+    init(viewController: HomeViewControlling, pdfService: PDFServicing, badge: Badge) {
         self.viewController = viewController
         self.pdfService = pdfService
+        self.badge = badge
 
-        let list = pdfService.generateList()
-        viewController.viewState = MainViewState(isLoading: false, badgeNumber: list.paths.count)
+        viewController.viewState = MainViewState(isLoading: false, badgeNumber: 0)
         viewController.setDelegate(self)
     }
 
@@ -40,8 +43,13 @@ final class HomeController: HomeControlling {
     }
 
     func refreshUI() {
-        let list = pdfService.generateList()
-        viewController.viewState = viewController.viewState?.copy(badgeNumber: list.paths.count)
+        let badgeNumber = pdfService.generateList().paths.count
+        viewController.viewState = viewController.viewState?.copy(badgeNumber: badgeNumber)
+        async({
+            try await(self.badge.setNumber(badgeNumber))
+        }, onError: { error in
+            logError(error.localizedDescription)
+        })
     }
 }
 

@@ -63,16 +63,8 @@ final class CameraTests: XCTestCase {
 
     func testTakeButtonTakesPhotos() {
         // mocks
-        class MockDelegate: CameraDelegate {
-            var photos = [UIImage]()
-
-            func camera(_ camera: Camera, didTakePhoto photo: UIImage) {
-                photos.append(photo)
-            }
-            func cameraDidCancel(_ camera: Camera) {}
-        }
         env.inject()
-        let delegate = MockDelegate()
+        let delegate = MockCameraDelegate()
         camera.setDelegate(delegate)
 
         // sut
@@ -80,7 +72,7 @@ final class CameraTests: XCTestCase {
         XCTAssertTrue(cameraOverlay.takeButton.fire())
 
         // test
-        XCTAssertEqual(delegate.photos.count, 2)
+        XCTAssertEqual(delegate.invocations.count(MockCameraDelegate.camera1.name), 2)
     }
 
     func testDoneIsNotEnabledWith0Photos() {

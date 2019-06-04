@@ -7,6 +7,7 @@ final class AppTestEnvironment {
     var camera: Camerable
     var cameraOverlay: CameraOverlayViewControlling
     var pdfViewController: PDFViewControlling
+    var badge: Badge
 
     private(set) var alertController: AlertControlling!
     private(set) var overlayAlertController: AlertControlling!
@@ -24,13 +25,15 @@ final class AppTestEnvironment {
          pdfService: PDFServicing = MockPDFService(),
          camera: Camerable = MockCamera(),
          cameraOverlay: CameraOverlayViewControlling = MockCameraOverlayViewController(),
-         pdfViewController: PDFViewControlling = MockPDFViewController()) {
+         pdfViewController: PDFViewControlling = MockPDFViewController(),
+         badge: Badge = MockBadge()) {
         type(of: self).resetStaticMocks()
         self.homeViewController = homeViewController
         self.pdfService = pdfService
         self.camera = camera
         self.cameraOverlay = cameraOverlay
         self.pdfViewController = pdfViewController
+        self.badge = badge
     }
 
     func setInWindow(_ viewController: UIViewController) {
@@ -64,7 +67,7 @@ final class AppTestEnvironment {
 extension AppTestEnvironment: TestEnvironment {
     func inject() {
         alertController = AlertController(presenter: homeViewController)
-        homeController = HomeController(viewController: homeViewController, pdfService: pdfService)
+        homeController = HomeController(viewController: homeViewController, pdfService: pdfService, badge: badge)
         overlayAlertController = AlertController(presenter: cameraOverlay)
         cameraController = CameraController(camera: camera, cameraOverlay: cameraOverlay,
                                             alertController: alertController,

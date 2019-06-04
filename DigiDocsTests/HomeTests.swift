@@ -8,6 +8,7 @@ final class HomeTests: XCTestCase {
     private var cameraOverlay: CameraOverlayViewController!
     private var env: AppTestEnvironment!
     private var pdfService: PDFService!
+    private var badge: MockBadge!
 
     override func setUp() {
         super.setUp()
@@ -15,9 +16,9 @@ final class HomeTests: XCTestCase {
         cameraOverlay = UIStoryboard.camera.instantiateInitialViewController() as? CameraOverlayViewController
         camera = Camera(overlay: cameraOverlay, pickerType: SimulatorImagePickerController.self)
         pdfService = PDFService(fileManager: .default)
-        _ = pdfService.deleteList(pdfService.generateList())
+        badge = MockBadge()
         env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService, camera: camera,
-                                 cameraOverlay: cameraOverlay)
+                                 cameraOverlay: cameraOverlay, badge: badge)
         env.setInWindow(homeViewController)
         UIView.setAnimationsEnabled(false)
     }
@@ -27,6 +28,7 @@ final class HomeTests: XCTestCase {
         cameraOverlay = nil
         camera = nil
         env = nil
+        _ = pdfService.deleteList(pdfService.generateList())
         pdfService = nil
         UIView.setAnimationsEnabled(true)
         super.tearDown()
@@ -64,8 +66,18 @@ final class HomeTests: XCTestCase {
         env.setNumberOfPDFs(1)
         env.inject()
 
-        // sut
+        // test
         XCTAssertEqual(homeViewController.listBadgeLabel?.text, "1")
+    }
+
+    func testAppBadgeShowsNumberOfPDFs() {
+        // mocks
+        env.setNumberOfPDFs(1)
+        env.inject()
+
+        // test
+        XCTAssertEqual(badge.invocations.find(MockBadge.setNumber1.name).first?
+            .parameter(for: MockBadge.setNumber1.params.number) as? Int ?? 0, 1)
     }
 
     func testNoPDFsDisabledListButton() {

@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.1 (03/06/2019) 
+    added app badge that shows number of pdfs
+
 ## v2.0.0 (01/02/2019) (Free)
     large refactor
     made open source
@@ -31,4 +34,4 @@ Apple ID: 1189349369
 
 # Future Work
 
-- nothing planned
+- app notification showing number of documents?

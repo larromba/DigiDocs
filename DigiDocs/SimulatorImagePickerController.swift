@@ -30,7 +30,12 @@ final class SimulatorImagePickerController: UIViewController, ImagePickerControl
         super.viewDidLoad()
         view.backgroundColor = .black
         imageView.image = Asset.exampleBill.image
-        imageView.frame = view.bounds.insetBy(dx: 20, dy: 60)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            imageView.frame = view.bounds.insetBy(dx: 40, dy: 120)
+        } else {
+            imageView.frame = view.bounds.insetBy(dx: 20, dy: 60)
+        }
+        imageView.contentMode = .scaleAspectFit
         view.addSubview(imageView)
     }
 

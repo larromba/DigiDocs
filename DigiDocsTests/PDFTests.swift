@@ -16,7 +16,6 @@ final class PDFTests: XCTestCase {
         cameraOverlay = UIStoryboard.camera.instantiateInitialViewController() as? CameraOverlayViewController
         camera = Camera(overlay: cameraOverlay, pickerType: SimulatorImagePickerController.self)
         pdfService = PDFService(fileManager: .default)
-        _ = pdfService.deleteList(pdfService.generateList())
         pdfViewController = PDFViewController(viewState: PDFViewState(paths: []))
         env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService, camera: camera,
                                  cameraOverlay: cameraOverlay, pdfViewController: pdfViewController)
@@ -28,6 +27,7 @@ final class PDFTests: XCTestCase {
         homeViewController = nil
         cameraOverlay = nil
         camera = nil
+        _ = pdfService.deleteList(pdfService.generateList())
         pdfService = nil
         pdfViewController = nil
         env = nil

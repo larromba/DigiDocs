@@ -11,7 +11,8 @@ protocol Camerable: AnyObject, Mockable {
     func dismiss()
 }
 
-protocol CameraDelegate: AnyObject {
+// sourcery: name = CameraDelegate
+protocol CameraDelegate: AnyObject, Mockable {
     func camera(_ camera: Camera, didTakePhoto photo: UIImage)
     func cameraDidCancel(_ camera: Camera)
 }
