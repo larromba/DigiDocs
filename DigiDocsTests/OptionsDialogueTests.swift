@@ -11,7 +11,6 @@ final class OptionsDialogueTests: XCTestCase {
         super.setUp()
         homeViewController = UIStoryboard.main.instantiateInitialViewController() as? HomeViewController
         pdfService = PDFService(fileManager: .default)
-        _ = pdfService.deleteList(pdfService.generateList())
         env = AppTestEnvironment(homeViewController: homeViewController, pdfService: pdfService)
         env.setNumberOfPDFs(2)
         env.setInWindow(homeViewController)
@@ -20,6 +19,7 @@ final class OptionsDialogueTests: XCTestCase {
 
     override func tearDown() {
         homeViewController = nil
+        _ = pdfService.deleteList(pdfService.generateList())
         pdfService = nil
         env = nil
         UIView.setAnimationsEnabled(true)

@@ -32,6 +32,7 @@ final class Snapshots: XCTestCase {
 
         // pdf view
         app.alerts["Document Name"].buttons["Random"].tap()
+        sleep(5)
         snapshot("PDF")
     }
 }

@@ -6,7 +6,12 @@ enum AppControllerFactory {
 
         let fileManager = FileManager.default
         let pdfService = PDFService(fileManager: fileManager)
-        let homeController = HomeController(viewController: viewController, pdfService: pdfService)
+        #if targetEnvironment(simulator)
+        if __isSnapshot { // delete saved pdfs if snapshotting
+            _ = pdfService.deleteList(pdfService.generateList())
+        }
+        #endif
+        let homeController = HomeController(viewController: viewController, pdfService: pdfService, badge: AppBadge())
 
         guard let overlay = UIStoryboard.camera
             .instantiateInitialViewController() as? CameraOverlayViewController else {

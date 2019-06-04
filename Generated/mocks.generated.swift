@@ -170,6 +170,37 @@ class MockAlertController: NSObject, AlertControlling {
 class MockAppController: NSObject, AppControlling {
 }
 
+class MockBadge: NSObject, Badge {
+    var number: Int {
+        get { return _number }
+        set(value) { _number = value; _numberHistory.append(_Variable(value)) }
+    }
+    var _number: Int!
+    var _numberHistory: [_Variable<Int?>] = []
+    let invocations = _Invocations()
+    let actions = _Actions()
+    static let invocations = _Invocations()
+    static let actions = _Actions()
+
+    // MARK: - setNumber
+
+    func setNumber(_ number: Int) -> Async<Void> {
+        let functionName = setNumber1.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: number, forKey: setNumber1.params.number)
+        invocations.record(invocation)
+        actions.set(defaultReturnValue: Async.success(()), for: functionName)
+        return actions.returnValue(for: functionName) as! Async<Void>
+    }
+
+    enum setNumber1: String, _StringRawRepresentable {
+        case name = "setNumber1"
+        enum params: String, _StringRawRepresentable {
+            case number = "setNumber(_number:Int).number"
+        }
+    }
+}
+
 class MockCameraController: NSObject, CameraControlling {
     let invocations = _Invocations()
     let actions = _Actions()
@@ -205,6 +236,47 @@ class MockCameraController: NSObject, CameraControlling {
         case name = "setDelegate2"
         enum params: String, _StringRawRepresentable {
             case delegate = "setDelegate(_delegate:CameraControllerDelegate).delegate"
+        }
+    }
+}
+
+class MockCameraDelegate: NSObject, CameraDelegate {
+    let invocations = _Invocations()
+    let actions = _Actions()
+    static let invocations = _Invocations()
+    static let actions = _Actions()
+
+    // MARK: - camera
+
+    func camera(_ camera: Camera, didTakePhoto photo: UIImage) {
+        let functionName = camera1.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: camera, forKey: camera1.params.camera)
+        invocation.set(parameter: photo, forKey: camera1.params.photo)
+        invocations.record(invocation)
+    }
+
+    enum camera1: String, _StringRawRepresentable {
+        case name = "camera1"
+        enum params: String, _StringRawRepresentable {
+            case camera = "camera(_camera:Camera,didTakePhotophoto:UIImage).camera"
+            case photo = "camera(_camera:Camera,didTakePhotophoto:UIImage).photo"
+        }
+    }
+
+    // MARK: - cameraDidCancel
+
+    func cameraDidCancel(_ camera: Camera) {
+        let functionName = cameraDidCancel2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: camera, forKey: cameraDidCancel2.params.camera)
+        invocations.record(invocation)
+    }
+
+    enum cameraDidCancel2: String, _StringRawRepresentable {
+        case name = "cameraDidCancel2"
+        enum params: String, _StringRawRepresentable {
+            case camera = "cameraDidCancel(_camera:Camera).camera"
         }
     }
 }

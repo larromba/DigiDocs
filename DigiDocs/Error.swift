@@ -13,3 +13,8 @@ enum PDFError: LocalizedError {
         return L10n.foobarAlertTitle
     }
 }
+
+enum BadgeError: Error {
+    case unauthorized
+    case frameworkError(Error)
+}

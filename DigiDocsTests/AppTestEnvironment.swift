@@ -7,6 +7,7 @@ final class AppTestEnvironment {
     var camera: Camerable
     var cameraOverlay: CameraOverlayViewControlling
     var pdfViewController: PDFViewControlling
+    var badge: Badge
 
     private(set) var alertController: AlertControlling!
     private(set) var overlayAlertController: AlertControlling!
@@ -19,24 +20,26 @@ final class AppTestEnvironment {
     private(set) var namingController: NamingControlling!
     private(set) var shareController: ShareControlling!
     private(set) var appController: AppControlling!
+    private(set) var window: UIWindow?
 
     init(homeViewController: HomeViewControlling = MockHomeViewController(),
          pdfService: PDFServicing = MockPDFService(),
          camera: Camerable = MockCamera(),
          cameraOverlay: CameraOverlayViewControlling = MockCameraOverlayViewController(),
-         pdfViewController: PDFViewControlling = MockPDFViewController()) {
+         pdfViewController: PDFViewControlling = MockPDFViewController(),
+         badge: Badge = MockBadge()) {
         type(of: self).resetStaticMocks()
         self.homeViewController = homeViewController
         self.pdfService = pdfService
         self.camera = camera
         self.cameraOverlay = cameraOverlay
         self.pdfViewController = pdfViewController
+        self.badge = badge
     }
 
     func setInWindow(_ viewController: UIViewController) {
-        let window = UIWindow()
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
+        window = UIWindow()
+        window?.rootViewController = viewController
     }
 
     func setNumberOfPDFs(_ number: Int) {
@@ -64,7 +67,7 @@ final class AppTestEnvironment {
 extension AppTestEnvironment: TestEnvironment {
     func inject() {
         alertController = AlertController(presenter: homeViewController)
-        homeController = HomeController(viewController: homeViewController, pdfService: pdfService)
+        homeController = HomeController(viewController: homeViewController, pdfService: pdfService, badge: badge)
         overlayAlertController = AlertController(presenter: cameraOverlay)
         cameraController = CameraController(camera: camera, cameraOverlay: cameraOverlay,
                                             alertController: alertController,
@@ -83,5 +86,6 @@ extension AppTestEnvironment: TestEnvironment {
                                       listController: listController, optionsController: optionsController,
                                       pdfController: pdfController, namingController: namingController,
                                       shareController: shareController, alertController: alertController)
+        window?.makeKeyAndVisible()
     }
 }
