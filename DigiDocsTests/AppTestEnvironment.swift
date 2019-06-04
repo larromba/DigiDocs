@@ -20,6 +20,7 @@ final class AppTestEnvironment {
     private(set) var namingController: NamingControlling!
     private(set) var shareController: ShareControlling!
     private(set) var appController: AppControlling!
+    private(set) var window: UIWindow?
 
     init(homeViewController: HomeViewControlling = MockHomeViewController(),
          pdfService: PDFServicing = MockPDFService(),
@@ -37,9 +38,8 @@ final class AppTestEnvironment {
     }
 
     func setInWindow(_ viewController: UIViewController) {
-        let window = UIWindow()
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
+        window = UIWindow()
+        window?.rootViewController = viewController
     }
 
     func setNumberOfPDFs(_ number: Int) {
@@ -86,5 +86,6 @@ extension AppTestEnvironment: TestEnvironment {
                                       listController: listController, optionsController: optionsController,
                                       pdfController: pdfController, namingController: namingController,
                                       shareController: shareController, alertController: alertController)
+        window?.makeKeyAndVisible()
     }
 }
