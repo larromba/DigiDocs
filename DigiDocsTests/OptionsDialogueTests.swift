@@ -26,7 +26,9 @@ final class OptionsDialogueTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewAllOpensAllPDFs() {
+    // MARK: - button
+
+    func test_viewButton_whenPressed_expectOpensAllPDFs() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.listButton.fire())
@@ -44,7 +46,7 @@ final class OptionsDialogueTests: XCTestCase {
         XCTAssertTrue(homeViewController.presentedViewController is PDFViewController)
     }
 
-    func testShareAllOpensShareDialogue() {
+    func test_shareButton_whenPressed_expectOpensShareDialogue() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.listButton.fire())
@@ -62,7 +64,7 @@ final class OptionsDialogueTests: XCTestCase {
         XCTAssertTrue(homeViewController.presentedViewController is UIActivityViewController)
     }
 
-    func testDeleteAllDeletesAllPDFs() {
+    func test_deleteButton_whenPressed_expectDeletesPDFs() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.listButton.fire())
@@ -86,7 +88,7 @@ final class OptionsDialogueTests: XCTestCase {
         XCTAssertEqual(pdfService.generateList().paths.count, 0)
     }
 
-    func testMainUIUpdatesAfterDelete() {
+    func test_listButton_whenPDFsDeleted_expectDisabled() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.listButton.fire())

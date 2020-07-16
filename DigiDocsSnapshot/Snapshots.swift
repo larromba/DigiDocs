@@ -5,7 +5,6 @@ final class Snapshots: XCTestCase {
 
     override func setUp() {
         super.setUp()
-
         app = XCUIApplication()
         setupSnapshot(app)
         continueAfterFailure = false
@@ -32,7 +31,7 @@ final class Snapshots: XCTestCase {
 
         // pdf view
         app.alerts["Document Name"].buttons["Random"].tap()
-        sleep(5)
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 5.0))
         snapshot("PDF")
     }
 }

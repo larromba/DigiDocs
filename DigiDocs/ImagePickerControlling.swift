@@ -7,6 +7,7 @@ protocol ImagePickerControlling: AnyObject, ViewControllerCastable {
     var cameraOverlayView: UIView? { get set }
     var cameraViewTransform: CGAffineTransform { get set }
     var delegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)? { get set }
+    var modalPresentationStyle: UIModalPresentationStyle { get set }
 
     init()
     static func isSourceTypeAvailable(_ sourceType: UIImagePickerController.SourceType) -> Bool

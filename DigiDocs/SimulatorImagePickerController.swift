@@ -2,7 +2,7 @@ import UIKit
 
 // Camera doesn't work in the simulator, so we use this when targeting the simulator
 
-#if targetEnvironment(simulator)
+#if DEBUG && targetEnvironment(simulator)
 final class SimulatorImagePickerController: UIViewController, ImagePickerControlling {
     var allowsEditing: Bool = false
     var sourceType: UIImagePickerController.SourceType = .camera

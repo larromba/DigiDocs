@@ -22,7 +22,9 @@ final class NameDialogueTests: XCTestCase {
         super.tearDown()
     }
 
-    func testNoTextDisabledOK() {
+    // MARK: - text
+
+    func test_text_whenEmpty_expectOKButtonDisabled() {
         // mocks
         env.inject()
         async({
@@ -40,7 +42,7 @@ final class NameDialogueTests: XCTestCase {
         XCTAssertFalse(alertController.actions[safe: 1]?.isEnabled ?? true)
     }
 
-    func testTextEnablesOK() {
+    func test_text_whenEntered_expectOKButtonEnabled() {
         // mocks
         env.inject()
         async({
@@ -62,7 +64,33 @@ final class NameDialogueTests: XCTestCase {
         XCTAssertTrue(alertController.actions[safe: 1]?.isEnabled ?? false)
     }
 
-    func testRandomChoosesRandomFileName() {
+    func test_text_whenChosen_expectIsValidFilePath() {
+        // mocks
+        env.inject()
+        var name: String = ""
+        async({
+            name = try await(self.env.namingController.getName())
+        }, onError: { error in
+            XCTFail(error.localizedDescription)
+        })
+
+        // sut
+        waitSync()
+        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
+            XCTFail("expected UIAlertController")
+            return
+        }
+        alertController.textFields?.first?.setText("a-\\te/st|..na:me")
+        XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
+
+        // test
+        waitSync()
+        XCTAssertEqual(name, "a-test|name")
+    }
+
+    // MARK: - button
+
+    func test_randomButton_whenPressed_expectChoosesRandomName() {
         // mocks
         env.inject()
         var name: String = ""
@@ -85,7 +113,7 @@ final class NameDialogueTests: XCTestCase {
         XCTAssertEqual(name.count, 36)
     }
 
-    func testCancelClosesDialogue() {
+    func test_cancelButton_whenPressed_expectDialogueCloses() {
         // mocks
         env.inject()
         async({
@@ -107,7 +135,7 @@ final class NameDialogueTests: XCTestCase {
         XCTAssertNil(homeViewController.presentedViewController)
     }
 
-    func testOkChoosesEnteredName() {
+    func test_okButton_whenPressed_expectChoosesName() {
         // mocks
         env.inject()
         var name: String = ""
@@ -129,29 +157,5 @@ final class NameDialogueTests: XCTestCase {
         // test
         waitSync()
         XCTAssertEqual(name, "test")
-    }
-
-    func testNameIsValidForFilePath() {
-        // mocks
-        env.inject()
-        var name: String = ""
-        async({
-            name = try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
-
-        // sut
-        waitSync()
-        guard let alertController = homeViewController.presentedViewController as? UIAlertController else {
-            XCTFail("expected UIAlertController")
-            return
-        }
-        alertController.textFields?.first?.setText("a-\\te/st|..na:me")
-        XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
-
-        // test
-        waitSync()
-        XCTAssertEqual(name, "a-test|name")
     }
 }

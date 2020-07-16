@@ -32,6 +32,7 @@ final class Camera: NSObject, Camerable {
         picker.sourceType = .camera
         picker.showsCameraControls = false
         picker.cameraOverlayView = overlay.view
+        picker.modalPresentationStyle = .fullScreen
         let screenSize = UIScreen.main.bounds.size
         let ratio: CGFloat = 4.0 / 3.0
         let cameraHeight = screenSize.width * ratio

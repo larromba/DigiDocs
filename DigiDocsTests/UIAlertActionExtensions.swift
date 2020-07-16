@@ -1,8 +1,8 @@
 import UIKit
 
-extension UIAlertAction {
-    typealias Handler = @convention(block) (UIAlertAction) -> Void
+private typealias Handler = @convention(block) (UIAlertAction) -> Void
 
+extension UIAlertAction {
     @discardableResult
     func fire() -> Bool {
         guard let block = value(forKey: "handler") else { return false }

@@ -34,7 +34,9 @@ final class HomeTests: XCTestCase {
         super.tearDown()
     }
 
-    func testCameraButtonOpensCamera() {
+    // MARK: - camera button
+
+    func test_cameraButton_whenPressed_expectOpensCamera() {
         // mocks
         env.inject()
 
@@ -45,7 +47,21 @@ final class HomeTests: XCTestCase {
         XCTAssertTrue(homeViewController.presentedViewController is SimulatorImagePickerController)
     }
 
-    func testListButtonShowsOptionsWhenHavePDFs() {
+    // MARK: - app badge
+
+    func test_appBadge_whenAppearsWithPDFsSaved_expectBadgeHasValue() {
+        // mocks
+        env.setNumberOfPDFs(1)
+        env.inject()
+
+        // test
+        XCTAssertEqual(badge.invocations.find(MockBadge.setNumber1.name).first?
+            .parameter(for: MockBadge.setNumber1.params.number) as? Int ?? 0, 1)
+    }
+
+    // MARK: - list button
+
+    func test_listButton_whenPressedWithPDFsSaved_expectOptionsShown() {
         // mocks
         env.setNumberOfPDFs(1)
         env.inject()
@@ -61,7 +77,7 @@ final class HomeTests: XCTestCase {
         XCTAssertEqual(alertController.preferredStyle, .actionSheet)
     }
 
-    func testListButtonBadgeShowsNumberOfPDFs() {
+    func test_listButton_whenAppearsWithPDFsSaved_expectBadgeHasValue() {
         // mocks
         env.setNumberOfPDFs(1)
         env.inject()
@@ -70,17 +86,7 @@ final class HomeTests: XCTestCase {
         XCTAssertEqual(homeViewController.listBadgeLabel?.text, "1")
     }
 
-    func testAppBadgeShowsNumberOfPDFs() {
-        // mocks
-        env.setNumberOfPDFs(1)
-        env.inject()
-
-        // test
-        XCTAssertEqual(badge.invocations.find(MockBadge.setNumber1.name).first?
-            .parameter(for: MockBadge.setNumber1.params.number) as? Int ?? 0, 1)
-    }
-
-    func testNoPDFsDisabledListButton() {
+    func test_listButton_whenAppearsWithNoPDFsSaved_expectDisabled() {
         // mocks
         env.inject()
 
@@ -88,7 +94,7 @@ final class HomeTests: XCTestCase {
         XCTAssertFalse(homeViewController.listButton.isEnabled)
     }
 
-    func testPDFsEnableListButton() {
+    func test_listButton_whenAppearsWithPDFsSaved_expectEnabled() {
         // mocks
         env.setNumberOfPDFs(1)
         env.inject()

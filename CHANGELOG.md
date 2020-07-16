@@ -34,4 +34,9 @@ Apple ID: 1189349369
 
 # Future Work
 
-- app notification showing number of documents?
+Edge detection?
+- https://www.reddit.com/r/iOSProgramming/comments/2qever/edge_recognition_for_images_in_camera/
+- https://code.google.com/archive/p/simple-iphone-image-processing/
+- https://github.com/mukyasa/MMCamScanner
+- https://docs.opencv.org/2.4/doc/tutorials/ios/image_manipulation/image_manipulation.html
+- https://github.com/hartws1/IRLScanner

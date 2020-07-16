@@ -1,5 +1,4 @@
 github "larromba/log" ~> 1.0
-github "larromba/testextensions" ~> 1.0
-github "larromba/asyncawait" ~> 1.0
-github "larromba/result" ~> 1.0
+github "larromba/testextensions" ~> 2.0
+github "larromba/asyncawait" ~> 2.0
 github "jkpang/PPBadgeView" ~> 2.3.0

@@ -3,8 +3,8 @@ import UIKit
 
 // sourcery: name = PDFController
 protocol PDFControlling: Mockable {
-    func deletePDFs(at paths: [URL]) -> Async<Void>
-    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void>
+    func deletePDFs(at paths: [URL]) -> Async<Void, Error>
+    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void, Error>
 }
 
 final class PDFController: PDFControlling {
@@ -29,11 +29,11 @@ final class PDFController: PDFControlling {
         viewController.setDelegate(self)
     }
 
-    func deletePDFs(at paths: [URL]) -> Async<Void> {
+    func deletePDFs(at paths: [URL]) -> Async<Void, Error> {
         return deletePDFs(at: paths, alertController: alertController)
     }
 
-    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void> {
+    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void, Error> {
         return Async { completion in
             async({
                 let pdf = PDF(images: photos, name: name)
@@ -51,7 +51,7 @@ final class PDFController: PDFControlling {
 
     // MARK: - private
 
-    private func deletePDFs(at paths: [URL], alertController: AlertControlling) -> Async<Void> {
+    private func deletePDFs(at paths: [URL], alertController: AlertControlling) -> Async<Void, Error> {
         return Async { completion in
             let alert = Alert(
                 title: L10n.warningAlertTitle,
@@ -71,7 +71,7 @@ final class PDFController: PDFControlling {
         }
     }
 
-    private func _deletePDFs(at paths: [URL]) -> Async<Void> {
+    private func _deletePDFs(at paths: [URL]) -> Async<Void, Error> {
         return Async { completion in
             var errors = [URL: Error]()
             paths.forEach {

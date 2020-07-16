@@ -6,7 +6,7 @@ enum AppControllerFactory {
 
         let fileManager = FileManager.default
         let pdfService = PDFService(fileManager: fileManager)
-        #if targetEnvironment(simulator)
+        #if DEBUG && targetEnvironment(simulator)
         if __isSnapshot { // delete saved pdfs if snapshotting
             _ = pdfService.deleteList(pdfService.generateList())
         }
@@ -17,7 +17,7 @@ enum AppControllerFactory {
             .instantiateInitialViewController() as? CameraOverlayViewController else {
                 fatalError("couldn't instantiate CameraOverlayViewController")
         }
-        #if targetEnvironment(simulator)
+        #if DEBUG && targetEnvironment(simulator)
         let pickerType = SimulatorImagePickerController.self
         #else
         let pickerType = UIImagePickerController.self

@@ -3,7 +3,7 @@ import Foundation
 
 // sourcery: name = NamingController
 protocol NamingControlling: Mockable {
-    func getName() -> Async<String>
+    func getName() -> Async<String, Error>
 }
 
 final class NamingController: NamingControlling {
@@ -15,32 +15,34 @@ final class NamingController: NamingControlling {
         self.pdfService = pdfService
     }
 
-    func getName() -> Async<String> {
+    func getName() -> Async<String, Error> {
         return Async { completion in
             let list = self.pdfService.generateList()
             var name: String?
+            let confirm = Alert.Action(title: L10n.okButtonTitle, handler: {
+                guard let name = name else {
+                    assertionFailure("name should never be nil")
+                    return
+                }
+                completion(.success(self.cleanName(name)))
+            })
+            let random = Alert.Action(title: L10n.randomButtonTitle, handler: {
+                completion(.success(UUID().uuidString))
+            })
+            let textField = Alert.TextField(placeholder: L10n.newDocumentAlertPlaceholder, text: nil, handler: { text in
+                name = text
+                if let text = text, !text.isEmpty && !list.contains(text) {
+                    onMain { self.alertController.setIsButtonEnabled(true, at: 1) }
+                } else {
+                    onMain { self.alertController.setIsButtonEnabled(false, at: 1) }
+                }
+            })
             let alert = Alert(
                 title: L10n.newDocumentAlertTitle,
                 message: L10n.newDocumentAlertMessage,
                 cancel: Alert.Action(title: L10n.cancelButtonTitle, handler: nil),
-                actions: [Alert.Action(title: L10n.okButtonTitle, handler: {
-                    guard let name = name else {
-                        fatalError("name should never be nil")
-                    }
-                    completion(.success(self.cleanName(name)))
-                }), Alert.Action(title: L10n.randomButtonTitle, handler: {
-                    completion(.success(UUID().uuidString))
-                })],
-                textField: Alert.TextField(placeholder: L10n.newDocumentAlertPlaceholder, text: nil, handler: { text in
-                    name = text
-                    onMain {
-                        if let text = text, !text.isEmpty && !list.contains(text) {
-                            self.alertController.setIsButtonEnabled(true, at: 1)
-                        } else {
-                            self.alertController.setIsButtonEnabled(false, at: 1)
-                        }
-                    }
-                })
+                actions: [confirm, random],
+                textField: textField
             )
             onMain {
                 self.alertController.showAlert(alert)

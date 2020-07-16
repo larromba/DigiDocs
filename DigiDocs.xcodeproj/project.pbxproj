@@ -32,7 +32,6 @@
 		7F48FEB621F7662900EACC03 /* OptionAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB521F7662900EACC03 /* OptionAction.swift */; };
 		7F48FEB821F77ADF00EACC03 /* ImagePickerControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEB721F77ADF00EACC03 /* ImagePickerControlling.swift */; };
 		7F48FEBB21F7808500EACC03 /* SimulatorImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F48FEBA21F7808500EACC03 /* SimulatorImagePickerController.swift */; };
-		7F48FEBE21F7941D00EACC03 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEBC21F7941D00EACC03 /* Result.framework */; };
 		7F48FEBF21F7941D00EACC03 /* AsyncAwait.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEBD21F7941D00EACC03 /* AsyncAwait.framework */; };
 		7F48FEC321F7A40D00EACC03 /* TestExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */; };
 		7F48FEC421F7A41500EACC03 /* TestExtensions.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F48FEC221F7A40D00EACC03 /* TestExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -215,7 +214,6 @@
 			files = (
 				7F9594101E0ADA7600CC2CC8 /* QuickLook.framework in Frameworks */,
 				7F8CBA1D21F7003D00218D8B /* Logging.framework in Frameworks */,
-				7F48FEBE21F7941D00EACC03 /* Result.framework in Frameworks */,
 				7F06F2982204A267008F1403 /* PPBadgeView.framework in Frameworks */,
 				7F48FEBF21F7941D00EACC03 /* AsyncAwait.framework in Frameworks */,
 			);
@@ -548,19 +546,20 @@
 					7F48FEEF21F7EEE300EACC03 = {
 						CreatedOnToolsVersion = 10.1;
 						DevelopmentTeam = PFC77GK3D7;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7FEB2C4D1E0ACA6D00478CD6;
 					};
 					7FEB2C4D1E0ACA6D00478CD6 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = PFC77GK3D7;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 					};
 					7FEB2C611E0ACA6D00478CD6 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = PFC77GK3D7;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7FEB2C4D1E0ACA6D00478CD6;
 					};
@@ -568,7 +567,7 @@
 			};
 			buildConfigurationList = 7FEB2C491E0ACA6D00478CD6 /* Build configuration list for PBXProject "DigiDocs" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -697,13 +696,11 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Logging.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AsyncAwait.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PPBadgeView.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Logging.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AsyncAwait.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PPBadgeView.framework",
 			);
@@ -872,7 +869,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsSnapshot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DigiDocs;
 			};
@@ -895,7 +892,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsSnapshot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DigiDocs;
 			};
@@ -1029,7 +1026,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1051,7 +1048,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1072,7 +1069,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigiDocs.app/DigiDocs";
 			};
 			name = Debug;
@@ -1093,7 +1090,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinkchicken.DigiDocsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigiDocs.app/DigiDocs";
 			};
 			name = Release;

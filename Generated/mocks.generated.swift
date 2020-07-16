@@ -1,8 +1,11 @@
-// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.18.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable line_length
 // swiftlint:disable variable_name
+
+// https://github.com/larromba/swift-mockable 
+// 2.0.0
 
 import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS)
@@ -13,7 +16,6 @@ import AppKit
 
 import AsyncAwait
 @testable import DigiDocs
-import Result
 
 // MARK: - Sourcery Helper
 
@@ -23,9 +25,9 @@ protocol _StringRawRepresentable: RawRepresentable {
 
 struct _Variable<T> {
     let date = Date()
-    var variable: T
+    var variable: T?
 
-    init(_ variable: T) {
+    init(_ variable: T?) {
         self.variable = variable
     }
 }
@@ -112,7 +114,7 @@ final class _Invocations {
     }
 
     func count<T: _StringRawRepresentable>(_ name: T) -> Int {
-        return history.filter {  $0.name == name.rawValue }.count
+        return history.filter { $0.name == name.rawValue }.count
     }
 
     func all() -> [_Invocation] {
@@ -120,7 +122,11 @@ final class _Invocations {
     }
 
     func find<T: _StringRawRepresentable>(_ name: T) -> [_Invocation] {
-        return history.filter {  $0.name == name.rawValue }.sorted { $0.date < $1.date }
+        return history.filter { $0.name == name.rawValue }.sorted { $0.date < $1.date }
+    }
+
+    func clear() {
+        history.removeAll()
     }
 }
 
@@ -184,13 +190,13 @@ class MockBadge: NSObject, Badge {
 
     // MARK: - setNumber
 
-    func setNumber(_ number: Int) -> Async<Void> {
+    func setNumber(_ number: Int) -> Async<Void, BadgeError> {
         let functionName = setNumber1.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: number, forKey: setNumber1.params.number)
         invocations.record(invocation)
-        actions.set(defaultReturnValue: Async.success(()), for: functionName)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        actions.set(defaultReturnValue: Async<Void, BadgeError>.success(()), for: functionName)
+        return actions.returnValue(for: functionName) as! Async<Void, BadgeError>
     }
 
     enum setNumber1: String, _StringRawRepresentable {
@@ -553,11 +559,11 @@ class MockNamingController: NSObject, NamingControlling {
 
     // MARK: - getName
 
-    func getName() -> Async<String> {
+    func getName() -> Async<String, Error> {
         let functionName = getName1.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<String>
+        return actions.returnValue(for: functionName) as! Async<String, Error>
     }
 
     enum getName1: String, _StringRawRepresentable {
@@ -608,12 +614,12 @@ class MockPDFController: NSObject, PDFControlling {
 
     // MARK: - deletePDFs
 
-    func deletePDFs(at paths: [URL]) -> Async<Void> {
+    func deletePDFs(at paths: [URL]) -> Async<Void, Error> {
         let functionName = deletePDFs1.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: paths, forKey: deletePDFs1.params.paths)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        return actions.returnValue(for: functionName) as! Async<Void, Error>
     }
 
     enum deletePDFs1: String, _StringRawRepresentable {
@@ -625,13 +631,13 @@ class MockPDFController: NSObject, PDFControlling {
 
     // MARK: - makePDF
 
-    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void> {
+    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void, Error> {
         let functionName = makePDF2.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: photos, forKey: makePDF2.params.photos)
         invocation.set(parameter: name, forKey: makePDF2.params.name)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        return actions.returnValue(for: functionName) as! Async<Void, Error>
     }
 
     enum makePDF2: String, _StringRawRepresentable {
@@ -665,12 +671,12 @@ class MockPDFService: NSObject, PDFServicing {
 
     // MARK: - deleteList
 
-    func deleteList(_ list: PDFList) -> Result<Void> {
+    func deleteList(_ list: PDFList) -> Result<Void, PDFError> {
         let functionName = deleteList2.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: list, forKey: deleteList2.params.list)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Result<Void>
+        return actions.returnValue(for: functionName) as! Result<Void, PDFError>
     }
 
     enum deleteList2: String, _StringRawRepresentable {
@@ -682,12 +688,12 @@ class MockPDFService: NSObject, PDFServicing {
 
     // MARK: - generatePDF
 
-    func generatePDF(_ pdf: PDF) -> Async<Void> {
+    func generatePDF(_ pdf: PDF) -> Async<Void, PDFError> {
         let functionName = generatePDF3.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: pdf, forKey: generatePDF3.params.pdf)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        return actions.returnValue(for: functionName) as! Async<Void, PDFError>
     }
 
     enum generatePDF3: String, _StringRawRepresentable {
