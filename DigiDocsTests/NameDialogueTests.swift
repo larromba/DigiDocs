@@ -27,11 +27,7 @@ final class NameDialogueTests: XCTestCase {
     func test_text_whenEmpty_expectOKButtonDisabled() {
         // mocks
         env.inject()
-        async({
-            try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // test
         waitSync()
@@ -45,11 +41,7 @@ final class NameDialogueTests: XCTestCase {
     func test_text_whenEntered_expectOKButtonEnabled() {
         // mocks
         env.inject()
-        async({
-            try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // sut
         waitSync()
@@ -66,13 +58,9 @@ final class NameDialogueTests: XCTestCase {
 
     func test_text_whenChosen_expectIsValidFilePath() {
         // mocks
+        let delegate = MockNamingControllerDelegate()
         env.inject()
-        var name: String = ""
-        async({
-            name = try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // sut
         waitSync()
@@ -80,11 +68,15 @@ final class NameDialogueTests: XCTestCase {
             XCTFail("expected UIAlertController")
             return
         }
+        env.namingController.setDelegate(delegate) // intercepting delegate calls after alert appears
         alertController.textFields?.first?.setText("a-\\te/st|..na:me")
         XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
 
         // test
         waitSync()
+        let name = delegate.invocations
+            .find(MockNamingControllerDelegate.controller1.name).first?
+            .parameter(for: MockNamingControllerDelegate.controller1.params.name) as? String
         XCTAssertEqual(name, "a-test|name")
     }
 
@@ -92,13 +84,9 @@ final class NameDialogueTests: XCTestCase {
 
     func test_randomButton_whenPressed_expectChoosesRandomName() {
         // mocks
+        let delegate = MockNamingControllerDelegate()
         env.inject()
-        var name: String = ""
-        async({
-            name = try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // sut
         waitSync()
@@ -106,21 +94,21 @@ final class NameDialogueTests: XCTestCase {
             XCTFail("expected UIAlertController")
             return
         }
+        env.namingController.setDelegate(delegate) // intercepting delegate calls after alert appears
         XCTAssertTrue(alertController.actions[safe: 2]?.fire() ?? false)
 
         // test
         waitSync()
-        XCTAssertEqual(name.count, 36)
+        let name = delegate.invocations
+            .find(MockNamingControllerDelegate.controller1.name).first?
+            .parameter(for: MockNamingControllerDelegate.controller1.params.name) as? String
+        XCTAssertEqual(name?.count, 36)
     }
 
     func test_cancelButton_whenPressed_expectDialogueCloses() {
         // mocks
         env.inject()
-        async({
-            try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // sut
         waitSync()
@@ -137,13 +125,9 @@ final class NameDialogueTests: XCTestCase {
 
     func test_okButton_whenPressed_expectChoosesName() {
         // mocks
+        let delegate = MockNamingControllerDelegate()
         env.inject()
-        var name: String = ""
-        async({
-            name = try await(self.env.namingController.getName())
-        }, onError: { error in
-            XCTFail(error.localizedDescription)
-        })
+        env.namingController.getName()
 
         // sut
         waitSync()
@@ -151,11 +135,15 @@ final class NameDialogueTests: XCTestCase {
             XCTFail("expected UIAlertController")
             return
         }
+        env.namingController.setDelegate(delegate) // intercepting delegate calls after alert appears
         alertController.textFields?.first?.setText("test")
         XCTAssertTrue(alertController.actions[safe: 1]?.fire() ?? false)
 
         // test
         waitSync()
+        let name = delegate.invocations
+            .find(MockNamingControllerDelegate.controller1.name).first?
+            .parameter(for: MockNamingControllerDelegate.controller1.params.name) as? String
         XCTAssertEqual(name, "test")
     }
 }

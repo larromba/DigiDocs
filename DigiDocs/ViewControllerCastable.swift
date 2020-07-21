@@ -1,11 +1,11 @@
 import UIKit
 
 protocol ViewControllerCastable {
-    var asViewController: UIViewController { get }
+    var casted: UIViewController { get }
 }
 
 extension ViewControllerCastable {
-    var asViewController: UIViewController {
+    var casted: UIViewController {
         guard let viewController = self as? UIViewController else {
             fatalError("expected UIViewController")
         }

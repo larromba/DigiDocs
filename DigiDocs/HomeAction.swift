@@ -1,6 +1,6 @@
 import Foundation
 
-enum MainAction {
+enum HomeAction {
     case openCamera
     case openList
 }

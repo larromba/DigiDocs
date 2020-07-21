@@ -2,13 +2,12 @@ import Logging
 import UIKit
 
 // sourcery: name = Camera
-protocol Camerable: AnyObject, Mockable {
+protocol Camerable: AnyObject, Dismissible, Mockable {
     var isAvailable: Bool { get }
 
     func setDelegate(_ delegate: CameraDelegate)
-    func open(in viewController: Presentable) -> Bool
+    func open(in presenter: Presentable) -> Bool
     func takePicture()
-    func dismiss()
 }
 
 // sourcery: name = CameraDelegate
@@ -49,12 +48,12 @@ final class Camera: NSObject, Camerable {
         self.delegate = delegate
     }
 
-    func open(in viewController: Presentable) -> Bool {
+    func open(in presenter: Presentable) -> Bool {
         guard isAvailable else {
             logError("camera not available")
             return false
         }
-        viewController.present(picker.asViewController, animated: true, completion: nil)
+        presenter.present(picker.casted, animated: true, completion: nil)
         return true
     }
 
@@ -62,8 +61,8 @@ final class Camera: NSObject, Camerable {
         picker.takePicture()
     }
 
-    func dismiss() {
-        picker.asViewController.dismiss(animated: true, completion: nil)
+    func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        picker.dismiss(animated: flag, completion: completion)
     }
 }
 

@@ -3,25 +3,23 @@ import Foundation
 // sourcery: name = ListController
 protocol ListControlling: Mockable {
     var documentCount: Int { get }
-    var list: PDFList { get }
+    var all: PDFList { get }
 
     func openList(_ list: PDFList)
 }
 
 final class ListController: ListControlling {
-    private let alertController: AlertControlling
     private let pdfService: PDFServicing
     private let presenter: Presentable
 
     var documentCount: Int {
-        return list.paths.count
+        return all.paths.count
     }
-    var list: PDFList {
+    var all: PDFList {
         return pdfService.generateList()
     }
 
-    init(alertController: AlertControlling, presenter: Presentable, pdfService: PDFServicing) {
-        self.alertController = alertController
+    init(presenter: Presentable, pdfService: PDFServicing) {
         self.presenter = presenter
         self.pdfService = pdfService
     }

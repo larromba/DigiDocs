@@ -1,7 +1,8 @@
 # Changelog
 
-## v2.0.2 (16/07/2020) 
+## v2.0.2 (21/07/2020) 
     minor updates
+    code refactor
 
 ## v2.0.1 (03/06/2019) 
     added app badge that shows number of pdfs
@@ -37,7 +38,6 @@ Apple ID: 1189349369
 
 # Future Work
 
-Use a coordinator?
 Edge detection?
 - https://www.reddit.com/r/iOSProgramming/comments/2qever/edge_recognition_for_images_in_camera/
 - https://code.google.com/archive/p/simple-iphone-image-processing/

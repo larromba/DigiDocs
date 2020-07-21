@@ -3,7 +3,8 @@ import UIKit
 extension UIAlertController {
     @discardableResult
     func tapButton(at index: Int) -> Bool {
-        dismiss(animated: false, completion: nil)
-        return actions[safe: index]?.fire() ?? false
+        guard let action = actions[safe: index] else { return false }
+        self.dismiss(animated: false) { action.fire() }
+        return true
     }
 }

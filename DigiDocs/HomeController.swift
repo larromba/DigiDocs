@@ -4,15 +4,13 @@ import UIKit
 
 // sourcery: name = HomeController
 protocol HomeControlling: Mockable {
-    var presenter: Presentable { get }
-
     func setIsLoading(_ isLoading: Bool)
     func setDelegate(_ delegate: HomeControllerDelegate)
-    func refreshUI()
+    func refreshBadge()
 }
 
 protocol HomeControllerDelegate: AnyObject {
-    func controller(_ controller: HomeControlling, performAction action: MainAction)
+    func controller(_ controller: HomeControlling, performAction action: HomeAction)
 }
 
 final class HomeController: HomeControlling {
@@ -20,10 +18,6 @@ final class HomeController: HomeControlling {
     private let pdfService: PDFServicing
     private let badge: Badge
     private weak var delegate: HomeControllerDelegate?
-
-    var presenter: Presentable {
-        return viewController
-    }
 
     init(viewController: HomeViewControlling, pdfService: PDFServicing, badge: Badge) {
         self.viewController = viewController
@@ -42,7 +36,7 @@ final class HomeController: HomeControlling {
         self.delegate = delegate
     }
 
-    func refreshUI() {
+    func refreshBadge() {
         let badgeNumber = pdfService.generateList().paths.count
         viewController.viewState = viewController.viewState?.copy(badgeNumber: badgeNumber)
         async({
@@ -57,7 +51,7 @@ final class HomeController: HomeControlling {
 
 extension HomeController: HomeViewControllerDelegate {
     func viewControllerWillAppear(_ viewController: HomeViewControlling) {
-        refreshUI()
+        refreshBadge()
     }
 
     func viewControllerCameraPressed(_ viewController: HomeViewControlling) {
