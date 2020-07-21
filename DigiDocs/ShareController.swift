@@ -8,19 +8,17 @@ protocol ShareControlling: Mockable {
 
 final class ShareController: ShareControlling {
     private let presenter: Presentable
-    private weak var current: UIActivityViewController?
 
     init(presenter: Presentable) {
         self.presenter = presenter
     }
 
     func shareItems(_ items: [URL]) {
-        guard current == nil else {
-            logWarning("already displaying UIActivityViewController")
+        guard !presenter.isPresenting else {
+            logWarning("already presenting so won't show UIActivityViewController")
             return
         }
         let viewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         presenter.present(viewController, animated: true, completion: nil)
-        current = viewController
     }
 }

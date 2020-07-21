@@ -27,7 +27,9 @@ final class CameraTests: XCTestCase {
         super.tearDown()
     }
 
-    func testCancelClosesCamera() {
+    // MARK: - close button
+
+    func test_closeButton_whenPressed_expectCameraCloses() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.cameraButton.fire())
@@ -43,7 +45,9 @@ final class CameraTests: XCTestCase {
         XCTAssertNil(homeViewController.presentedViewController)
     }
 
-    func testDoneOpensNameFileDialogue() {
+    // MARK: - done button
+
+    func test_doneButton_whenPressed_expectOpensNameFileDialogue() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.cameraButton.fire())
@@ -61,7 +65,28 @@ final class CameraTests: XCTestCase {
         XCTAssertEqual(alertController.title, "Document Name")
     }
 
-    func testTakeButtonTakesPhotos() {
+    func test_doneButton_whenZeroPhotosTaken_expectDisabled() {
+        // mocks
+        env.inject()
+        XCTAssertTrue(homeViewController.cameraButton.fire())
+
+        // test
+        XCTAssertFalse(cameraOverlay.doneButton.isEnabled)
+    }
+
+    func test_doneButton_whenPhotosTaken_expectEnabled() {
+        // mocks
+        env.inject()
+        XCTAssertTrue(homeViewController.cameraButton.fire())
+        XCTAssertTrue(cameraOverlay.takeButton.fire())
+
+        // test
+        XCTAssertTrue(cameraOverlay.doneButton.isEnabled)
+    }
+
+    // MARK: - take button
+
+    func test_takeButton_whenPressed_expectTakesPhoto() {
         // mocks
         env.inject()
         let delegate = MockCameraDelegate()
@@ -75,26 +100,7 @@ final class CameraTests: XCTestCase {
         XCTAssertEqual(delegate.invocations.count(MockCameraDelegate.camera1.name), 2)
     }
 
-    func testDoneIsNotEnabledWith0Photos() {
-        // mocks
-        env.inject()
-        XCTAssertTrue(homeViewController.cameraButton.fire())
-
-        // test
-        XCTAssertFalse(cameraOverlay.doneButton.isEnabled)
-    }
-
-    func testDoneIsEnabledWithPhotos() {
-        // mocks
-        env.inject()
-        XCTAssertTrue(homeViewController.cameraButton.fire())
-        XCTAssertTrue(cameraOverlay.takeButton.fire())
-
-        // test
-        XCTAssertTrue(cameraOverlay.doneButton.isEnabled)
-    }
-
-    func testPhotoCount() {
+    func test_takeButton_whenPhotosTaken_expectNumberShown() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.cameraButton.fire())
@@ -106,7 +112,9 @@ final class CameraTests: XCTestCase {
         XCTAssertEqual(cameraOverlay.numberLabel.text, "3 photos")
     }
 
-    func testCameraNotAvailableOnPressingButtonDisplaysAlert() {
+    // MARK: - camera button
+
+    func test_cameraButton_whenCameraNotAvailable_expectAlertShown() {
         // mocks
         env.inject()
         SimulatorImagePickerController.isSourceTypeAvailable = false

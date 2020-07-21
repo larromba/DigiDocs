@@ -9,17 +9,20 @@ final class AppTestEnvironment {
     var pdfViewController: PDFViewControlling
     var badge: Badge
 
-    private(set) var alertController: AlertControlling!
     private(set) var overlayAlertController: AlertControlling!
     private(set) var pdfAlertController: AlertControlling!
     private(set) var homeController: HomeControlling!
+    private(set) var homeAlertController: AlertControlling!
     private(set) var cameraController: CameraControlling!
+    private(set) var cameraAlertController: AlertControlling!
     private(set) var listController: ListControlling!
     private(set) var optionsController: OptionsControlling!
     private(set) var pdfController: PDFControlling!
     private(set) var namingController: NamingControlling!
     private(set) var shareController: ShareControlling!
-    private(set) var appController: AppControlling!
+    private(set) var homeCoordinator: HomeCoordinating!
+    private(set) var appRouter: AppRouting!
+    private(set) var app: App!
     private(set) var window: UIWindow?
 
     init(homeViewController: HomeViewControlling = MockHomeViewController(),
@@ -66,26 +69,33 @@ final class AppTestEnvironment {
 
 extension AppTestEnvironment: TestEnvironment {
     func inject() {
-        alertController = AlertController(presenter: homeViewController)
+        homeAlertController = AlertController(presenter: homeViewController)
         homeController = HomeController(viewController: homeViewController, pdfService: pdfService, badge: badge)
         overlayAlertController = AlertController(presenter: cameraOverlay)
-        cameraController = CameraController(camera: camera, cameraOverlay: cameraOverlay,
-                                            alertController: alertController,
-                                            overlayAlertController: overlayAlertController)
-        listController = ListController(alertController: alertController, presenter: homeViewController,
-                                        pdfService: pdfService)
+        cameraController = CameraController(camera: camera, cameraOverlay: cameraOverlay, presenter: homeViewController)
+        cameraAlertController = AlertController(presenter: cameraOverlay)
+        listController = ListController(presenter: homeViewController, pdfService: pdfService)
         // popoverView required for ipad, but safe to inject dummy view as we're only testing iphone
         optionsController = OptionsController(presenter: homeViewController, popoverView: UIView())
         pdfAlertController = AlertController(presenter: pdfViewController)
-        pdfController = PDFController(viewController: pdfViewController, alertController: alertController,
-                                      pdfAlertController: pdfAlertController, presenter: homeViewController,
+        pdfController = PDFController(viewController: pdfViewController, presenter: homeViewController,
                                       pdfService: pdfService)
-        namingController = NamingController(alertController: alertController, pdfService: pdfService)
+        namingController = NamingController(pdfService: pdfService)
         shareController = ShareController(presenter: homeViewController)
-        appController = AppController(homeController: homeController, cameraController: cameraController,
-                                      listController: listController, optionsController: optionsController,
-                                      pdfController: pdfController, namingController: namingController,
-                                      shareController: shareController, alertController: alertController)
+        homeCoordinator = HomeCoordinater(
+            homeController: homeController,
+            homeAlertController: homeAlertController,
+            cameraController: cameraController,
+            cameraAlertController: cameraAlertController,
+            listController: listController,
+            optionsController: optionsController,
+            pdfController: pdfController,
+            pdfAlertController: pdfAlertController,
+            namingController: namingController,
+            shareController: shareController
+        )
+        appRouter = AppRouter(homeCoordinator: homeCoordinator)
+        app = App(router: appRouter)
         window?.makeKeyAndVisible()
     }
 }

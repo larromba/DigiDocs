@@ -16,8 +16,8 @@ final class AlertController: AlertControlling {
     }
 
     func showAlert(_ alert: Alert) {
-        guard currentAlert == nil else {
-            logWarning("already showing alert")
+        guard let presenter = presenter, !presenter.isPresenting else {
+            logWarning("already presenting so won't show Alert")
             return
         }
         let viewController = UIAlertController(title: alert.title,
@@ -43,7 +43,7 @@ final class AlertController: AlertControlling {
                                     for: .editingChanged)
             }
         }
-        presenter?.present(viewController, animated: true, completion: nil)
+        presenter.present(viewController, animated: true, completion: nil)
         currentAlert = viewController
     }
 

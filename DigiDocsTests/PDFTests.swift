@@ -35,7 +35,7 @@ final class PDFTests: XCTestCase {
         super.tearDown()
     }
 
-    func testChoosingNameAndTakingPictureGeneratesPDF() {
+    func test_pdf_whenTakenPictureAndChosenName_expectIsSaved() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.cameraButton.fire())
@@ -53,10 +53,11 @@ final class PDFTests: XCTestCase {
         XCTAssertEqual(env.pdfService.generateList().paths.count, 1)
     }
 
-    func testPDFOpensInViewAfterGeneration() {
+    func test_pdf_whenSaved_expectCanBeOpened() {
         // mocks
         env.inject()
         XCTAssertTrue(homeViewController.cameraButton.fire())
+        waitSync()
         XCTAssertTrue(cameraOverlay.takeButton.fire())
         XCTAssertTrue(cameraOverlay.doneButton.fire())
         waitSync()

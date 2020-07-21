@@ -1,14 +1,13 @@
 import AsyncAwait
 import Logging
-import Result
 import UIKit
 
 // sourcery: name = PDFService
 protocol PDFServicing: Mockable {
     // sourcery: returnValue = "PDFList(paths: [])"
     func generateList() -> PDFList
-    func deleteList(_ list: PDFList) -> Result<Void>
-    func generatePDF(_ pdf: PDF) -> Async<Void>
+    func deleteList(_ list: PDFList) -> Result<Void, PDFError>
+    func generatePDF(_ pdf: PDF) -> Async<Void, PDFError>
 }
 
 final class PDFService: PDFServicing {
@@ -39,29 +38,29 @@ final class PDFService: PDFServicing {
         }
     }
 
-    func deleteList(_ list: PDFList) -> Result<Void> {
+    func deleteList(_ list: PDFList) -> Result<Void, PDFError> {
         for url in list.paths {
             do {
                 try fileManager.removeItem(at: url)
             } catch {
-                return .failure(PDFError.framework(error))
+                return .failure(.framework(error))
             }
         }
         return .success(())
     }
 
-    func generatePDF(_ pdf: PDF) -> Async<Void> {
+    func generatePDF(_ pdf: PDF) -> Async<Void, PDFError> {
         return Async { completion in
             guard !pdf.images.isEmpty else {
                 logError("pdf images empty")
-                completion(.failure(PDFError.noContent))
+                completion(.failure(.noContent))
                 return
             }
             DispatchQueue.global().async(execute: {
                 let firstImage = pdf.images[0]
                 let bounds = CGRect(x: 0, y: 0, width: firstImage.size.width, height: firstImage.size.height)
                 guard UIGraphicsBeginPDFContextToFile(pdf.path.relativePath, bounds, nil) else {
-                    completion(.failure(PDFError.context))
+                    completion(.failure(.context))
                     return
                 }
                 for image in pdf.images {

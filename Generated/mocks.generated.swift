@@ -1,8 +1,11 @@
-// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.18.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable line_length
 // swiftlint:disable variable_name
+
+// https://github.com/larromba/swift-mockable 
+// 2.0.0
 
 import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS)
@@ -13,7 +16,6 @@ import AppKit
 
 import AsyncAwait
 @testable import DigiDocs
-import Result
 
 // MARK: - Sourcery Helper
 
@@ -23,9 +25,9 @@ protocol _StringRawRepresentable: RawRepresentable {
 
 struct _Variable<T> {
     let date = Date()
-    var variable: T
+    var variable: T?
 
-    init(_ variable: T) {
+    init(_ variable: T?) {
         self.variable = variable
     }
 }
@@ -112,7 +114,7 @@ final class _Invocations {
     }
 
     func count<T: _StringRawRepresentable>(_ name: T) -> Int {
-        return history.filter {  $0.name == name.rawValue }.count
+        return history.filter { $0.name == name.rawValue }.count
     }
 
     func all() -> [_Invocation] {
@@ -120,7 +122,11 @@ final class _Invocations {
     }
 
     func find<T: _StringRawRepresentable>(_ name: T) -> [_Invocation] {
-        return history.filter {  $0.name == name.rawValue }.sorted { $0.date < $1.date }
+        return history.filter { $0.name == name.rawValue }.sorted { $0.date < $1.date }
+    }
+
+    func clear() {
+        history.removeAll()
     }
 }
 
@@ -167,9 +173,6 @@ class MockAlertController: NSObject, AlertControlling {
     }
 }
 
-class MockAppController: NSObject, AppControlling {
-}
-
 class MockBadge: NSObject, Badge {
     var number: Int {
         get { return _number }
@@ -184,13 +187,13 @@ class MockBadge: NSObject, Badge {
 
     // MARK: - setNumber
 
-    func setNumber(_ number: Int) -> Async<Void> {
+    func setNumber(_ number: Int) -> Async<Void, BadgeError> {
         let functionName = setNumber1.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: number, forKey: setNumber1.params.number)
         invocations.record(invocation)
-        actions.set(defaultReturnValue: Async.success(()), for: functionName)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        actions.set(defaultReturnValue: Async<Void, BadgeError>.success(()), for: functionName)
+        return actions.returnValue(for: functionName) as! Async<Void, BadgeError>
     }
 
     enum setNumber1: String, _StringRawRepresentable {
@@ -202,6 +205,12 @@ class MockBadge: NSObject, Badge {
 }
 
 class MockCameraController: NSObject, CameraControlling {
+    var isPresenting: Bool {
+        get { return _isPresenting }
+        set(value) { _isPresenting = value; _isPresentingHistory.append(_Variable(value)) }
+    }
+    var _isPresenting: Bool!
+    var _isPresentingHistory: [_Variable<Bool?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
@@ -209,31 +218,45 @@ class MockCameraController: NSObject, CameraControlling {
 
     // MARK: - openCamera
 
-    func openCamera(in presenter: Presentable) {
+    func openCamera() {
         let functionName = openCamera1.name
         let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: presenter, forKey: openCamera1.params.presenter)
         invocations.record(invocation)
     }
 
     enum openCamera1: String, _StringRawRepresentable {
         case name = "openCamera1"
+    }
+
+    // MARK: - closeCamera
+
+    func closeCamera(completion: (() -> Void)?) {
+        let functionName = closeCamera2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        if let completion = completion {
+            invocation.set(parameter: completion, forKey: closeCamera2.params.completion)
+        }
+        invocations.record(invocation)
+    }
+
+    enum closeCamera2: String, _StringRawRepresentable {
+        case name = "closeCamera2"
         enum params: String, _StringRawRepresentable {
-            case presenter = "openCamera(inpresenter:Presentable).presenter"
+            case completion = "closeCamera(completion:(()->Void)?).completion"
         }
     }
 
     // MARK: - setDelegate
 
     func setDelegate(_ delegate: CameraControllerDelegate) {
-        let functionName = setDelegate2.name
+        let functionName = setDelegate3.name
         let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: delegate, forKey: setDelegate2.params.delegate)
+        invocation.set(parameter: delegate, forKey: setDelegate3.params.delegate)
         invocations.record(invocation)
     }
 
-    enum setDelegate2: String, _StringRawRepresentable {
-        case name = "setDelegate2"
+    enum setDelegate3: String, _StringRawRepresentable {
+        case name = "setDelegate3"
         enum params: String, _StringRawRepresentable {
             case delegate = "setDelegate(_delegate:CameraControllerDelegate).delegate"
         }
@@ -288,6 +311,12 @@ class MockCameraOverlayViewController: NSObject, CameraOverlayViewControlling {
     }
     var _viewState: CameraViewStating?
     var _viewStateHistory: [_Variable<CameraViewStating?>] = []
+    var isPresenting: Bool {
+        get { return _isPresenting }
+        set(value) { _isPresenting = value; _isPresentingHistory.append(_Variable(value)) }
+    }
+    var _isPresenting: Bool! = false
+    var _isPresentingHistory: [_Variable<Bool?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
@@ -362,10 +391,10 @@ class MockCamera: NSObject, Camerable {
 
     // MARK: - open
 
-    func open(in viewController: Presentable) -> Bool {
+    func open(in presenter: Presentable) -> Bool {
         let functionName = open2.name
         let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: viewController, forKey: open2.params.viewController)
+        invocation.set(parameter: presenter, forKey: open2.params.presenter)
         invocations.record(invocation)
         return actions.returnValue(for: functionName) as! Bool
     }
@@ -373,7 +402,7 @@ class MockCamera: NSObject, Camerable {
     enum open2: String, _StringRawRepresentable {
         case name = "open2"
         enum params: String, _StringRawRepresentable {
-            case viewController = "open(inviewController:Presentable).viewController"
+            case presenter = "open(inpresenter:Presentable).presenter"
         }
     }
 
@@ -391,24 +420,26 @@ class MockCamera: NSObject, Camerable {
 
     // MARK: - dismiss
 
-    func dismiss() {
+    func dismiss(animated flag: Bool, completion: (() -> Void)?) {
         let functionName = dismiss4.name
         let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: flag, forKey: dismiss4.params.flag)
+        if let completion = completion {
+            invocation.set(parameter: completion, forKey: dismiss4.params.completion)
+        }
         invocations.record(invocation)
     }
 
     enum dismiss4: String, _StringRawRepresentable {
         case name = "dismiss4"
+        enum params: String, _StringRawRepresentable {
+            case flag = "dismiss(animatedflag:Bool,completion:(()->Void)?).flag"
+            case completion = "dismiss(animatedflag:Bool,completion:(()->Void)?).completion"
+        }
     }
 }
 
 class MockHomeController: NSObject, HomeControlling {
-    var presenter: Presentable {
-        get { return _presenter }
-        set(value) { _presenter = value; _presenterHistory.append(_Variable(value)) }
-    }
-    var _presenter: Presentable!
-    var _presenterHistory: [_Variable<Presentable?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
@@ -446,17 +477,20 @@ class MockHomeController: NSObject, HomeControlling {
         }
     }
 
-    // MARK: - refreshUI
+    // MARK: - refreshBadge
 
-    func refreshUI() {
-        let functionName = refreshUI3.name
+    func refreshBadge() {
+        let functionName = refreshBadge3.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocations.record(invocation)
     }
 
-    enum refreshUI3: String, _StringRawRepresentable {
-        case name = "refreshUI3"
+    enum refreshBadge3: String, _StringRawRepresentable {
+        case name = "refreshBadge3"
     }
+}
+
+class MockHomeCoordinator: NSObject, HomeCoordinating {
 }
 
 class MockHomeViewController: NSObject, HomeViewControlling {
@@ -466,6 +500,12 @@ class MockHomeViewController: NSObject, HomeViewControlling {
     }
     var _viewState: MainViewStating?
     var _viewStateHistory: [_Variable<MainViewStating?>] = []
+    var isPresenting: Bool {
+        get { return _isPresenting }
+        set(value) { _isPresenting = value; _isPresentingHistory.append(_Variable(value)) }
+    }
+    var _isPresenting: Bool! = false
+    var _isPresentingHistory: [_Variable<Bool?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
@@ -517,12 +557,12 @@ class MockListController: NSObject, ListControlling {
     }
     var _documentCount: Int!
     var _documentCountHistory: [_Variable<Int?>] = []
-    var list: PDFList {
-        get { return _list }
-        set(value) { _list = value; _listHistory.append(_Variable(value)) }
+    var all: PDFList {
+        get { return _all }
+        set(value) { _all = value; _allHistory.append(_Variable(value)) }
     }
-    var _list: PDFList!
-    var _listHistory: [_Variable<PDFList?>] = []
+    var _all: PDFList!
+    var _allHistory: [_Variable<PDFList?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
@@ -545,6 +585,69 @@ class MockListController: NSObject, ListControlling {
     }
 }
 
+class MockNamingControllerDelegate: NSObject, NamingControllerDelegate {
+    let invocations = _Invocations()
+    let actions = _Actions()
+    static let invocations = _Invocations()
+    static let actions = _Actions()
+
+    // MARK: - controller
+
+    func controller(_ controller: NamingControlling, gotName name: String) {
+        let functionName = controller1.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: controller, forKey: controller1.params.controller)
+        invocation.set(parameter: name, forKey: controller1.params.name)
+        invocations.record(invocation)
+    }
+
+    enum controller1: String, _StringRawRepresentable {
+        case name = "controller1"
+        enum params: String, _StringRawRepresentable {
+            case controller = "controller(_controller:NamingControlling,gotNamename:String).controller"
+            case name = "controller(_controller:NamingControlling,gotNamename:String).name"
+        }
+    }
+
+    // MARK: - controller
+
+    func controller(_ controller: NamingControlling, showAlert alert: Alert) {
+        let functionName = controller2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: controller, forKey: controller2.params.controller)
+        invocation.set(parameter: alert, forKey: controller2.params.alert)
+        invocations.record(invocation)
+    }
+
+    enum controller2: String, _StringRawRepresentable {
+        case name = "controller2"
+        enum params: String, _StringRawRepresentable {
+            case controller = "controller(_controller:NamingControlling,showAlertalert:Alert).controller"
+            case alert = "controller(_controller:NamingControlling,showAlertalert:Alert).alert"
+        }
+    }
+
+    // MARK: - controller
+
+    func controller(_ controller: NamingControlling, setIsAlertButtonEnabled isEnabled: Bool, at index: Int) {
+        let functionName = controller3.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: controller, forKey: controller3.params.controller)
+        invocation.set(parameter: isEnabled, forKey: controller3.params.isEnabled)
+        invocation.set(parameter: index, forKey: controller3.params.index)
+        invocations.record(invocation)
+    }
+
+    enum controller3: String, _StringRawRepresentable {
+        case name = "controller3"
+        enum params: String, _StringRawRepresentable {
+            case controller = "controller(_controller:NamingControlling,setIsAlertButtonEnabledisEnabled:Bool,atindex:Int).controller"
+            case isEnabled = "controller(_controller:NamingControlling,setIsAlertButtonEnabledisEnabled:Bool,atindex:Int).isEnabled"
+            case index = "controller(_controller:NamingControlling,setIsAlertButtonEnabledisEnabled:Bool,atindex:Int).index"
+        }
+    }
+}
+
 class MockNamingController: NSObject, NamingControlling {
     let invocations = _Invocations()
     let actions = _Actions()
@@ -553,15 +656,30 @@ class MockNamingController: NSObject, NamingControlling {
 
     // MARK: - getName
 
-    func getName() -> Async<String> {
+    func getName() {
         let functionName = getName1.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<String>
     }
 
     enum getName1: String, _StringRawRepresentable {
         case name = "getName1"
+    }
+
+    // MARK: - setDelegate
+
+    func setDelegate(_ delegate: NamingControllerDelegate) {
+        let functionName = setDelegate2.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: delegate, forKey: setDelegate2.params.delegate)
+        invocations.record(invocation)
+    }
+
+    enum setDelegate2: String, _StringRawRepresentable {
+        case name = "setDelegate2"
+        enum params: String, _StringRawRepresentable {
+            case delegate = "setDelegate(_delegate:NamingControllerDelegate).delegate"
+        }
     }
 }
 
@@ -601,44 +719,62 @@ class MockOptionsController: NSObject, OptionsControlling {
 }
 
 class MockPDFController: NSObject, PDFControlling {
+    var isPresenting: Bool {
+        get { return _isPresenting }
+        set(value) { _isPresenting = value; _isPresentingHistory.append(_Variable(value)) }
+    }
+    var _isPresenting: Bool!
+    var _isPresentingHistory: [_Variable<Bool?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()
     static let actions = _Actions()
 
-    // MARK: - deletePDFs
+    // MARK: - showPDF
 
-    func deletePDFs(at paths: [URL]) -> Async<Void> {
-        let functionName = deletePDFs1.name
+    func showPDF(_ pdf: PDF) {
+        let functionName = showPDF1.name
         let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: paths, forKey: deletePDFs1.params.paths)
+        invocation.set(parameter: pdf, forKey: showPDF1.params.pdf)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
     }
 
-    enum deletePDFs1: String, _StringRawRepresentable {
-        case name = "deletePDFs1"
+    enum showPDF1: String, _StringRawRepresentable {
+        case name = "showPDF1"
         enum params: String, _StringRawRepresentable {
-            case paths = "deletePDFs(atpaths:[URL]).paths"
+            case pdf = "showPDF(_pdf:PDF).pdf"
         }
     }
 
-    // MARK: - makePDF
+    // MARK: - showDeleteDialogue
 
-    func makePDF(fromPhotos photos: [UIImage], withName name: String) -> Async<Void> {
-        let functionName = makePDF2.name
+    func showDeleteDialogue(for pdfPaths: [URL]) {
+        let functionName = showDeleteDialogue2.name
         let invocation = _Invocation(name: functionName.rawValue)
-        invocation.set(parameter: photos, forKey: makePDF2.params.photos)
-        invocation.set(parameter: name, forKey: makePDF2.params.name)
+        invocation.set(parameter: pdfPaths, forKey: showDeleteDialogue2.params.pdfPaths)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
     }
 
-    enum makePDF2: String, _StringRawRepresentable {
-        case name = "makePDF2"
+    enum showDeleteDialogue2: String, _StringRawRepresentable {
+        case name = "showDeleteDialogue2"
         enum params: String, _StringRawRepresentable {
-            case photos = "makePDF(fromPhotosphotos:[UIImage],withNamename:String).photos"
-            case name = "makePDF(fromPhotosphotos:[UIImage],withNamename:String).name"
+            case pdfPaths = "showDeleteDialogue(forpdfPaths:[URL]).pdfPaths"
+        }
+    }
+
+    // MARK: - setDelegate
+
+    func setDelegate(_ delegate: PDFControllerDelegate) {
+        let functionName = setDelegate3.name
+        let invocation = _Invocation(name: functionName.rawValue)
+        invocation.set(parameter: delegate, forKey: setDelegate3.params.delegate)
+        invocations.record(invocation)
+    }
+
+    enum setDelegate3: String, _StringRawRepresentable {
+        case name = "setDelegate3"
+        enum params: String, _StringRawRepresentable {
+            case delegate = "setDelegate(_delegate:PDFControllerDelegate).delegate"
         }
     }
 }
@@ -665,12 +801,12 @@ class MockPDFService: NSObject, PDFServicing {
 
     // MARK: - deleteList
 
-    func deleteList(_ list: PDFList) -> Result<Void> {
+    func deleteList(_ list: PDFList) -> Result<Void, PDFError> {
         let functionName = deleteList2.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: list, forKey: deleteList2.params.list)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Result<Void>
+        return actions.returnValue(for: functionName) as! Result<Void, PDFError>
     }
 
     enum deleteList2: String, _StringRawRepresentable {
@@ -682,12 +818,12 @@ class MockPDFService: NSObject, PDFServicing {
 
     // MARK: - generatePDF
 
-    func generatePDF(_ pdf: PDF) -> Async<Void> {
+    func generatePDF(_ pdf: PDF) -> Async<Void, PDFError> {
         let functionName = generatePDF3.name
         let invocation = _Invocation(name: functionName.rawValue)
         invocation.set(parameter: pdf, forKey: generatePDF3.params.pdf)
         invocations.record(invocation)
-        return actions.returnValue(for: functionName) as! Async<Void>
+        return actions.returnValue(for: functionName) as! Async<Void, PDFError>
     }
 
     enum generatePDF3: String, _StringRawRepresentable {
@@ -705,12 +841,18 @@ class MockPDFViewController: NSObject, PDFViewControlling {
     }
     var _viewState: PDFViewStating!
     var _viewStateHistory: [_Variable<PDFViewStating?>] = []
-    var asViewController: UIViewController {
-        get { return _asViewController }
-        set(value) { _asViewController = value; _asViewControllerHistory.append(_Variable(value)) }
+    var isPresenting: Bool {
+        get { return _isPresenting }
+        set(value) { _isPresenting = value; _isPresentingHistory.append(_Variable(value)) }
     }
-    var _asViewController: UIViewController! = UIViewController()
-    var _asViewControllerHistory: [_Variable<UIViewController?>] = []
+    var _isPresenting: Bool! = false
+    var _isPresentingHistory: [_Variable<Bool?>] = []
+    var casted: UIViewController {
+        get { return _casted }
+        set(value) { _casted = value; _castedHistory.append(_Variable(value)) }
+    }
+    var _casted: UIViewController! = UIViewController()
+    var _castedHistory: [_Variable<UIViewController?>] = []
     let invocations = _Invocations()
     let actions = _Actions()
     static let invocations = _Invocations()

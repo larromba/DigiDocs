@@ -4,7 +4,7 @@ import UIKit
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    private var appController: AppControlling?
+    private var app: Appable?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -14,12 +14,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         #endif
-
         guard let viewController = window?.rootViewController as? HomeViewController else {
             assertionFailure("expected homeViewController")
             return true
         }
-        appController = AppControllerFactory.makeAppController(viewController: viewController)
+        app = AppFactory.make(viewController: viewController)
         return true
     }
 }
