@@ -38,6 +38,8 @@ Apple ID: 1189349369
 
 # Future Work
 
+delete single pdf?
+
 Edge detection?
 - https://www.reddit.com/r/iOSProgramming/comments/2qever/edge_recognition_for_images_in_camera/
 - https://code.google.com/archive/p/simple-iphone-image-processing/
